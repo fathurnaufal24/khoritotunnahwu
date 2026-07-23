@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خَرِيطَةُ النَّحْو</title>
+    <link rel="icon" type="image/png" href="logo_web.png">
+    <!-- Framework Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Google: Poppins untuk teks biasa, Amiri untuk teks Arab -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0f172a;
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        .arabic { font-family: 'Amiri', serif; }
+
+        /* Animasi Transisi Slide */
+        .slide {
+            display: none;
+            opacity: 0;
+            transform: translateY(14px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .slide.active {
+            display: flex;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* Efek Glassmorphism biar kekinian */
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.78);
+            backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            box-shadow: 0 25px 60px -20px rgba(0, 0, 0, 0.55);
+            transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+        }
+        .glass-panel:hover {
+            transform: translateY(-3px);
+            border-color: rgba(56, 189, 248, 0.3);
+        }
+        .glass-panel strong,
+        .glass-panel .arabic {
+            text-shadow: 0 1px 12px rgba(0, 0, 0, 0.22);
+        }
+
+        @media (max-width: 1024px) {
+            .glass-panel { padding: 1.25rem; }
+        }
+
+        @media (max-width: 768px) {
+            .glass-panel {
+                position: relative !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                left: auto !important;
+                top: auto !important;
+                height: auto !important;
+                margin-bottom: 1rem;
+            }
+            .slide .relative svg { display: none; }
+            .slide .relative > * { position: relative !important; }
+            .slide .absolute { position: relative !important; }
+            .glass-panel { border-radius: 1.5rem; }
+        }
+
+        @media (max-width: 640px) {
+            .glass-panel { padding: 1rem; }
+            .slide h1 { font-size: 2.6rem; }
+            .slide h2 { font-size: 1.9rem; }
+            .slide p, .slide button, .slide span { font-size: 0.95rem; }
+        }
+    </style>
+</head>
+<body class="min-h-screen w-screen overflow-auto flex flex-col justify-center items-center bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 relative p-4">
+
+    <!-- Efek Background Dekoratif -->
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
+        <div class="absolute w-96 h-96 bg-teal-500 rounded-full mix-blend-multiply filter blur-[128px] opacity-40 top-[-10%] left-[-10%]"></div>
+        <div class="absolute w-96 h-96 bg-indigo-500 rounded-full mix-blend-multiply filter blur-[128px] opacity-40 bottom-[-10%] right-[-10%]"></div>
+    </div>
+
+    <!-- CONTAINER UTAMA -->
+    <div class="glass-panel w-full max-w-5xl min-h-[75vh] h-auto rounded-3xl z-10 flex flex-col p-8 relative">
+        
+        <!-- Progress Bar -->
+        <div class="w-full bg-slate-700 h-2 rounded-full mb-6">
+            <div id="progress-bar" class="bg-teal-400 h-2 rounded-full transition-all duration-300 w-0"></div>
+        </div>
+
+        <!-- SLIDE 1: Cover -->
+        <div class="slide active flex-col items-center justify-center h-full text-center" id="slide-1">
+            <span class="px-4 py-1 bg-teal-500/20 text-teal-300 rounded-full text-sm font-semibold tracking-wider mb-6">MATERI NAHWU</span>
+            <h1 class="text-5xl md:text-6xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-teal-300 to-emerald-200">
+                خَرِيطَةُ النَّحْو
+            </h1>
+            <p class="text-xl text-slate-300 mb-12">Peta Konsep Pembelajaran Nahwu</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-md mx-auto">
+                <button onclick="goToSlide(2)" class="bg-white/5 border border-white/10 rounded-xl p-4 text-center cursor-pointer hover:bg-white/10 transition w-full font-medium">Materi</button>
+                <button onclick="goToSlide(16)" class="bg-white/5 border border-white/10 rounded-xl p-4 text-center cursor-pointer hover:bg-white/10 transition w-full font-medium">Tujuan</button>
+
+                <button onclick="goToSlide(15)" class="bg-white/5 border border-white/10 rounded-xl p-4 text-center cursor-pointer hover:bg-white/10 transition w-full font-medium">Petunjuk</button>
+                <button onclick="goToSlide(17)" class="bg-white/5 border border-white/10 rounded-xl p-4 text-center cursor-pointer hover:bg-white/10 transition w-full font-medium">Evaluasi</button>
+            </div>
+        </div>
+
+        <!-- SLIDE 2: Menu Materi -->
+        <div class="slide flex-col items-center justify-center h-full w-full" id="slide-2">
+            <h2 class="arabic text-5xl font-bold mb-12 text-teal-300">مادة الدروس</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mx-auto" dir="rtl">
+                <!-- Kolom Kanan -->
+                <button onclick="goToSlide(3)" class="glass-panel p-6 rounded-2xl hover:bg-white/10 transition hover:scale-105 border border-blue-500/30 text-right">
+                    <div class="arabic text-2xl text-white">تعريف الكلام</div>
+                </button>
+                
+                <!-- Kolom Kiri -->
+                <button onclick="goToSlide(4)" class="glass-panel p-6 rounded-2xl hover:bg-white/10 transition hover:scale-105 border border-blue-500/30 text-right">
+                    <div class="arabic text-2xl text-white">تعريف الإعراب وأنواعه</div>
+                </button>
+
+                <!-- Kolom Kanan -->
+                <button onclick="goToSlide(5)" class="glass-panel p-6 rounded-2xl hover:bg-white/10 transition hover:scale-105 border border-blue-500/30 text-right">
+                    <div class="arabic text-2xl text-white">تقسيم الإعراب</div>
+                </button>
+
+                <!-- Kolom Kiri -->
+                <button onclick="goToSlide(8)" class="glass-panel p-6 rounded-2xl hover:bg-white/10 transition hover:scale-105 border border-blue-500/30 text-right">
+                    <div class="arabic text-2xl text-white leading-relaxed">إعراب الإسم المفرد و جمع المؤنث السالم</div>
+                </button>
+
+                <!-- Kolom Kanan -->
+                <button onclick="goToSlide(10)" class="glass-panel p-6 rounded-2xl hover:bg-white/10 transition hover:scale-105 border border-blue-500/30 text-right">
+                    <div class="arabic text-2xl text-white leading-relaxed">إعراب جمع المؤنث السالم والإسم غير المنصرف</div>
+                </button>
+
+                <!-- Kolom Kiri -->
+                <button onclick="goToSlide(12)" class="glass-panel p-6 rounded-2xl hover:bg-white/10 transition hover:scale-105 border border-blue-500/30 text-right">
+                    <div class="arabic text-2xl text-white leading-relaxed">إعراب الأسماء الخمسة، المثنى، وجمع المذكر السالم</div>
+                </button>
+            </div>
+            
+            <!-- Tombol Kembali ke Menu Utama -->
+            <button onclick="goToSlide(1)" class="mt-10 px-6 py-2 bg-slate-700/50 hover:bg-slate-700 rounded-lg text-slate-300 transition">
+                Kembali ke Menu Utama
+            </button>
+        </div>
+
+       <!-- SLIDE 3: Definisi Kalam (Presisi Layout) -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-3">
+            
+            <!-- Tombol Ruju' (Kembali ke Menu) - Dipindah ke Kiri Atas biar aman -->
+            <button onclick="goToSlide(2)" class="absolute top-6 left-6 px-8 py-2 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg shadow-blue-500/30 transition hover:scale-105 border border-blue-400/50 flex items-center justify-center z-50">
+                <span class="arabic text-2xl">رجوع</span>
+            </button>
+
+            <!-- Canvas Mind Map dengan Tinggi Fix (65vh) biar nggak nabrak tombol bawah -->
+            <div class="relative w-full max-w-5xl h-[65vh] mx-auto" dir="ltr">
+                
+                <!-- LAYER 1: Garis & Panah (SVG) - Koordinat Presisi -->
+                <svg class="absolute inset-0 w-full h-full pointer-events-none z-0">
+                    <defs>
+                        <!-- Desain ujung panah -->
+                        <marker id="arrowhead" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                            <polyline points="2,2 8,5 2,8" fill="none" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </marker>
+                    </defs>
+                    
+                    <!-- Garis Diagonal dari Kalam (X:80%, Y:46%) ke 4 Kotak Tengah (X:71%) -->
+                    <line x1="80%" y1="46%" x2="71%" y2="15%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead)" />
+                    <line x1="80%" y1="46%" x2="71%" y2="35%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead)" />
+                    <line x1="80%" y1="46%" x2="71%" y2="55%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead)" />
+                    <line x1="80%" y1="46%" x2="71%" y2="75%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead)" />
+
+                    <!-- Garis Lurus dari 3 Kotak Tengah (X:55%) ke Teks Kiri (X:48%) -->
+                    <line x1="55%" y1="15%" x2="48%" y2="15%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead)" />
+                    <line x1="55%" y1="35%" x2="48%" y2="35%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead)" />
+                    <line x1="55%" y1="55%" x2="48%" y2="55%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead)" />
+
+                    <!-- Garis Bercabang dari Kotak Paling Bawah (Bil Wadh'i) -->
+                    <line x1="55%" y1="75%" x2="43%" y2="69%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead)" />
+                    <line x1="55%" y1="75%" x2="43%" y2="81%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead)" />
+                </svg>
+
+                <!-- LAYER 2: Kotak Teks -->
+                
+                <!-- Root: Al-Kalam -->
+                <div class="absolute flex items-center justify-center glass-panel rounded-lg border border-slate-400 z-10" style="left: 80%; top: 40%; width: 15%; height: 12%;">
+                    <span class="arabic text-5xl font-bold text-white">الكلام</span>
+                </div>
+
+                <!-- Cabang 1: Al-Lafadz -->
+                <div class="absolute flex items-center justify-center glass-panel rounded-lg border border-slate-400 z-10" style="left: 55%; top: 10%; width: 15%; height: 10%;">
+                    <span class="arabic text-3xl font-bold text-white">اللفظ</span>
+                </div>
+                <div class="absolute flex items-center justify-end text-right z-10" style="left: 5%; top: 10%; width: 42%; height: 10%;" dir="rtl">
+                    <span class="arabic text-2xl text-slate-200">الصوت المشتمل على بعض حروف الهجائية</span>
+                </div>
+
+                <!-- Cabang 2: Al-Murokkab -->
+                <div class="absolute flex items-center justify-center glass-panel rounded-lg border border-slate-400 z-10" style="left: 55%; top: 30%; width: 15%; height: 10%;">
+                    <span class="arabic text-3xl font-bold text-white">المركب</span>
+                </div>
+                <div class="absolute flex items-center justify-end text-right z-10" style="left: 5%; top: 30%; width: 42%; height: 10%;" dir="rtl">
+                    <span class="arabic text-2xl text-slate-200">ما تركب من كلمتين فأكثر</span>
+                </div>
+
+                <!-- Cabang 3: Al-Mufid -->
+                <div class="absolute flex items-center justify-center glass-panel rounded-lg border border-slate-400 z-10" style="left: 55%; top: 50%; width: 15%; height: 10%;">
+                    <span class="arabic text-3xl font-bold text-white">المفيد</span>
+                </div>
+                <div class="absolute flex items-center justify-end text-right z-10" style="left: 5%; top: 50%; width: 42%; height: 10%;" dir="rtl">
+                    <span class="arabic text-2xl text-slate-200 leading-relaxed">أفاد فائدة يحسن السكوت من المتكلم والسامع</span>
+                </div>
+
+                <!-- Cabang 4: Bil Wadh'i -->
+                <div class="absolute flex items-center justify-center glass-panel rounded-lg border border-slate-400 z-10" style="left: 55%; top: 70%; width: 15%; height: 10%;">
+                    <span class="arabic text-3xl font-bold text-white">بالوضع</span>
+                </div>
+                <!-- Sub-cabang 4.1 -->
+                <div class="absolute flex items-center justify-end text-right z-10" style="left: 20%; top: 65%; width: 22%; height: 8%;" dir="rtl">
+                    <span class="arabic text-2xl text-slate-200">بالقصد</span>
+                </div>
+                <!-- Sub-cabang 4.2 -->
+                <div class="absolute flex items-center justify-end text-right z-10" style="left: 20%; top: 77%; width: 22%; height: 8%;" dir="rtl">
+                    <span class="arabic text-2xl text-slate-200">بالوضع العربي</span>
+                </div>
+
+            </div>
+        </div>  
+        <!-- SLIDE 4: Definisi I'rob & Pembagiannya (Presisi Layout) -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-4">
+            
+            <!-- Tombol Ruju' (Kembali ke Menu) - Kiri Atas -->
+            <button onclick="goToSlide(2)" class="absolute top-6 left-6 px-8 py-2 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg shadow-blue-500/30 transition hover:scale-105 border border-blue-400/50 flex items-center justify-center z-50">
+                <span class="arabic text-2xl">رجوع</span>
+            </button>
+
+            <!-- Canvas Mind Map dengan Tinggi Fix (65vh) -->
+            <div class="relative w-full max-w-5xl h-[65vh] mx-auto" dir="ltr">
+                
+                <!-- LAYER 1: Garis & Panah (SVG) -->
+                <svg class="absolute inset-0 w-full h-full pointer-events-none z-0">
+                    <defs>
+                        <!-- Desain ujung panah -->
+                        <marker id="arrowhead2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                            <polyline points="2,2 8,5 2,8" fill="none" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </marker>
+                    </defs>
+                    
+                    <!-- Garis Vertikal (I'rob -> Ta'rif -> Definisi Panjang) -->
+                    <line x1="82.5%" y1="35%" x2="82.5%" y2="45%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead2)" />
+                    <line x1="82.5%" y1="55%" x2="82.5%" y2="65%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead2)" />
+
+                    <!-- Garis Horizontal (I'rob -> Aqsāmuhu) -->
+                    <line x1="75%" y1="30%" x2="63%" y2="30%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead2)" />
+
+                    <!-- Garis Menyebar (Aqsāmuhu -> 4 Pembagian) -->
+                    <line x1="45%" y1="30%" x2="30%" y2="14%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead2)" />
+                    <line x1="45%" y1="30%" x2="30%" y2="29%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead2)" />
+                    <line x1="45%" y1="30%" x2="30%" y2="44%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead2)" />
+                    <line x1="45%" y1="30%" x2="30%" y2="59%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead2)" />
+                </svg>
+
+                <!-- LAYER 2: Kotak Teks -->
+                
+                <!-- Root: Al-I'rob (Kanan Atas) -->
+                <div class="absolute flex items-center justify-center glass-panel rounded-lg border border-slate-400 z-10" style="left: 75%; top: 25%; width: 15%; height: 10%;">
+                    <span class="arabic text-4xl font-bold text-white">الإِعْرَابُ</span>
+                </div>
+
+                <!-- Node: Ta'rif (Bawah I'rob) -->
+                <div class="absolute flex items-center justify-center glass-panel rounded-lg border border-slate-400 z-10" style="left: 75%; top: 45%; width: 15%; height: 10%;">
+                    <span class="arabic text-3xl text-white">تعريف</span>
+                </div>
+
+                <!-- Definisi Panjang (Bawah Ta'rif) -->
+                <div class="absolute flex items-center justify-center glass-panel rounded-lg border border-slate-400 z-10 p-4 text-center" style="left: 65%; top: 65%; width: 35%; height: 22%;" dir="rtl">
+                    <span class="arabic text-2xl text-slate-200 leading-relaxed">
+                        هُوَ تَغْيِيرُ أَوَاخِرِ الْكَلِمِ لِاخْتِلافِ الْعَوَامِلِ الدَّاخِلَةِ عَلَيْهَا لَفْظَا أَوْ تقديراً
+                    </span>
+                </div>
+
+                <!-- Node: Aqsāmuhu (Kiri I'rob) -->
+                <div class="absolute flex items-center justify-center glass-panel rounded-lg border border-slate-400 z-10" style="left: 45%; top: 25%; width: 18%; height: 10%;">
+                    <span class="arabic text-3xl font-bold text-white">أَقْسَامُهُ أَرْبَعَةٌ</span>
+                </div>
+
+                <!-- 4 Pembagian (Kiri Aqsāmuhu) -->
+                
+                <!-- Rofa' -->
+                <div class="absolute flex items-center justify-center glass-panel rounded-lg border border-slate-400 z-10" style="left: 15%; top: 10%; width: 15%; height: 8%;">
+                    <span class="arabic text-3xl font-bold text-white">رَفْعٌ</span>
+                </div>
+                
+                <!-- Nashob -->
+                <div class="absolute flex items-center justify-center glass-panel rounded-lg border border-slate-400 z-10" style="left: 15%; top: 25%; width: 15%; height: 8%;">
+                    <span class="arabic text-3xl font-bold text-white">نَصْبٌ</span>
+                </div>
+
+                <!-- Khofadh -->
+                <div class="absolute flex items-center justify-center glass-panel rounded-lg border border-slate-400 z-10" style="left: 15%; top: 40%; width: 15%; height: 8%;">
+                    <span class="arabic text-3xl font-bold text-white">خَفْضٌ</span>
+                </div>
+
+                <!-- Jazm -->
+                <div class="absolute flex items-center justify-center glass-panel rounded-lg border border-slate-400 z-10" style="left: 15%; top: 55%; width: 15%; height: 8%;">
+                    <span class="arabic text-3xl font-bold text-white">جَزْمٌ</span>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- SLIDE 5: Pembagian I'rob (Root) -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-5">
+            
+            <!-- Tombol Ruju' (Kembali ke Menu) -->
+            <button onclick="goToSlide(2)" class="absolute top-6 left-6 px-8 py-2 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg shadow-blue-500/30 transition hover:scale-105 border border-blue-400/50 flex items-center justify-center z-50">
+                <span class="arabic text-2xl">رجوع</span>
+            </button>
+
+            <!-- Tombol At-Taali (Selanjutnya ke Slide 6) -->
+            <button onclick="goToSlide(6)" class="absolute bottom-8 right-8 px-10 py-4 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg shadow-blue-500/30 transition hover:scale-105 border border-blue-400/50 flex items-center justify-center z-50">
+                <span class="arabic text-3xl">التالي</span>
+            </button>
+
+            <div class="relative w-full max-w-5xl h-[65vh] mx-auto" dir="ltr">
+                <svg class="absolute inset-0 w-full h-full pointer-events-none z-0">
+                    <defs><marker id="arr5" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><polyline points="2,2 8,5 2,8" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round"/></marker></defs>
+                    <line x1="75%" y1="50%" x2="50%" y2="25%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr5)" />
+                    <line x1="75%" y1="50%" x2="50%" y2="75%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr5)" />
+                </svg>
+
+                <div class="absolute flex items-center justify-center glass-panel rounded-sm border border-slate-400 z-10" style="left: 75%; top: 45%; width: 20%; height: 10%;">
+                    <span class="arabic text-3xl font-bold text-white">المعربات قسمان</span>
+                </div>
+                <div class="absolute flex items-center justify-center glass-panel rounded-sm border border-slate-400 z-10" style="left: 30%; top: 20%; width: 20%; height: 10%;">
+                    <span class="arabic text-3xl font-bold text-white">يعرب بالحركات</span>
+                </div>
+                <div class="absolute flex items-center justify-center glass-panel rounded-sm border border-slate-400 z-10" style="left: 30%; top: 70%; width: 20%; height: 10%;">
+                    <span class="arabic text-3xl font-bold text-white">يعرب بالحروف</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 6: I'rob Bil Harokat -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-6">
+            <button onclick="goToSlide(2)" class="absolute top-6 left-6 px-8 py-2 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg shadow-blue-500/30 transition hover:scale-105 border border-blue-400/50 flex items-center justify-center z-50">
+                <span class="arabic text-2xl">رجوع</span>
+            </button>
+            <button onclick="goToSlide(7)" class="absolute bottom-8 right-8 px-10 py-4 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg shadow-blue-500/30 transition hover:scale-105 border border-blue-400/50 flex items-center justify-center z-50">
+                <span class="arabic text-3xl">التالي</span>
+            </button>
+
+            <div class="relative w-full max-w-5xl h-[65vh] mx-auto" dir="ltr">
+                <svg class="absolute inset-0 w-full h-full pointer-events-none z-0">
+                    <defs><marker id="arr6" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><polyline points="2,2 8,5 2,8" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round"/></marker></defs>
+                    <line x1="75%" y1="50%" x2="68%" y2="50%" stroke="#94a3b8" stroke-width="1.5" />
+                    <line x1="68%" y1="15%" x2="68%" y2="85%" stroke="#94a3b8" stroke-width="1.5" />
+                    <line x1="68%" y1="15%" x2="55%" y2="15%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr6)" />
+                    <line x1="68%" y1="38%" x2="55%" y2="38%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr6)" />
+                    <line x1="68%" y1="62%" x2="55%" y2="62%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr6)" />
+                    <line x1="68%" y1="85%" x2="55%" y2="85%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr6)" />
+                </svg>
+
+                <div class="absolute flex items-center justify-center glass-panel rounded-sm border border-slate-400 z-10" style="left: 75%; top: 45%; width: 22%; height: 10%;">
+                    <span class="arabic text-3xl font-bold text-white">الذي يعرب بالحركات</span>
+                </div>
+                <div class="absolute flex items-center justify-center glass-panel rounded-sm border border-slate-400 z-10" style="left: 35%; top: 10%; width: 20%; height: 10%;">
+                    <span class="arabic text-3xl font-bold text-white">الإسم المفرد</span>
+                </div>
+                <div class="absolute flex items-center justify-center glass-panel rounded-sm border border-slate-400 z-10" style="left: 35%; top: 33%; width: 20%; height: 10%;">
+                    <span class="arabic text-3xl font-bold text-white">جمع التكسير</span>
+                </div>
+                <div class="absolute flex items-center justify-center glass-panel rounded-sm border border-slate-400 z-10" style="left: 35%; top: 57%; width: 20%; height: 10%;">
+                    <span class="arabic text-3xl font-bold text-white">جمع المؤنث السالم</span>
+                </div>
+                <div class="absolute flex items-center justify-center glass-panel rounded-sm border border-slate-400 z-10" style="left: 35%; top: 80%; width: 20%; height: 10%;">
+                    <span class="arabic text-3xl font-bold text-white">إسم غير منصرف</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 7: I'rob Bil Huruf -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-7">
+            <button onclick="goToSlide(2)" class="absolute top-6 left-6 px-8 py-2 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg shadow-blue-500/30 transition hover:scale-105 border border-blue-400/50 flex items-center justify-center z-50">
+                <span class="arabic text-2xl">رجوع</span>
+            </button>
+            <button onclick="goToSlide(2)" class="absolute bottom-8 right-8 px-10 py-4 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg shadow-blue-500/30 transition hover:scale-105 border border-blue-400/50 flex items-center justify-center z-50">
+                <span class="arabic text-3xl">رجوع</span>
+            </button>
+
+            <div class="relative w-full max-w-5xl h-[65vh] mx-auto" dir="ltr">
+                <svg class="absolute inset-0 w-full h-full pointer-events-none z-0">
+                    <defs><marker id="arr7" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><polyline points="2,2 8,5 2,8" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round"/></marker></defs>
+                    <line x1="75%" y1="50%" x2="68%" y2="50%" stroke="#94a3b8" stroke-width="1.5" />
+                    <line x1="68%" y1="20%" x2="68%" y2="80%" stroke="#94a3b8" stroke-width="1.5" />
+                    <line x1="68%" y1="20%" x2="55%" y2="20%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr7)" />
+                    <line x1="68%" y1="50%" x2="55%" y2="50%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr7)" />
+                    <line x1="68%" y1="80%" x2="55%" y2="80%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr7)" />
+                </svg>
+
+                <div class="absolute flex items-center justify-center glass-panel rounded-sm border border-slate-400 z-10" style="left: 75%; top: 45%; width: 22%; height: 10%;">
+                    <span class="arabic text-3xl font-bold text-white">الذي يعرب بالحروف</span>
+                </div>
+                <div class="absolute flex flex-col items-center justify-center glass-panel rounded-sm border border-slate-400 z-10" style="left: 35%; top: 15%; width: 20%; height: 12%;">
+                    <span class="arabic text-2xl font-bold text-white">الأسماء</span>
+                    <span class="arabic text-2xl font-bold text-white">الخمسة</span>
+                </div>
+                <div class="absolute flex items-center justify-center glass-panel rounded-sm border border-slate-400 z-10" style="left: 35%; top: 45%; width: 20%; height: 10%;">
+                    <span class="arabic text-3xl font-bold text-white">الإسم المثنى</span>
+                </div>
+                <div class="absolute flex items-center justify-center glass-panel rounded-sm border border-slate-400 z-10" style="left: 35%; top: 75%; width: 20%; height: 10%;">
+                    <span class="arabic text-3xl font-bold text-white">جمع المذكر السالم</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 8: Isim Mufrod -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-8">
+            <h2 class="arabic text-5xl font-bold mb-4 text-slate-800 border-b-2 border-slate-300 pb-4">الذي يعرب بالحركات</h2>
+            
+            <!-- Tombol At-Taali -->
+            <button onclick="goToSlide(9)" class="absolute bottom-8 right-8 px-10 py-4 bg-blue-600 hover:bg-blue-500 rounded-[50px] text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
+                <span class="arabic text-3xl">التالي</span>
+            </button>
+
+            <div class="relative w-full max-w-5xl h-[60vh] mx-auto mt-4" dir="ltr">
+                <svg class="absolute inset-0 w-full h-full pointer-events-none z-0">
+                    <defs><marker id="arr-mufrod" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><polyline points="2,2 8,5 2,8" fill="none" stroke="#64748b" stroke-width="1.5" stroke-linecap="round"/></marker></defs>
+                    
+                    <!-- Garis Branching dari Root ke 3 Bagian -->
+                    <line x1="73%" y1="50%" x2="65%" y2="50%" stroke="#64748b" stroke-width="1.5" />
+                    <line x1="65%" y1="20%" x2="65%" y2="80%" stroke="#64748b" stroke-width="1.5" />
+                    <line x1="65%" y1="20%" x2="59%" y2="20%" stroke="#64748b" stroke-width="1.5" />
+                    <line x1="65%" y1="50%" x2="59%" y2="50%" stroke="#64748b" stroke-width="1.5" />
+                    <line x1="65%" y1="80%" x2="59%" y2="80%" stroke="#64748b" stroke-width="1.5" />
+
+                    <!-- Panah dari (Rofa, Nashob, Jar) ke (Dhommah, Fathah, Kasrah) -->
+                    <line x1="49%" y1="20%" x2="41%" y2="20%" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-mufrod)" />
+                    <line x1="49%" y1="50%" x2="41%" y2="50%" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-mufrod)" />
+                    <line x1="49%" y1="80%" x2="41%" y2="80%" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-mufrod)" />
+                </svg>
+
+                <!-- Root -->
+                <div class="absolute flex items-center justify-center bg-white z-10" style="left: 73%; top: 45%; width: 22%; height: 10%;">
+                    <span class="arabic text-5xl font-bold text-black">الاسم المفرد</span>
+                </div>
+                
+                <!-- Rofa' -->
+                <div class="absolute flex items-center justify-center bg-white z-10" style="left: 49%; top: 15%; width: 10%; height: 10%;">
+                    <span class="arabic text-4xl font-bold text-red-600">الرفع</span>
+                </div>
+                <div class="absolute flex items-center justify-center z-10" style="left: 31%; top: 15%; width: 10%; height: 10%;">
+                    <span class="arabic text-4xl font-bold text-red-600">ضمة</span>
+                </div>
+                <div class="absolute flex items-center justify-end z-10" style="left: 6%; top: 15%; width: 20%; height: 10%;" dir="rtl">
+                    <span class="arabic text-4xl font-bold text-black">جَاءَ زَيْدٌ</span>
+                </div>
+
+                <!-- Nashob -->
+                <div class="absolute flex items-center justify-center bg-white z-10" style="left: 49%; top: 45%; width: 10%; height: 10%;">
+                    <span class="arabic text-4xl font-bold text-yellow-500">النصب</span>
+                </div>
+                <div class="absolute flex items-center justify-center z-10" style="left: 31%; top: 45%; width: 10%; height: 10%;">
+                    <span class="arabic text-4xl font-bold text-yellow-500">فتحة</span>
+                </div>
+                <div class="absolute flex items-center justify-end z-10" style="left: 6%; top: 45%; width: 20%; height: 10%;" dir="rtl">
+                    <span class="arabic text-4xl font-bold text-black">رَأَيْتُ زَيْدًا</span>
+                </div>
+
+                <!-- Jar -->
+                <div class="absolute flex items-center justify-center bg-white z-10" style="left: 49%; top: 75%; width: 10%; height: 10%;">
+                    <span class="arabic text-4xl font-bold text-green-600">الجر</span>
+                </div>
+                <div class="absolute flex items-center justify-center z-10" style="left: 31%; top: 75%; width: 10%; height: 10%;">
+                    <span class="arabic text-4xl font-bold text-green-600">كسرة</span>
+                </div>
+                <div class="absolute flex items-center justify-end z-10" style="left: 6%; top: 75%; width: 20%; height: 10%;" dir="rtl">
+                    <span class="arabic text-4xl font-bold text-black">مَرَرْتُ بِزَيْدٍ</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 9: Jama' Taksir -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-9">
+            <h2 class="arabic text-5xl font-bold mb-4 text-slate-800 border-b-2 border-slate-300 pb-4">الذي يعرب بالحركات</h2>
+            
+            <!-- Tombol Ruju' -->
+            <button onclick="goToSlide(2)" class="absolute bottom-8 right-8 px-10 py-4 bg-blue-600 hover:bg-blue-500 rounded-[50px] text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
+                <span class="arabic text-3xl">رجوع</span>
+            </button>
+
+            <div class="relative w-full max-w-5xl h-[60vh] mx-auto mt-4" dir="ltr">
+                <svg class="absolute inset-0 w-full h-full pointer-events-none z-0">
+                    <defs><marker id="arr-taksir" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><polyline points="2,2 8,5 2,8" fill="none" stroke="#64748b" stroke-width="1.5" stroke-linecap="round"/></marker></defs>
+                    
+                    <line x1="73%" y1="50%" x2="65%" y2="50%" stroke="#64748b" stroke-width="1.5" />
+                    <line x1="65%" y1="20%" x2="65%" y2="80%" stroke="#64748b" stroke-width="1.5" />
+                    <line x1="65%" y1="20%" x2="59%" y2="20%" stroke="#64748b" stroke-width="1.5" />
+                    <line x1="65%" y1="50%" x2="59%" y2="50%" stroke="#64748b" stroke-width="1.5" />
+                    <line x1="65%" y1="80%" x2="59%" y2="80%" stroke="#64748b" stroke-width="1.5" />
+
+                    <line x1="49%" y1="20%" x2="41%" y2="20%" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-taksir)" />
+                    <line x1="49%" y1="50%" x2="41%" y2="50%" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-taksir)" />
+                    <line x1="49%" y1="80%" x2="41%" y2="80%" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-taksir)" />
+                </svg>
+
+                <div class="absolute flex items-center justify-center bg-white z-10" style="left: 73%; top: 45%; width: 22%; height: 10%;">
+                    <span class="arabic text-5xl font-bold text-black">جمع التكسير</span>
+                </div>
+                
+                <!-- Rofa' -->
+                <div class="absolute flex items-center justify-center bg-white z-10" style="left: 49%; top: 15%; width: 10%; height: 10%;">
+                    <span class="arabic text-4xl font-bold text-red-600">الرفع</span>
+                </div>
+                <div class="absolute flex items-center justify-center z-10" style="left: 31%; top: 15%; width: 10%; height: 10%;">
+                    <span class="arabic text-4xl font-bold text-red-600">ضمة</span>
+                </div>
+                <div class="absolute flex items-center justify-end z-10" style="left: 6%; top: 15%; width: 20%; height: 10%;" dir="rtl">
+                    <span class="arabic text-4xl font-bold text-white text-nowrap">جَاءَ الرِّجَالُ.</span>
+                </div>
+
+                <!-- Nashob -->
+                <div class="absolute flex items-center justify-center bg-white z-10" style="left: 49%; top: 45%; width: 10%; height: 10%;">
+                    <span class="arabic text-4xl font-bold text-yellow-500">النصب</span>
+                </div>
+                <div class="absolute flex items-center justify-center z-10" style="left: 31%; top: 45%; width: 10%; height: 10%;">
+                    <span class="arabic text-4xl font-bold text-yellow-500">فتحة</span>
+                </div>
+                <div class="absolute flex items-center justify-end z-10" style="left: 6%; top: 45%; width: 20%; height: 10%;" dir="rtl">
+                    <span class="arabic text-4xl font-bold text-black text-nowrap">رَأَيْتُ الرِّجَالَ.</span>
+                </div>
+
+                <!-- Jar -->
+                <div class="absolute flex items-center justify-center bg-white z-10" style="left: 49%; top: 75%; width: 10%; height: 10%;">
+                    <span class="arabic text-4xl font-bold text-green-600">الجر</span>
+                </div>
+                <div class="absolute flex items-center justify-center z-10" style="left: 31%; top: 75%; width: 10%; height: 10%;">
+                    <span class="arabic text-4xl font-bold text-green-600">كسرة</span>
+                </div>
+                <div class="absolute flex items-center justify-end z-10" style="left: 6%; top: 75%; width: 20%; height: 10%;" dir="rtl">
+                    <span class="arabic text-4xl font-bold text-black text-nowrap">مَرَرْتُ بِالرِّجَالِ.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 10: Jama' Muannats Salim -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-10">
+            <h2 class="arabic text-5xl font-bold mb-4 text-slate-800 border-b-2 border-slate-300 pb-4">الذي يعرب بالحركات</h2>
+            
+            <!-- Tombol At-Taali -->
+            <button onclick="goToSlide(11)" class="absolute bottom-8 right-8 px-10 py-4 bg-blue-600 hover:bg-blue-500 rounded-[50px] text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
+                <span class="arabic text-3xl">التالي</span>
+            </button>
+
+            <!-- Icon Speaker (Di Kiri) -->
+            <button class="absolute left-10 top-1/2 -translate-y-1/2 w-24 h-24 bg-blue-500 hover:bg-blue-400 rounded-full flex items-center justify-center shadow-xl border-4 border-slate-700/20 transition hover:scale-105 z-50">
+                <i class="fa-solid fa-volume-high text-4xl text-slate-200 opacity-80"></i>
+            </button>
+
+            <div class="relative w-full max-w-5xl h-[60vh] mx-auto mt-4" dir="ltr">
+                <svg class="absolute inset-0 w-full h-full pointer-events-none z-0">
+                    <defs><marker id="arr-muannats" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><polyline points="2,2 8,5 2,8" fill="none" stroke="#64748b" stroke-width="1.5" stroke-linecap="round"/></marker></defs>
+                    
+                    <line x1="77%" y1="50%" x2="65%" y2="50%" stroke="#64748b" stroke-width="1.5" />
+                    <line x1="65%" y1="20%" x2="65%" y2="80%" stroke="#64748b" stroke-width="1.5" />
+                    <line x1="65%" y1="20%" x2="59%" y2="20%" stroke="#64748b" stroke-width="1.5" />
+                    <line x1="65%" y1="50%" x2="59%" y2="50%" stroke="#64748b" stroke-width="1.5" />
+                    <line x1="65%" y1="80%" x2="59%" y2="80%" stroke="#64748b" stroke-width="1.5" />
+
+                    <line x1="49%" y1="20%" x2="41%" y2="20%" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-muannats)" />
+                    <line x1="49%" y1="50%" x2="41%" y2="50%" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-muannats)" />
+                    <line x1="49%" y1="80%" x2="41%" y2="80%" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-muannats)" />
+                </svg>
+
+                <div class="absolute flex flex-col items-center justify-center bg-white z-10" style="left: 77%; top: 38%; width: 22%; height: 24%;">
+                    <span class="arabic text-5xl font-bold text-black leading-snug text-center">جمع<br>المؤنث<br>السالم</span>
+                </div>
+                
+                <!-- Rofa' -->
+                <div class="absolute flex items-center justify-center bg-white z-10" style="left: 49%; top: 15%; width: 10%; height: 10%;">
+                    <span class="arabic text-4xl font-bold text-red-600">الرفع</span>
+                </div>
+                <div class="absolute flex items-center justify-center z-10" style="left: 31%; top: 15%; width: 10%; height: 10%;">
+                    <span class="arabic text-4xl font-bold text-red-600">ضمة</span>
+                </div>
+                <div class="absolute flex items-center justify-end z-10" style="left: 6%; top: 15%; width: 22%; height: 10%;" dir="rtl">
+                    <span class="arabic text-4xl font-bold text-black text-nowrap">جَاءَتِ الْمُسْلِمَاتُ.</span>
+                </div>
+
+                <!-- Nashob (Pake Kasrah) -->
+                <div class="absolute flex items-center justify-center bg-white z-10" style="left: 49%; top: 45%; width: 10%; height: 10%;">
+                    <span class="arabic text-4xl font-bold text-yellow-500">النصب</span>
+                </div>
+                <div class="absolute flex items-center justify-center z-10" style="left: 31%; top: 45%; width: 10%; height: 10%;">
+                    <span class="arabic text-4xl font-bold text-green-600">كسرة</span> 
+                </div>
+                <div class="absolute flex items-center justify-end z-10" style="left: 6%; top: 45%; width: 22%; height: 10%;" dir="rtl">
+                    <span class="arabic text-4xl font-bold text-black text-nowrap">رَأَيْتُ الْمُسْلِمَاتِ.</span>
+                </div>
+
+                <!-- Jar -->
+                <div class="absolute flex items-center justify-center bg-white z-10" style="left: 49%; top: 75%; width: 10%; height: 10%;">
+                    <span class="arabic text-4xl font-bold text-green-600">الجر</span>
+                </div>
+                <div class="absolute flex items-center justify-center z-10" style="left: 31%; top: 75%; width: 10%; height: 10%;">
+                    <span class="arabic text-4xl font-bold text-green-600">كسرة</span>
+                </div>
+                <div class="absolute flex items-center justify-end z-10" style="left: 6%; top: 75%; width: 22%; height: 10%;" dir="rtl">
+                    <span class="arabic text-4xl font-bold text-black text-nowrap">سَلَّمْتُ عَلَى الْمُسْلِمَاتِ.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 11: Isim Ghoiru Munsyorif -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-11">
+            <h2 class="arabic text-5xl font-bold mb-4 text-slate-800 border-b-2 border-slate-300 pb-4">الذي يعرب بالحركات</h2>
+            
+            <!-- Tombol Ruju' -->
+            <button onclick="goToSlide(2)" class="absolute bottom-8 right-8 px-10 py-4 bg-blue-600 hover:bg-blue-500 rounded-[50px] text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
+                <span class="arabic text-3xl">رجوع</span>
+            </button>
+
+            <div class="relative w-full max-w-5xl h-[60vh] mx-auto mt-4" dir="ltr">
+                <svg class="absolute inset-0 w-full h-full pointer-events-none z-0">
+                    <defs><marker id="arr-ghoiru" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><polyline points="2,2 8,5 2,8" fill="none" stroke="#64748b" stroke-width="1.5" stroke-linecap="round"/></marker></defs>
+                    
+                    <line x1="77%" y1="50%" x2="65%" y2="50%" stroke="#64748b" stroke-width="1.5" />
+                    <line x1="65%" y1="20%" x2="65%" y2="80%" stroke="#64748b" stroke-width="1.5" />
+                    <line x1="65%" y1="20%" x2="59%" y2="20%" stroke="#64748b" stroke-width="1.5" />
+                    <line x1="65%" y1="50%" x2="59%" y2="50%" stroke="#64748b" stroke-width="1.5" />
+                    <line x1="65%" y1="80%" x2="59%" y2="80%" stroke="#64748b" stroke-width="1.5" />
+
+                    <line x1="49%" y1="20%" x2="41%" y2="20%" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-ghoiru)" />
+                    <line x1="49%" y1="50%" x2="41%" y2="50%" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-ghoiru)" />
+                    <line x1="49%" y1="80%" x2="41%" y2="80%" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-ghoiru)" />
+                </svg>
+
+                <div class="absolute flex flex-col items-center justify-center bg-white z-10" style="left: 77%; top: 40%; width: 22%; height: 20%;">
+                    <span class="arabic text-5xl font-bold text-black text-center leading-snug">لاسم غير<br>المنصرف</span>
+                </div>
+                
+                <!-- Rofa' -->
+                <div class="absolute flex items-center justify-center bg-white z-10" style="left: 49%; top: 15%; width: 10%; height: 10%;">
+                    <span class="arabic text-4xl font-bold text-red-600">الرفع</span>
+                </div>
+                <div class="absolute flex items-center justify-center z-10" style="left: 31%; top: 15%; width: 10%; height: 10%;">
+                    <span class="arabic text-4xl font-bold text-red-600">ضمة</span>
+                </div>
+                <div class="absolute flex items-center justify-end z-10" style="left: 6%; top: 15%; width: 20%; height: 10%;" dir="rtl">
+                    <span class="arabic text-4xl font-bold text-black">جَاءَ أَحْمَدُ</span>
+                </div>
+
+                <!-- Nashob -->
+                <div class="absolute flex items-center justify-center bg-white z-10" style="left: 49%; top: 45%; width: 10%; height: 10%;">
+                    <span class="arabic text-4xl font-bold text-yellow-500">النصب</span>
+                </div>
+                <div class="absolute flex items-center justify-center z-10" style="left: 31%; top: 45%; width: 10%; height: 10%;">
+                    <span class="arabic text-4xl font-bold text-yellow-500">فتحة</span>
+                </div>
+                <div class="absolute flex items-center justify-end z-10" style="left: 6%; top: 45%; width: 20%; height: 10%;" dir="rtl">
+                    <span class="arabic text-4xl font-bold text-black">رَأَيْتُ أَحْمَدَ</span>
+                </div>
+
+                <!-- Jar (Pake Fathah) -->
+                <div class="absolute flex items-center justify-center bg-white z-10" style="left: 49%; top: 75%; width: 10%; height: 10%;">
+                    <span class="arabic text-4xl font-bold text-green-600">الجر</span>
+                </div>
+                <div class="absolute flex items-center justify-center z-10" style="left: 31%; top: 75%; width: 10%; height: 10%;">
+                    <span class="arabic text-4xl font-bold text-yellow-500">فتحة</span> <!-- Jar ghoiru munsyorif pake fathah (warna kuning di gambar lu) -->
+                </div>
+                <div class="absolute flex items-center justify-end z-10" style="left: 6%; top: 75%; width: 20%; height: 10%;" dir="rtl">
+                    <span class="arabic text-4xl font-bold text-black">مَرَرْتُ بِأَحْمَدَ</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 12: Asmaul Khomsah -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-12">
+            <h2 class="arabic text-5xl font-bold mb-4 text-slate-800 border-b-2 border-slate-300 pb-4">الذي يعرب بالحروف</h2>
+            
+            <!-- Tombol At-Taali -->
+            <button onclick="goToSlide(13)" class="absolute bottom-8 right-8 px-10 py-4 bg-blue-600 hover:bg-blue-500 rounded-[50px] text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
+                <span class="arabic text-3xl">التالي</span>
+            </button>
+
+            <div class="relative w-full max-w-5xl h-[60vh] mx-auto mt-4" dir="ltr">
+                <svg class="absolute inset-0 w-full h-full pointer-events-none z-0">
+                    <defs><marker id="arr-khomsah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><polyline points="2,2 8,5 2,8" fill="none" stroke="#64748b" stroke-width="1.5" stroke-linecap="round"/></marker></defs>
+                    <line x1="73%" y1="50%" x2="65%" y2="50%" stroke="#64748b" stroke-width="1.5" />
+                    <line x1="65%" y1="20%" x2="65%" y2="80%" stroke="#64748b" stroke-width="1.5" />
+                    <line x1="65%" y1="20%" x2="59%" y2="20%" stroke="#64748b" stroke-width="1.5" />
+                    <line x1="65%" y1="50%" x2="59%" y2="50%" stroke="#64748b" stroke-width="1.5" />
+                    <line x1="65%" y1="80%" x2="59%" y2="80%" stroke="#64748b" stroke-width="1.5" />
+                    <line x1="49%" y1="20%" x2="41%" y2="20%" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-khomsah)" />
+                    <line x1="49%" y1="50%" x2="41%" y2="50%" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-khomsah)" />
+                    <line x1="49%" y1="80%" x2="41%" y2="80%" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-khomsah)" />
+                </svg>
+
+                <div class="absolute flex items-center justify-center bg-white z-10" style="left: 73%; top: 45%; width: 22%; height: 10%;">
+                    <span class="arabic text-5xl font-bold text-black">الأسماء الخمسة</span>
+                </div>
+                
+                <!-- Rofa' -->
+                <div class="absolute flex items-center justify-center bg-white z-10" style="left: 49%; top: 15%; width: 10%; height: 10%;">
+                    <span class="arabic text-4xl font-bold text-red-600">الرفع</span>
+                </div>
+                <div class="absolute flex items-center justify-center z-10" style="left: 31%; top: 15%; width: 10%; height: 10%;">
+                    <span class="arabic text-4xl font-bold text-red-600">بالواو</span>
+                </div>
+                <div class="absolute flex items-center justify-end z-10" style="left: 6%; top: 15%; width: 20%; height: 10%;" dir="rtl">
+                    <!-- Perhatikan warna Wawu disesuaikan -->
+                    <span class="arabic text-4xl font-bold text-black">جَاءَ أَبُ<span class="text-red-600">و</span>كَ</span>
+                </div>
+
+                <!-- Nashob -->
+                <div class="absolute flex items-center justify-center bg-white z-10" style="left: 49%; top: 45%; width: 10%; height: 10%;">
+                    <span class="arabic text-4xl font-bold text-yellow-500">النصب</span>
+                </div>
+                <div class="absolute flex items-center justify-center z-10" style="left: 31%; top: 45%; width: 10%; height: 10%;">
+                    <span class="arabic text-4xl font-bold text-yellow-500">بالألف</span>
+                </div>
+                <div class="absolute flex items-center justify-end z-10" style="left: 6%; top: 45%; width: 20%; height: 10%;" dir="rtl">
+                    <span class="arabic text-4xl font-bold text-black">رَأَيْتُ أَبَ<span class="text-yellow-500">ا</span>كَ</span>
+                </div>
+
+                <!-- Jar -->
+                <div class="absolute flex items-center justify-center bg-white z-10" style="left: 49%; top: 75%; width: 10%; height: 10%;">
+                    <span class="arabic text-4xl font-bold text-green-600">الجر</span>
+                </div>
+                <div class="absolute flex items-center justify-center z-10" style="left: 31%; top: 75%; width: 10%; height: 10%;">
+                    <span class="arabic text-4xl font-bold text-green-600">بالياء</span>
+                </div>
+                <div class="absolute flex items-center justify-end z-10" style="left: 6%; top: 75%; width: 20%; height: 10%;" dir="rtl">
+                    <span class="arabic text-4xl font-bold text-black">سَلَّمْتُ عَلَى أَبِ<span class="text-green-600">ي</span>كَ</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 13: Isim Mutsanna -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-13">
+            <h2 class="arabic text-5xl font-bold mb-4 text-slate-800 border-b-2 border-slate-300 pb-4">الذي يعرب بالحروف</h2>
+            
+            <button onclick="goToSlide(14)" class="absolute bottom-8 right-8 px-10 py-4 bg-blue-600 hover:bg-blue-500 rounded-[50px] text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
+                <span class="arabic text-3xl">التالي</span>
+            </button>
+
+            <div class="relative w-full max-w-5xl h-[60vh] mx-auto mt-4" dir="ltr">
+                <svg class="absolute inset-0 w-full h-full pointer-events-none z-0">
+                    <defs><marker id="arr-mutsanna" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><polyline points="2,2 8,5 2,8" fill="none" stroke="#64748b" stroke-width="1.5" stroke-linecap="round"/></marker></defs>
+                    <line x1="73%" y1="50%" x2="65%" y2="50%" stroke="#64748b" stroke-width="1.5" />
+                    <line x1="65%" y1="20%" x2="65%" y2="80%" stroke="#64748b" stroke-width="1.5" />
+                    <line x1="65%" y1="20%" x2="59%" y2="20%" stroke="#64748b" stroke-width="1.5" />
+                    <line x1="65%" y1="50%" x2="59%" y2="50%" stroke="#64748b" stroke-width="1.5" />
+                    <line x1="65%" y1="80%" x2="59%" y2="80%" stroke="#64748b" stroke-width="1.5" />
+                    <line x1="49%" y1="20%" x2="41%" y2="20%" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-mutsanna)" />
+                    <line x1="49%" y1="50%" x2="41%" y2="50%" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-mutsanna)" />
+                    <line x1="49%" y1="80%" x2="41%" y2="80%" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-mutsanna)" />
+                </svg>
+
+                <div class="absolute flex items-center justify-center bg-white z-10" style="left: 73%; top: 45%; width: 22%; height: 10%;">
+                    <span class="arabic text-5xl font-bold text-black">المثنى</span>
+                </div>
+                
+                <!-- Rofa' -->
+                <div class="absolute flex items-center justify-center bg-white z-10" style="left: 49%; top: 15%; width: 10%; height: 10%;">
+                    <span class="arabic text-4xl font-bold text-red-600">الرفع</span>
+                </div>
+                <div class="absolute flex items-center justify-center z-10" style="left: 31%; top: 15%; width: 10%; height: 10%;">
+                    <span class="arabic text-4xl font-bold text-yellow-500">بالألف</span>
+                </div>
+                <div class="absolute flex items-center justify-end z-10" style="left: 2%; top: 15%; width: 25%; height: 10%;" dir="rtl">
+                    <span class="arabic text-4xl font-bold text-black">جَاءَ الطَّالِبَ<span class="text-yellow-500">ا</span>نِ</span>
+                </div>
+
+                <!-- Nashob -->
+                <div class="absolute flex items-center justify-center bg-white z-10" style="left: 49%; top: 45%; width: 10%; height: 10%;">
+                    <span class="arabic text-4xl font-bold text-yellow-500">النصب</span>
+                </div>
+                <div class="absolute flex items-center justify-center z-10" style="left: 31%; top: 45%; width: 10%; height: 10%;">
+                    <span class="arabic text-4xl font-bold text-green-600">بالياء</span>
+                </div>
+                <div class="absolute flex items-center justify-end z-10" style="left: 2%; top: 45%; width: 25%; height: 10%;" dir="rtl">
+                    <span class="arabic text-4xl font-bold text-black">رَأَيْتُ الطَّالِبَ<span class="text-green-600">يْ</span>نِ</span>
+                </div>
+
+                <!-- Jar -->
+                <div class="absolute flex items-center justify-center bg-white z-10" style="left: 49%; top: 75%; width: 10%; height: 10%;">
+                    <span class="arabic text-4xl font-bold text-green-600">الجر</span>
+                </div>
+                <div class="absolute flex items-center justify-center z-10" style="left: 31%; top: 75%; width: 10%; height: 10%;">
+                    <span class="arabic text-4xl font-bold text-green-600">بالياء</span>
+                </div>
+                <div class="absolute flex items-center justify-end z-10" style="left: 2%; top: 75%; width: 25%; height: 10%;" dir="rtl">
+                    <span class="arabic text-4xl font-bold text-black">مَرَرْتُ بِالطَّالِبَ<span class="text-green-600">يْ</span>نِ</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 14: Jama' Mudzakkar Salim -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-14">
+            <h2 class="arabic text-5xl font-bold mb-4 text-slate-800 border-b-2 border-slate-300 pb-4">الذي يعرب بالحروف</h2>
+            
+            <!-- Tombol Ruju' -->
+            <button onclick="goToSlide(2)" class="absolute bottom-8 right-8 px-10 py-4 bg-blue-600 hover:bg-blue-500 rounded-[50px] text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
+                <span class="arabic text-3xl">رجوع</span>
+            </button>
+
+            <!-- Icon Speaker -->
+            <button class="absolute left-10 top-1/2 -translate-y-1/2 w-24 h-24 bg-blue-500 hover:bg-blue-400 rounded-full flex items-center justify-center shadow-xl border-4 border-slate-700/20 transition hover:scale-105 z-50">
+                <i class="fa-solid fa-volume-high text-4xl text-slate-200 opacity-80"></i>
+            </button>
+
+            <div class="relative w-full max-w-5xl h-[60vh] mx-auto mt-4" dir="ltr">
+                <svg class="absolute inset-0 w-full h-full pointer-events-none z-0">
+                    <defs><marker id="arr-mudzakkar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><polyline points="2,2 8,5 2,8" fill="none" stroke="#64748b" stroke-width="1.5" stroke-linecap="round"/></marker></defs>
+                    <line x1="77%" y1="50%" x2="68%" y2="50%" stroke="#64748b" stroke-width="1.5" />
+                    <line x1="68%" y1="20%" x2="68%" y2="80%" stroke="#64748b" stroke-width="1.5" />
+                    <line x1="68%" y1="20%" x2="62%" y2="20%" stroke="#64748b" stroke-width="1.5" />
+                    <line x1="68%" y1="50%" x2="62%" y2="50%" stroke="#64748b" stroke-width="1.5" />
+                    <line x1="68%" y1="80%" x2="62%" y2="80%" stroke="#64748b" stroke-width="1.5" />
+                    <line x1="49%" y1="20%" x2="41%" y2="20%" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-mudzakkar)" />
+                    <line x1="49%" y1="50%" x2="41%" y2="50%" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-mudzakkar)" />
+                    <line x1="49%" y1="80%" x2="41%" y2="80%" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-mudzakkar)" />
+                </svg>
+
+                <div class="absolute flex flex-col items-center justify-center bg-white z-10" style="left: 77%; top: 38%; width: 22%; height: 24%;">
+                    <span class="arabic text-5xl font-bold text-black text-center leading-snug">جمع المذكر<br>السالم</span>
+                </div>
+                
+                <!-- Rofa' -->
+                <div class="absolute flex items-center justify-center bg-white z-10" style="left: 49%; top: 15%; width: 10%; height: 10%;">
+                    <span class="arabic text-4xl font-bold text-red-600">الرفع</span>
+                </div>
+                <div class="absolute flex items-center justify-center z-10" style="left: 31%; top: 15%; width: 10%; height: 10%;">
+                    <span class="arabic text-4xl font-bold text-red-600">بالواو</span>
+                </div>
+                <div class="absolute flex items-center justify-end z-10" style="left: 2%; top: 15%; width: 25%; height: 10%;" dir="rtl">
+                    <span class="arabic text-4xl font-bold text-black">جَاءَ الْمُسْلِمُ<span class="text-red-600">و</span>نَ</span>
+                </div>
+
+                <!-- Nashob -->
+                <div class="absolute flex items-center justify-center bg-white z-10" style="left: 49%; top: 45%; width: 10%; height: 10%;">
+                    <span class="arabic text-4xl font-bold text-yellow-500">النصب</span>
+                </div>
+                <div class="absolute flex items-center justify-center z-10" style="left: 31%; top: 45%; width: 10%; height: 10%;">
+                    <span class="arabic text-4xl font-bold text-green-600">بالياء</span>
+                </div>
+                <div class="absolute flex items-center justify-end z-10" style="left: 2%; top: 45%; width: 25%; height: 10%;" dir="rtl">
+                    <span class="arabic text-4xl font-bold text-black">رَأَيْتُ الْمُسْلِمِ<span class="text-green-600">ي</span>نَ</span>
+                </div>
+
+                <!-- Jar -->
+                <div class="absolute flex items-center justify-center bg-white z-10" style="left: 49%; top: 75%; width: 10%; height: 10%;">
+                    <span class="arabic text-4xl font-bold text-green-600">الجر</span>
+                </div>
+                <div class="absolute flex items-center justify-center z-10" style="left: 31%; top: 75%; width: 10%; height: 10%;">
+                    <span class="arabic text-4xl font-bold text-green-600">بالياء</span>
+                </div>
+                <div class="absolute flex items-center justify-end z-10" style="left: 2%; top: 75%; width: 25%; height: 10%;" dir="rtl">
+                    <span class="arabic text-4xl font-bold text-black">سَلَّمْتُ عَلَى الْمُسْلِمِ<span class="text-green-600">ي</span>نَ</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 15: Petunjuk Pembelajaran -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-15">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 text-teal-300 border-b-2 border-teal-500/30 pb-4 uppercase tracking-widest">
+                PETUNJUK PEMBELAJARAN
+            </h2>
+            
+            <!-- Kontainer Teks (Bisa di-scroll kalo di HP) -->
+            <div class="w-full max-w-4xl bg-slate-800/60 p-6 md:p-8 rounded-2xl border border-slate-600 shadow-inner overflow-y-auto h-[60vh] text-left text-slate-200 text-sm md:text-base leading-relaxed space-y-5">
+                
+                <p>Selamat datang di media pembelajaran Nahwu berbasis <strong>Mind Mapping</strong>[cite: 2]. Ikuti langkah-langkah berikut agar pembelajaran dapat berlangsung secara terarah dan optimal[cite: 2].</p>
+
+                <!-- Poin 1 -->
+                <div>
+                    <h3 class="font-bold text-teal-400 text-lg">1. Pelajari Materi dari Kitab</h3>
+                    <p>Pembelajaran tetap menggunakan <strong>Kitab Jurumiyah dan Mukhtashar Jiddan</strong> sebagai sumber dan rujukan utama[cite: 2]. Pelajari materi dan simak penjelasan guru dengan baik[cite: 2].</p>
+                </div>
+
+                <!-- Poin 2 -->
+                <div>
+                    <h3 class="font-bold text-teal-400 text-lg">2. Pahami melalui Mind Mapping</h3>
+                    <p>Setelah mempelajari materi tertentu, buka bagian <strong>Mind Mapping</strong> yang tersedia[cite: 2]. Mind Mapping disajikan untuk membantu menyederhanakan materi, menghubungkan antarkonsep, serta mempermudah pemahaman terhadap kaidah-kaidah Nahwu[cite: 2].</p>
+                </div>
+
+                <!-- Poin 3 -->
+                <div>
+                    <h3 class="font-bold text-teal-400 text-lg">3. Perkuat Hafalan</h3>
+                    <p>Pada bagian materi tertentu yang dilengkapi dengan <strong>lagu hafalan</strong>, manfaatkan lagu tersebut untuk membantu mengingat dan menguatkan hafalan tanda-tanda i'rab[cite: 2]. Dengarkan dan ulangi beberapa kali agar materi lebih mudah melekat dalam ingatan[cite: 2].</p>
+                </div>
+
+                <!-- Poin 4 -->
+                <div>
+                    <h3 class="font-bold text-teal-400 text-lg">4. Uji Kemampuanmu</h3>
+                    <p>Setelah mempelajari materi, buka menu <strong>Evaluasi</strong>[cite: 2]. Pilih materi yang telah dipelajari, kemudian kerjakan soal-soal yang tersedia untuk mengukur tingkat pemahamanmu[cite: 2].</p>
+                </div>
+
+                <!-- Poin 5 -->
+                <div>
+                    <h3 class="font-bold text-teal-400 text-lg">5. Pelajari Kembali Materi</h3>
+                    <p>Jika masih terdapat jawaban yang kurang tepat, jangan khawatir[cite: 2]. Kembali ke bagian <strong>Materi</strong> atau <strong>Mind Mapping</strong>, pelajari kembali materi yang belum dipahami, kemudian ulangi evaluasi[cite: 2].</p>
+                </div>
+            </div>
+
+            <!-- Tombol Kembali (Ruju' ke Cover awal) -->
+            <button onclick="goToSlide(1)" class="absolute bottom-8 right-8 md:right-12 px-10 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg shadow-blue-500/30 transition hover:scale-105 border border-blue-400/50 z-50 font-bold lowercase tracking-wide">
+                kembali
+            </button>
+        </div>
+
+        <!-- SLIDE 16: Tujuan Pembuatan Media -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 text-teal-300 border-b-2 border-teal-500/30 pb-4 uppercase tracking-widest text-center">
+                TUJUAN PEMBUATAN MEDIA
+            </h2>
+            
+            <!-- Kontainer Teks (Bisa di-scroll kalo teksnya panjang) -->
+            <div class="w-full max-w-4xl bg-slate-800/60 p-6 md:p-8 rounded-2xl border border-slate-600 shadow-inner overflow-y-auto h-[60vh] text-left text-slate-200 text-sm md:text-base leading-relaxed space-y-5">
+                
+                <p>Media pembelajaran ini dikembangkan sebagai media pendukung pembelajaran Nahwu yang memadukan teknologi dengan penyajian materi berbasis <strong>Mind Mapping</strong>. Media ini dirancang untuk membantu peserta didik memahami dan mengingat kaidah-kaidah Nahwu secara lebih mudah, terstruktur, dan menarik.</p>
+                <p>Secara khusus, media ini bertujuan untuk:</p>
+
+                <!-- Poin 1 -->
+                <div>
+                    <h3 class="font-bold text-teal-400 text-lg">1. Mempermudah Pemahaman Materi Nahwu</h3>
+                    <p>Menyajikan materi Nahwu secara lebih ringkas dan visual melalui Mind Mapping sehingga hubungan antara konsep dan kaidah dapat dipahami dengan lebih mudah.</p>
+                </div>
+
+                <!-- Poin 2 -->
+                <div>
+                    <h3 class="font-bold text-teal-400 text-lg">2. Membantu Menghafal Tanda-Tanda I'rab</h3>
+                    <p>Membantu peserta didik mengingat tanda-tanda i'rab melalui penyajian yang sistematis dan, pada materi tertentu, diperkuat dengan lagu atau media hafalan.</p>
+                </div>
+
+                <!-- Poin 3 -->
+                <div>
+                    <h3 class="font-bold text-teal-400 text-lg">3. Mengintegrasikan Kitab dengan Teknologi</h3>
+                    <p>Menjadikan PowerPoint interaktif sebagai media pendukung pembelajaran, sementara <strong>Kitab Jurumiyah dan Mukhtashar Jiddan</strong> tetap menjadi sumber dan rujukan utama dalam memahami materi Nahwu.</p>
+                </div>
+
+                <!-- Poin 4 -->
+                <div>
+                    <h3 class="font-bold text-teal-400 text-lg">4. Meningkatkan Keterlibatan Peserta Didik</h3>
+                    <p>Menciptakan pengalaman belajar yang lebih aktif melalui navigasi interaktif, Mind Mapping, serta latihan soal yang dapat dikerjakan secara langsung.</p>
+                </div>
+
+                <!-- Poin 5 -->
+                <div>
+                    <h3 class="font-bold text-teal-400 text-lg">5. Mengukur Pemahaman Peserta Didik</h3>
+                    <p>Menyediakan evaluasi pada setiap materi untuk membantu peserta didik mengukur pemahaman terhadap materi yang telah dipelajari.</p>
+                </div>
+
+                <!-- Poin 6 -->
+                <div>
+                    <h3 class="font-bold text-teal-400 text-lg">6. Menciptakan Pembelajaran Nahwu yang Lebih Menarik</h3>
+                    <p>Menghadirkan alternatif pembelajaran Nahwu yang lebih visual, interaktif, dan menyenangkan tanpa menghilangkan karakteristik pembelajaran berbasis kitab.</p>
+                </div>
+            </div>
+
+            <!-- Tombol Kembali (Ruju' ke Cover awal) -->
+            <button onclick="goToSlide(1)" class="absolute bottom-8 right-8 md:right-12 px-10 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg shadow-blue-500/30 transition hover:scale-105 border border-blue-400/50 z-50 font-bold lowercase tracking-wide">
+                kembali
+            </button>
+        </div>
+
+        <!-- SLIDE 17: Menu Evaluasi (Daftar Pelajaran) -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-17">
+            
+            <!-- Tombol Ruju' (Kembali ke Menu Utama) -->
+            <button onclick="goToSlide(1)" class="absolute bottom-8 right-8 px-10 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg shadow-blue-500/30 transition hover:scale-105 border border-blue-400/50 z-50">
+                <span class="arabic text-3xl font-bold">رجوع</span>
+            </button>
+
+            <!-- Judul Atas (Ad-Duruusul Muqorroh) -->
+            <div class="w-full max-w-2xl bg-yellow-500 hover:bg-yellow-400 transition py-4 px-8 rounded-xl shadow-lg border border-yellow-400 mb-10 text-center mx-auto cursor-default">
+                <h2 class="arabic text-3xl md:text-4xl font-bold text-white">الدُّرُوْسُ المُقَرَّرَةُ</h2>
+            </div>
+            
+            <!-- Grid 6 Tombol Pelajaran (Warna Kuning) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 w-full max-w-5xl mx-auto" dir="rtl">
+                
+                <!-- Pelajaran 1 -->
+                <!-- Nanti onclick-nya bisa lu isi "goToSlide(XX)" kalo slide kuisnya udah lu bikin -->
+                <button onclick="goToSlide(18)" class="bg-blue-500 hover:bg-blue-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-center hover:scale-105 z-10">
+                    <span class="arabic text-2xl md:text-3xl font-bold text-white leading-relaxed">
+        الدَّرْسُ الأَوَّلُ — تَعْرِيْفُ الْكَلَامِ
+                </span>
+                </button>
+
+                <!-- Pelajaran 4 -->
+                <button class="bg-blue-500 hover:bg-blue-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-center hover:scale-105">
+                    <span class="arabic text-2xl md:text-3xl font-bold text-white leading-relaxed">
+                        الدَّرْسُ الرَّابِعُ — إِعْرَابُ الْمُفْرَدِ وَجَمْعُ التَّكْسِيْرِ
+                    </span>
+                </button>
+
+                <!-- Pelajaran 2 -->
+                <button class="bg-blue-500 hover:bg-blue-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-center hover:scale-105">
+                    <span class="arabic text-2xl md:text-3xl font-bold text-white leading-relaxed">
+                        الدَّرْسُ الثَّانِي — تَعْرِيْفُ الإِعْرَابِ وَأَقْسَامُهُ
+                    </span>
+                </button>
+
+                <!-- Pelajaran 5 -->
+                <button class="bg-blue-500 hover:bg-blue-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-center hover:scale-105">
+                    <span class="arabic text-2xl md:text-3xl font-bold text-white leading-relaxed">
+                        الدَّرْسُ الْخَامِسُ — جَمْعُ الْمُؤَنَّثِ السَّالِمِ وَالإِسْمُ غَيْرُ المُنْصَرِفِ
+                    </span>
+                </button>
+
+                <!-- Pelajaran 3 -->
+                <button class="bg-blue-500 hover:bg-blue-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-center hover:scale-105">
+                    <span class="arabic text-2xl md:text-3xl font-bold text-white leading-relaxed">
+                        الدَّرْسُ الثَّالِثُ — عَلَامَاتُ الإِعْرَابِ
+                    </span>
+                </button>
+
+                <!-- Pelajaran 6 -->
+                <button class="bg-blue-500 hover:bg-blue-400 transition py-5 px-6 rounded-xl shadow-lg border border-blue-400 text-center hover:scale-105">
+                    <span class="arabic text-2xl md:text-3xl font-bold text-white leading-relaxed">
+                        الدَّرْسُ السَّادِسُ — الأَسْمَاءُ الْخَمْسَةُ وَالمُثَنَّى وَجَمْعُ الْمُذَكَّرِ السَّالِمِ
+                    </span>
+                </button>
+
+            </div>
+        </div>
+
+        <!-- SLIDE 18: Kuis Pelajaran 1 -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-18">
+            
+            <!-- Tombol Ruju' ke Menu Evaluasi -->
+            <button onclick="goToSlide(17)" class="absolute top-6 left-6 px-8 py-2 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg shadow-blue-500/30 transition hover:scale-105 border border-blue-400/50 z-50">
+                <span class="arabic text-2xl">رجوع</span>
+            </button>
+
+            <!-- Menampilkan Skor Sementara -->
+            <div class="absolute top-6 right-6 px-6 py-2 bg-slate-800 rounded-lg border border-teal-500 text-teal-400 font-bold z-50">
+                Skor: <span id="skor-display">0</span>
+            </div>
+
+            <!-- Pertanyaan -->
+            <div class="w-full max-w-3xl bg-yellow-500 py-6 px-8 rounded-xl shadow-lg border border-yellow-400 mb-12 text-center mx-auto mt-12">
+                <h2 class="arabic text-3xl md:text-4xl font-bold text-white">ما تعريف الكلام عند ابن آجروم</h2>
+            </div>
+            
+            <!-- Pilihan Ganda -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mx-auto" dir="rtl">
+                
+                <!-- Pilihan B (BENAR) -->
+                <button onclick="cekJawaban(this, true)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">B. اللفظ المركب المفيد بالوضع</span>
+                </button>
+
+                <!-- Pilihan A (SALAH) -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">A. اللفظ الذي يتكون من كلمة واحدة</span>
+                </button>
+
+                <!-- Pilihan D (SALAH) -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">D. مجموعة من الحروف التي لا معنى لها</span>
+                </button>
+
+                <!-- Pilihan C (SALAH) -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">C. كل صوت يخرج من الفم</span>
+                </button>
+            </div>
+
+            <!-- Tombol At-Taali (Selanjutnya) -->
+            <!-- Nanti diarahkan ke soal berikutnya (misal slide 19), sementara gw balikin ke menu (17) dulu -->
+            <button onclick="goToSlide(19)" class="btn-next-soal hidden mt-12 mb-4 px-12 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
+    <span class="arabic text-3xl font-bold">التالي</span>
+</button>
+        </div>
+
+        <!-- SLIDE 19: Kuis Pelajaran 1 - Soal 2 -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-19">
+            
+            <!-- Tombol Ruju' ke Menu Evaluasi -->
+            <button onclick="goToSlide(17)" class="absolute top-6 left-6 px-8 py-2 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg shadow-blue-500/30 transition hover:scale-105 border border-blue-400/50 z-50">
+                <span class="arabic text-2xl">رجوع</span>
+            </button>
+
+            <!-- Menampilkan Skor Sementara -->
+            <div class="absolute top-6 right-6 px-6 py-2 bg-slate-800 rounded-lg border border-teal-500 text-teal-400 font-bold z-50">
+                Skor: <span class="update-skor">0</span>
+            </div>
+
+            <!-- Pertanyaan -->
+            <div class="w-full max-w-3xl bg-yellow-500 py-6 px-8 rounded-xl shadow-lg border border-yellow-400 mb-12 text-center mx-auto mt-12">
+                <h2 class="arabic text-3xl md:text-4xl font-bold text-white">أَيُّ مما يأتي يُعَدُّ كلامًا؟</h2>
+            </div>
+            
+            <!-- Pilihan Ganda -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mx-auto" dir="rtl">
+                
+                <!-- Pilihan B (Kanan Atas) -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">B. إنْ جاءَ</span>
+                </button>
+
+                <!-- Pilihan A (Kiri Atas) -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">A. زيدٌ</span>
+                </button>
+
+                <!-- Pilihan D (Kanan Bawah) -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">D. في البيتِ</span>
+                </button>
+
+                <!-- Pilihan C (Kiri Bawah - BENAR) -->
+                <button onclick="cekJawaban(this, true)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">C. جاءَ زيدٌ</span>
+                </button>
+            </div>
+
+            <!-- Tombol At-Taali (Sementara gw balikin ke menu 17, nanti lu ubah jadi goToSlide(20) kalau ada soal 3) -->
+             <button onclick="goToSlide(20)" class="mt-12 mb-4 px-12 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
+    <span class="arabic text-3xl font-bold">التالي</span>
+</button>
+        </div>
+
+        <!-- SLIDE 20: Kuis Pelajaran 1 - Soal 3 -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-20">
+            
+            <!-- Tombol Ruju' ke Menu Evaluasi -->
+            <button onclick="goToSlide(17)" class="absolute top-6 left-6 px-8 py-2 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg shadow-blue-500/30 transition hover:scale-105 border border-blue-400/50 z-50">
+                <span class="arabic text-2xl">رجوع</span>
+            </button>
+
+            <!-- Menampilkan Skor Sementara -->
+            <div class="absolute top-6 right-6 px-6 py-2 bg-slate-800 rounded-lg border border-teal-500 text-teal-400 font-bold z-50">
+                Skor: <span class="update-skor">0</span>
+            </div>
+
+            <!-- Pertanyaan -->
+            <div class="w-full max-w-3xl bg-yellow-500 py-6 px-8 rounded-xl shadow-lg border border-yellow-400 mb-12 text-center mx-auto mt-12">
+                <h2 class="arabic text-3xl md:text-4xl font-bold text-white">أَيُّ مما يأتي ليس كلامًا؟</h2>
+            </div>
+            
+            <!-- Pilihan Ganda -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mx-auto" dir="rtl">
+                
+                <!-- Pilihan B (Kanan Atas) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">B. محمدٌ حاضرٌ</span>
+                </button>
+
+                <!-- Pilihan A (Kiri Atas) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">A. قامَ زيدٌ</span>
+                </button>
+
+                <!-- Pilihan D (Kanan Bawah) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">D. ذهبَ الطالبُ</span>
+                </button>
+
+                <!-- Pilihan C (Kiri Bawah) - BENAR -->
+                <button onclick="cekJawaban(this, true)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">C. إنْ جاءَ</span>
+                </button>
+            </div>
+
+            <!-- Tombol At-Taali (Desain presisi di tengah bawah, sementara diarahkan balik ke menu Evaluasi di slide 17) -->
+            <button onclick="goToSlide(17)" class="mt-12 mb-4 px-12 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
+                <span class="arabic text-3xl font-bold">التالي</span>
+            </button>
+        </div>
+
+        <!-- TOMBOL NAVIGASI -->
+        <!-- TOMBOL NAVIGASI (Disembunyikan) -->
+        <div class="hidden">
+            <span id="current-page">1</span>
+            <span id="total-page">1</span>
+        </div>
+
+
+    <!-- LOGIKA JAVASCRIPT UNTUK NAVIGASI -->
+    <script>
+        let currentSlide = 1;
+        const totalSlides = document.querySelectorAll('.slide').length;
+        document.getElementById('total-page').innerText = totalSlides;
+
+        function updateUI() {
+            // Sembunyikan semua slide
+            document.querySelectorAll('.slide').forEach(slide => {
+                slide.classList.remove('active');
+            });
+            
+            // Tampilkan slide saat ini
+            document.getElementById(`slide-${currentSlide}`).classList.add('active');
+            
+            // Update teks halaman
+            document.getElementById('current-page').innerText = currentSlide;
+
+            // Update Progress Bar
+            const progress = ((currentSlide - 1) / (totalSlides - 1)) * 100;
+            document.getElementById('progress-bar').style.width = `${progress}%`;
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                updateUI();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 1) {
+                currentSlide--;
+                updateUI();
+            }
+        }
+
+        // Biar bisa ganti slide pake tombol panah di keyboard laptop!
+        //document.addEventListener('keydown', (e) => {
+           // if (e.key === 'ArrowRight') nextSlide();
+            //if (e.key === 'ArrowLeft') prevSlide();
+        //});
+        
+        updateUI(); // Inisialisasi awal
+        function goToSlide(slideNumber) {
+            if (slideNumber >= 1 && slideNumber <= totalSlides) {
+                currentSlide = slideNumber;
+                updateUI();
+            }
+        }
+
+        // LOGIKA KUIS
+        let totalSkor = 0;
+        let soalTerjawab = {}; // Biar user gak bisa nge-klik berkali-kali di satu soal
+
+        function cekJawaban(tombolPilihan, isBenar) {
+            // Cek apakah di slide ini user udah pernah jawab?
+            if (soalTerjawab[currentSlide]) return; 
+            
+            soalTerjawab[currentSlide] = true; // Tandai soal ini udah dijawab
+
+            // Styling tombol setelah diklik biar ketahuan mana yang bener/salah
+            const semuaOpsi = tombolPilihan.parentElement.querySelectorAll('.kuis-opsi');
+            semuaOpsi.forEach(btn => {
+                btn.classList.remove('hover:bg-yellow-400', 'hover:scale-105', 'bg-yellow-500');
+                btn.classList.add('bg-slate-500', 'opacity-50', 'cursor-not-allowed'); // Matiin tombol lain
+            });
+
+            if (isBenar) {
+                totalSkor += 5; // Nambah poin 5
+                tombolPilihan.classList.remove('bg-slate-500', 'opacity-50');
+                tombolPilihan.classList.add('bg-green-500', 'border-green-400', 'opacity-100'); // Hijau = Benar
+                alert("ممتاز! Jawaban Benar (+5 Poin)");
+            } else {
+                tombolPilihan.classList.remove('bg-slate-500', 'opacity-50');
+                tombolPilihan.classList.add('bg-red-500', 'border-red-400', 'opacity-100'); // Merah = Salah
+                alert("kurang tepat, poin kamu 0");
+            }
+
+            // Update tampilan skor di semua slide
+            document.querySelectorAll('.update-skor').forEach(el => el.innerText = totalSkor);
+
+            // LOGIKA BARU: MUNCULIN TOMBOL "SELANJUTNYA"
+            const slideSekarang = document.getElementById(`slide-${currentSlide}`);
+            const tombolNext = slideSekarang.querySelector('.btn-next-soal');
+            if (tombolNext) {
+                tombolNext.classList.remove('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
