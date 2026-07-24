@@ -15,8 +15,9 @@
         html { scroll-behavior: smooth; }
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #0f172a;
-            color: white;
+            /* Background Langit Biru Cerah */
+            background: linear-gradient(180deg, #4cb8f3 0%, #89d4fe 50%, #c4eaff 100%);
+            color: #1e3a8a;
             min-height: 100vh;
             overflow-x: hidden;
         }
@@ -26,71 +27,117 @@
         .slide {
             display: none;
             opacity: 0;
-            transform: translateY(14px);
+            transform: scale(0.95);
             transition: opacity 0.3s ease, transform 0.3s ease;
         }
         .slide.active {
             display: flex;
             opacity: 1;
-            transform: translateY(0);
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px) scale(0.98); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
+            transform: scale(1);
         }
 
-        /* Efek Glassmorphism biar kekinian */
+        /* TOMBOL CIRCLE 3D (Buat tombol back, sound, dll) */
+        .btn-circle-3d {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #22d3ee; /* Warna cyan */
+            border: 4px solid #fff;
+            box-shadow: 0 8px 0 #0891b2, 0 15px 20px rgba(0,0,0,0.2);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.1s;
+            z-index: 50;
+        }
+        .btn-circle-3d:active {
+            transform: translateY(8px);
+            box-shadow: 0 0 0 #0891b2, 0 5px 10px rgba(0,0,0,0.2);
+        }
+
+        /* CARD MENU 3D PUTIH */
+        .card-menu-3d {
+            background: #ffffff;
+            border-radius: 30px;
+            border-bottom: 12px solid #e2e8f0;
+            box-shadow: 0 15px 25px rgba(0,0,0,0.15);
+            display: flex;
+            flex-col;
+            align-items: center;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .card-menu-3d:hover {
+            transform: translateY(-5px);
+        }
+        .card-menu-3d:active {
+            transform: translateY(10px);
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        /* KOTAK MATERI UTAMA (Ganti Glassmorphism jadi 3D Biru Tua biar teks putih lu tetep kebaca) */
         .glass-panel {
-            background: rgba(15, 23, 42, 0.78);
-            backdrop-filter: blur(18px);
-            border: 1px solid rgba(255, 255, 255, 0.14);
-            box-shadow: 0 25px 60px -20px rgba(0, 0, 0, 0.55);
-            transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
-        }
-        .glass-panel:hover {
-            transform: translateY(-3px);
-            border-color: rgba(56, 189, 248, 0.3);
-        }
-        .glass-panel strong,
-        .glass-panel .arabic {
-            text-shadow: 0 1px 12px rgba(0, 0, 0, 0.22);
+            background: #1e3a5f;
+            border: 6px solid #60b3e6;
+            border-radius: 35px;
+            box-shadow: 0 15px 0 #112745, 0 25px 30px rgba(0,0,0,0.3);
+            transition: transform 0.25s ease;
+            position: relative;
         }
 
-        @media (max-width: 1024px) {
-            .glass-panel { padding: 1.25rem; }
+        /* Efek Teks Judul 3D */
+        .text-3d-title {
+            color: #ffffff;
+            text-shadow: 
+                -3px -3px 0 #1e3a8a,  
+                 3px -3px 0 #1e3a8a,
+                -3px  3px 0 #1e3a8a,
+                 3px  3px 0 #1e3a8a,
+                 0 8px 0 #0f172a,
+                 0 15px 20px rgba(0,0,0,0.4);
         }
 
         @media (max-width: 768px) {
             .glass-panel {
-                position: relative !important;
                 width: 100% !important;
-                max-width: 100% !important;
-                left: auto !important;
-                top: auto !important;
-                height: auto !important;
-                margin-bottom: 1rem;
+                border-radius: 20px !important;
+                padding: 1rem !important;
+                box-shadow: 0 8px 0 #112745 !important;
             }
-            .slide .relative svg { display: none; }
-            .slide .relative > * { position: relative !important; }
-            .slide .absolute { position: relative !important; }
-            .glass-panel { border-radius: 1.5rem; }
+            .slide .relative svg { display: none !important; }
+            .slide .relative { display: flex !important; flex-direction: column !important; gap: 12px !important; height: auto !important; margin-top: 20px !important; }
+            .slide .relative > div.absolute { position: relative !important; left: auto !important; top: auto !important; width: 100% !important; height: auto !important; padding: 15px !important; }
+            .btn-circle-3d { width: 45px; height: 45px; font-size: 1.2rem; }
         }
-
-        @media (max-width: 640px) {
-            .glass-panel { padding: 1rem; }
-            .slide h1 { font-size: 2.6rem; }
-            .slide h2 { font-size: 1.9rem; }
-            .slide p, .slide button, .slide span { font-size: 0.95rem; }
-        }
+        /* ============================================================ */
     </style>
 </head>
-<body class="min-h-screen w-screen overflow-auto flex flex-col justify-center items-center bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 relative p-4">
+<body class="min-h-screen w-screen overflow-auto flex flex-col justify-center items-center relative p-4">
 
-    <!-- Efek Background Dekoratif -->
-    <div class="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
-        <div class="absolute w-96 h-96 bg-teal-500 rounded-full mix-blend-multiply filter blur-[128px] opacity-40 top-[-10%] left-[-10%]"></div>
-        <div class="absolute w-96 h-96 bg-indigo-500 rounded-full mix-blend-multiply filter blur-[128px] opacity-40 bottom-[-10%] right-[-10%]"></div>
+    <!-- Tombol Navigasi Global (Sound, Help, Exit kayak di gambar) -->
+    <div class="fixed top-6 left-6 flex flex-col gap-4 z-50">
+        <button class="btn-circle-3d" onclick="goToSlide(1)"><i class="fa-solid fa-arrow-left"></i></button>
     </div>
+    <div class="fixed top-6 right-6 flex flex-col gap-4 z-50">
+        <button class="btn-circle-3d"><i class="fa-solid fa-question"></i></button>
+        <button class="btn-circle-3d"><i class="fa-solid fa-volume-high"></i></button>
+    </div>
+
+    <!-- Dekorasi Bawah (Bentuk Awan/Bukit Salju Putih) -->
+    <div class="fixed bottom-0 left-0 w-full h-48 bg-white z-0" style="border-radius: 100% 100% 0 0 / 50px 50px 0 0; box-shadow: 0 -20px 50px rgba(255,255,255,0.5);"></div>
+    <div class="fixed bottom-0 left-[-10%] w-[120%] h-32 bg-[#e0f2fe] z-0 opacity-60" style="border-radius: 100% 100% 0 0 / 100px 100px 0 0;"></div>
+
+    <!-- CONTAINER UTAMA MATERI -->
+    <div class="glass-panel w-full max-w-5xl min-h-[75vh] h-auto rounded-3xl z-10 flex flex-col p-8 relative mt-12 mb-12">
+        
+        <!-- Progress Bar (Desain 3D) -->
+        <div class="w-full bg-[#112745] h-4 rounded-full mb-6 border-2 border-[#1e3a5f] shadow-inner">
+            <div id="progress-bar" class="bg-cyan-400 h-full rounded-full transition-all duration-300 w-0 shadow-[inset_0_-3px_0_rgba(0,0,0,0.2)]"></div>
+        </div>
 
     <!-- CONTAINER UTAMA -->
     <div class="glass-panel w-full max-w-5xl min-h-[75vh] h-auto rounded-3xl z-10 flex flex-col p-8 relative">
@@ -102,20 +149,54 @@
 
         <!-- SLIDE 1: Cover -->
         <div class="slide active flex-col items-center justify-center h-full text-center" id="slide-1">
-            <span class="px-4 py-1 bg-teal-500/20 text-teal-300 rounded-full text-sm font-semibold tracking-wider mb-6">MATERI NAHWU</span>
-            <h1 class="text-5xl md:text-6xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-teal-300 to-emerald-200">
+            
+            <!-- Judul Ala Qolbuna -->
+            <h1 class="arabic text-7xl md:text-8xl font-black mb-4 text-3d-title tracking-wider mt-4">
                 خَرِيطَةُ النَّحْو
             </h1>
-            <p class="text-xl text-slate-300 mb-12">Peta Konsep Pembelajaran Nahwu</p>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-md mx-auto">
-                <button onclick="goToSlide(2)" class="bg-white/5 border border-white/10 rounded-xl p-4 text-center cursor-pointer hover:bg-white/10 transition w-full font-medium">Materi</button>
-                <button onclick="goToSlide(16)" class="bg-white/5 border border-white/10 rounded-xl p-4 text-center cursor-pointer hover:bg-white/10 transition w-full font-medium">Tujuan</button>
+            
+            <!-- Subjudul Pill -->
+            <div class="bg-[#0f172a] border-4 border-slate-700 text-white px-8 py-3 rounded-full text-lg md:text-xl font-bold mb-12 shadow-[0_8px_0_#020617] tracking-wide inline-block">
+                Peta Konsep Pembelajaran Nahwu
+            </div>
 
-                <button onclick="goToSlide(15)" class="bg-white/5 border border-white/10 rounded-xl p-4 text-center cursor-pointer hover:bg-white/10 transition w-full font-medium">Petunjuk</button>
-                <button onclick="goToSlide(17)" class="bg-white/5 border border-white/10 rounded-xl p-4 text-center cursor-pointer hover:bg-white/10 transition w-full font-medium">Evaluasi</button>
+            <!-- 4 Kotak Menu -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 w-full max-w-4xl mx-auto">
+                
+                <!-- Menu 1: Materi -->
+                <div onclick="goToSlide(2)" class="card-menu-3d flex flex-col items-center justify-between h-56">
+                    <div class="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center shadow-inner mb-4">
+                        <i class="fa-solid fa-book-open text-5xl text-blue-500 drop-shadow-md"></i>
+                    </div>
+                    <span class="font-bold text-slate-800 text-lg leading-tight text-center">Materi<br>Nahwu</span>
+                </div>
+
+                <!-- Menu 2: Tujuan -->
+                <div onclick="goToSlide(16)" class="card-menu-3d flex flex-col items-center justify-between h-56">
+                    <div class="w-24 h-24 bg-purple-100 rounded-full flex items-center justify-center shadow-inner mb-4">
+                        <i class="fa-solid fa-bullseye text-5xl text-purple-500 drop-shadow-md"></i>
+                    </div>
+                    <span class="font-bold text-slate-800 text-lg leading-tight text-center">Tujuan<br>Pembelajaran</span>
+                </div>
+
+                <!-- Menu 3: Petunjuk -->
+                <div onclick="goToSlide(15)" class="card-menu-3d flex flex-col items-center justify-between h-56">
+                    <div class="w-24 h-24 bg-amber-100 rounded-full flex items-center justify-center shadow-inner mb-4">
+                        <i class="fa-solid fa-circle-info text-5xl text-amber-500 drop-shadow-md"></i>
+                    </div>
+                    <span class="font-bold text-slate-800 text-lg leading-tight text-center">Petunjuk<br>Aplikasi</span>
+                </div>
+
+                <!-- Menu 4: Evaluasi -->
+                <div onclick="goToSlide(17)" class="card-menu-3d flex flex-col items-center justify-between h-56">
+                    <div class="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center shadow-inner mb-4">
+                        <i class="fa-solid fa-clipboard-question text-5xl text-green-500 drop-shadow-md"></i>
+                    </div>
+                    <span class="font-bold text-slate-800 text-lg leading-tight text-center">Soal<br>Evaluasi</span>
+                </div>
+
             </div>
         </div>
-
         <!-- SLIDE 2: Menu Materi -->
         <div class="slide flex-col items-center justify-center h-full w-full" id="slide-2">
             <h2 class="arabic text-5xl font-bold mb-12 text-teal-300">مادة الدروس</h2>
@@ -430,8 +511,11 @@
 
         <!-- SLIDE 8: Isim Mufrod -->
         <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-8">
-            <h2 class="arabic text-5xl font-bold mb-4 text-slate-800 border-b-2 border-slate-300 pb-4">الذي يعرب بالحركات</h2>
+            <h2 class="arabic text-5xl font-bold text-white mb-4 text-slate-800 border-b-2 border-slate-300 pb-4">الذي يعرب بالحركات</h2>
             
+            <!-- Ganti 'lagu-mufrod.mp3' sama nama file lagu lu yang asli -->
+            <audio id="audio-mufrod" src="audio_ismu_irob.mp3"></audio>
+
             <!-- Tombol At-Taali -->
             <button onclick="goToSlide(9)" class="absolute bottom-8 right-8 px-10 py-4 bg-blue-600 hover:bg-blue-500 rounded-[50px] text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
                 <span class="arabic text-3xl">التالي</span>
@@ -1229,8 +1313,54 @@
             </div>
 
             <!-- Tombol Ruju' (Selesai Kuis, kembali ke menu Evaluasi di slide 17) -->
-            <button onclick="goToSlide(17)" class="btn-next-soal hidden mt-12 mb-4 px-12 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
+            <button onclick="goToSlide(22)" class="btn-next-soal hidden mt-12 mb-4 px-12 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
                 <span class="arabic text-3xl font-bold">رجوع</span>
+            </button>
+        </div>
+
+        <!-- SLIDE 22: Hasil Skor Evaluasi -->
+        <div class="slide flex-col items-center justify-center h-full w-full relative pt-8" id="slide-22">
+            
+            <!-- Judul Atas -->
+            <div class="bg-[#1e3a5f] border-2 border-slate-700 rounded-2xl py-3 px-10 mb-8 shadow-lg z-10">
+                <h2 class="text-3xl md:text-4xl font-bold text-white tracking-wide">Poin Soal Evaluasi</h2>
+            </div>
+
+            <!-- Kontainer Kotak Skor -->
+            <div class="w-full max-w-4xl bg-[#60b3e6] p-8 md:p-12 rounded-xl border-4 border-[#2b6d9c] flex flex-col md:flex-row justify-around items-center gap-8 shadow-[0_10px_30px_rgba(0,0,0,0.3)] z-10">
+
+                <!-- Jawaban Benar -->
+                <div class="flex flex-col items-center">
+                    <h3 class="text-xl md:text-2xl font-black text-[#90d948] mb-4 text-center text-shadow-sm stroke-text">Jawaban<br>yang benar:</h3>
+                    <!-- Kotak Putih Timbul -->
+                    <div class="bg-[#f0f0f0] rounded-3xl p-6 shadow-[inset_0_-8px_0_rgba(200,200,200,1),0_8px_15px_rgba(0,0,0,0.2)] border-2 border-white w-32 h-32 flex items-center justify-center">
+                        <span id="hasil-benar" class="text-6xl font-black text-slate-800">0</span>
+                    </div>
+                </div>
+
+                <!-- Jawaban Salah -->
+                <div class="flex flex-col items-center">
+                    <h3 class="text-xl md:text-2xl font-black text-[#ff5757] mb-4 text-center text-shadow-sm stroke-text">Jawaban<br>yang Salah:</h3>
+                    <!-- Kotak Putih Timbul -->
+                    <div class="bg-[#f0f0f0] rounded-3xl p-6 shadow-[inset_0_-8px_0_rgba(200,200,200,1),0_8px_15px_rgba(0,0,0,0.2)] border-2 border-white w-32 h-32 flex items-center justify-center">
+                        <span id="hasil-salah" class="text-6xl font-black text-slate-800">0</span>
+                    </div>
+                </div>
+
+                <!-- Total Score -->
+                <div class="flex flex-col items-center">
+                    <h3 class="text-xl md:text-2xl font-black text-white mb-4 text-center text-shadow-sm stroke-text">Total Score:</h3>
+                    <!-- Kotak Putih Timbul -->
+                    <div class="bg-[#f0f0f0] rounded-3xl p-6 shadow-[inset_0_-8px_0_rgba(200,200,200,1),0_8px_15px_rgba(0,0,0,0.2)] border-2 border-white w-32 h-32 flex items-center justify-center">
+                        <span id="hasil-skor" class="text-6xl font-black text-slate-800">0</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Tombol Selesai (Kembali ke Menu Evaluasi Utama) -->
+            <button onclick="goToSlide(17)" class="mt-12 px-12 py-4 bg-teal-500 hover:bg-teal-400 rounded-full text-white shadow-lg transition hover:scale-105 border-2 border-white z-50">
+                <span class="font-bold text-2xl uppercase tracking-wider">Selesai</span>
             </button>
         </div>
 
@@ -1257,14 +1387,30 @@
             // Tampilkan slide saat ini
             document.getElementById(`slide-${currentSlide}`).classList.add('active');
             
-            // Update teks halaman
-            document.getElementById('current-page').innerText = currentSlide;
+            // Update teks halaman (Kalo masih ada yang pake ID ini)
+            const currentPageEl = document.getElementById('current-page');
+            if(currentPageEl) currentPageEl.innerText = currentSlide;
 
             // Update Progress Bar
-            const progress = ((currentSlide - 1) / (totalSlides - 1)) * 100;
-            document.getElementById('progress-bar').style.width = `${progress}%`;
-        }
+            const progressBar = document.getElementById('progress-bar');
+            if(progressBar) {
+                const progress = ((currentSlide - 1) / (totalSlides - 1)) * 100;
+                progressBar.style.width = `${progress}%`;
+            }
 
+            // LOGIKA AUDIO OTOMATIS
+            const laguMufrod = document.getElementById('audio-mufrod');
+            if (laguMufrod) {
+                if (currentSlide === 8) {
+                    // Kalo slide 8, play lagunya
+                    laguMufrod.play().catch(error => console.log("Audio diblokir browser, butuh interaksi klik dulu."));
+                } else {
+                    // Kalo pindah ke slide lain, pause dan ulang lagunya dari detik ke-0
+                    laguMufrod.pause();
+                    laguMufrod.currentTime = 0; 
+                }
+            }
+        }
         function nextSlide() {
             if (currentSlide < totalSlides) {
                 currentSlide++;
@@ -1295,6 +1441,8 @@
 
         // LOGIKA KUIS
         let totalSkor = 0;
+        let jumlahBenar = 0;
+        let jumlahSalah = 0;
         let soalTerjawab = {}; // Biar user gak bisa nge-klik berkali-kali di satu soal
 
         function cekJawaban(tombolPilihan, isBenar) {
@@ -1303,7 +1451,7 @@
             
             soalTerjawab[currentSlide] = true; // Tandai soal ini udah dijawab
 
-            // Styling tombol setelah diklik biar ketahuan mana yang bener/salah
+            // Styling tombol setelah diklik
             const semuaOpsi = tombolPilihan.parentElement.querySelectorAll('.kuis-opsi');
             semuaOpsi.forEach(btn => {
                 btn.classList.remove('hover:bg-yellow-400', 'hover:scale-105', 'bg-yellow-500');
@@ -1311,20 +1459,27 @@
             });
 
             if (isBenar) {
-                totalSkor += 5; // Nambah poin 5
+                totalSkor += 5; // Nambah poin
+                jumlahBenar += 1; // Nambah jumlah jawaban benar
                 tombolPilihan.classList.remove('bg-slate-500', 'opacity-50');
                 tombolPilihan.classList.add('bg-green-500', 'border-green-400', 'opacity-100'); // Hijau = Benar
                 alert("ممتاز! Jawaban Benar (+5 Poin)");
             } else {
+                jumlahSalah += 1; // Nambah jumlah jawaban salah
                 tombolPilihan.classList.remove('bg-slate-500', 'opacity-50');
                 tombolPilihan.classList.add('bg-red-500', 'border-red-400', 'opacity-100'); // Merah = Salah
                 alert("kurang tepat, poin kamu 0");
             }
 
-            // Update tampilan skor di semua slide
+            // Update tampilan UI sementara di pojok atas tiap soal
             document.querySelectorAll('.update-skor').forEach(el => el.innerText = totalSkor);
 
-            // LOGIKA BARU: MUNCULIN TOMBOL "SELANJUTNYA"
+            // Update tampilan UI di Halaman Skor Akhir (Slide 22)
+            document.getElementById('hasil-benar').innerText = jumlahBenar;
+            document.getElementById('hasil-salah').innerText = jumlahSalah;
+            document.getElementById('hasil-skor').innerText = totalSkor;
+
+            // Munculin tombol "Selanjutnya / Lihat Skor"
             const slideSekarang = document.getElementById(`slide-${currentSlide}`);
             const tombolNext = slideSekarang.querySelector('.btn-next-soal');
             if (tombolNext) {
