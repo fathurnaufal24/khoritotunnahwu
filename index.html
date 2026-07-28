@@ -119,12 +119,15 @@
 <body class="min-h-screen w-screen overflow-auto flex flex-col justify-center items-center relative p-4">
 
     <!-- Tombol Navigasi Global (Sound, Help, Exit kayak di gambar) -->
+     <audio id="bg-music" src="audio_halamanutama.mp3" loop autoplay></audio>
     <div class="fixed top-6 left-6 flex flex-col gap-4 z-50">
         <button class="btn-circle-3d" onclick="goToSlide(1)"><i class="fa-solid fa-arrow-left"></i></button>
     </div>
     <div class="fixed top-6 right-6 flex flex-col gap-4 z-50">
         <button class="btn-circle-3d"><i class="fa-solid fa-question"></i></button>
-        <button class="btn-circle-3d"><i class="fa-solid fa-volume-high"></i></button>
+        <button class="btn-circle-3d" onclick="toggleMusic(event)">
+    <i id="sound-icon" class="fa-solid fa-volume-xmark"></i>
+</button> 
     </div>
 
     <!-- Dekorasi Bawah (Bentuk Awan/Bukit Salju Putih) -->
@@ -1486,6 +1489,59 @@
                 tombolNext.classList.remove('hidden');
             }
         }
+
+        // ==========================================
+        // LOGIKA BACKSOUND MUSIC (BGM) LANGSUNG NYALA
+        // ==========================================
+        const bgMusic = document.getElementById('bg-music');
+        const soundIcon = document.getElementById('sound-icon');
+        let isMusicPlaying = false;
+
+        // Fungsi yang maksa lagu nyala pas web pertama dibuka
+        window.onload = function() {
+            bgMusic.play().then(() => {
+                // Kalau browser ngizinin autoplay, icon langsung berubah nyala
+                isMusicPlaying = true;
+                soundIcon.classList.remove('fa-volume-xmark');
+                soundIcon.classList.add('fa-volume-high');
+            }).catch((err) => {
+                // Kalau Chrome ngeblokir karena aturan keamanan, icon diset silang
+                console.log("Autoplay diblokir browser. User harus klik layar dulu.");
+                isMusicPlaying = false;
+                soundIcon.classList.remove('fa-volume-high');
+                soundIcon.classList.add('fa-volume-xmark');
+            });
+        };
+
+        // Fungsi buat nyalain/matiin musik pas tombol speaker diklik
+        function toggleMusic(event) {
+            if (event) event.stopPropagation(); 
+
+            if (isMusicPlaying) {
+                bgMusic.pause();
+                soundIcon.classList.remove('fa-volume-high');
+                soundIcon.classList.add('fa-volume-xmark');
+                isMusicPlaying = false;
+            } else {
+                bgMusic.play();
+                soundIcon.classList.remove('fa-volume-xmark');
+                soundIcon.classList.add('fa-volume-high');
+                isMusicPlaying = true;
+            }
+        }
+
+        // Trik cadangan: Kalo autoplay diblokir browser, pas user klik layar pertama kali lagunya nyala
+        document.addEventListener('click', function playOnFirstClick() {
+            if (!isMusicPlaying) {
+                bgMusic.play().then(() => {
+                    isMusicPlaying = true;
+                    soundIcon.classList.remove('fa-volume-xmark');
+                    soundIcon.classList.add('fa-volume-high');
+                }).catch(err => console.log("Menunggu interaksi..."));
+            }
+            document.removeEventListener('click', playOnFirstClick);
+        });
+        
     </script>
 </body>
 </html>
