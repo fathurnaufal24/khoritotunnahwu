@@ -230,7 +230,7 @@
 
                 <!-- Kolom Kiri -->
                 <button onclick="goToSlide(8)" class="glass-panel p-6 rounded-2xl hover:bg-white/10 transition hover:scale-105 border border-blue-500/30 text-right">
-                    <div class="arabic text-2xl text-white leading-relaxed">إعراب الإسم المفرد و جمع المؤنث السالم</div>
+                    <div class="arabic text-2xl text-white leading-relaxed">إعراب الإسم المفرد وجمع التكسير</div>
                 </button>
 
                 <!-- Kolom Kanan -->
@@ -562,7 +562,7 @@
                     <span class="arabic text-4xl font-bold text-red-600">ضمة</span>
                 </div>
                 <div class="absolute flex items-center justify-end z-10" style="left: 6%; top: 15%; width: 20%; height: 10%;" dir="rtl">
-                    <span class="arabic text-4xl font-bold text-black">جَاءَ زَيْدٌ</span>
+                    <span class="arabic text-4xl font-bold text-white">جَاءَ زَيْدٌ</span>
                 </div>
 
                 <!-- Nashob -->
@@ -573,7 +573,7 @@
                     <span class="arabic text-4xl font-bold text-yellow-500">فتحة</span>
                 </div>
                 <div class="absolute flex items-center justify-end z-10" style="left: 6%; top: 45%; width: 20%; height: 10%;" dir="rtl">
-                    <span class="arabic text-4xl font-bold text-black">رَأَيْتُ زَيْدًا</span>
+                    <span class="arabic text-4xl font-bold text-white">رَأَيْتُ زَيْدًا</span>
                 </div>
 
                 <!-- Jar -->
@@ -584,7 +584,7 @@
                     <span class="arabic text-4xl font-bold text-green-600">كسرة</span>
                 </div>
                 <div class="absolute flex items-center justify-end z-10" style="left: 6%; top: 75%; width: 20%; height: 10%;" dir="rtl">
-                    <span class="arabic text-4xl font-bold text-black">مَرَرْتُ بِزَيْدٍ</span>
+                    <span class="arabic text-4xl font-bold text-white">مَرَرْتُ بِزَيْدٍ</span>
                 </div>
             </div>
         </div>
@@ -593,6 +593,9 @@
         <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-9">
             <h2 class="arabic text-5xl font-bold mb-4 text-slate-800 border-b-2 border-slate-300 pb-4">الذي يعرب بالحركات</h2>
             
+            <!-- INI KODE AUDIO-NYA BANG -->
+            <!-- Pastiin nama file 'audio_taksir.mp3' disamain sama nama file lagu lu -->
+            <audio id="audio-taksir" src="Jam_taksir.mp3"></audio>
             <!-- Tombol Ruju' -->
             <button onclick="goToSlide(2)" class="absolute bottom-8 right-8 px-10 py-4 bg-blue-600 hover:bg-blue-500 rounded-[50px] text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
                 <span class="arabic text-3xl">رجوع</span>
@@ -636,7 +639,7 @@
                     <span class="arabic text-4xl font-bold text-yellow-500">فتحة</span>
                 </div>
                 <div class="absolute flex items-center justify-end z-10" style="left: 6%; top: 45%; width: 20%; height: 10%;" dir="rtl">
-                    <span class="arabic text-4xl font-bold text-black text-nowrap">رَأَيْتُ الرِّجَالَ.</span>
+                    <span class="arabic text-4xl font-bold text-white text-nowrap">رَأَيْتُ الرِّجَالَ.</span>
                 </div>
 
                 <!-- Jar -->
@@ -647,7 +650,7 @@
                     <span class="arabic text-4xl font-bold text-green-600">كسرة</span>
                 </div>
                 <div class="absolute flex items-center justify-end z-10" style="left: 6%; top: 75%; width: 20%; height: 10%;" dir="rtl">
-                    <span class="arabic text-4xl font-bold text-black text-nowrap">مَرَرْتُ بِالرِّجَالِ.</span>
+                    <span class="arabic text-4xl font-bold text-white text-nowrap">مَرَرْتُ بِالرِّجَالِ.</span>
                 </div>
             </div>
         </div>
@@ -656,6 +659,9 @@
         <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-10">
             <h2 class="arabic text-5xl font-bold mb-4 text-slate-800 border-b-2 border-slate-300 pb-4">الذي يعرب بالحركات</h2>
             
+            <!-- Ganti 'audio_muannats.mp3' dengan nama file lagu aslinya -->
+            <audio id="audio-muannats" src="jam'u_muaannas_salim.mp3"></audio>
+
             <!-- Tombol At-Taali -->
             <button onclick="goToSlide(11)" class="absolute bottom-8 right-8 px-10 py-4 bg-blue-600 hover:bg-blue-500 rounded-[50px] text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
                 <span class="arabic text-3xl">التالي</span>
@@ -724,6 +730,9 @@
         <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-11">
             <h2 class="arabic text-5xl font-bold mb-4 text-slate-800 border-b-2 border-slate-300 pb-4">الذي يعرب بالحركات</h2>
             
+            <!-- Ganti 'audio_ghoiru.mp3' dengan nama file lagu aslinya -->
+            <audio id="audio-ghoiru" src="ghoiru_munshorif.mp3"></audio>
+
             <!-- Tombol Ruju' -->
             <button onclick="goToSlide(2)" class="absolute bottom-8 right-8 px-10 py-4 bg-blue-600 hover:bg-blue-500 rounded-[50px] text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
                 <span class="arabic text-3xl">رجوع</span>
@@ -1447,11 +1456,31 @@
 
 
     <!-- LOGIKA JAVASCRIPT UNTUK NAVIGASI -->
+    <!-- LOGIKA JAVASCRIPT UNTUK NAVIGASI & AUDIO -->
     <script>
+        // ==========================================
+        // 1. VARIABEL GLOBAL (Dipindah ke atas biar ga error)
+        // ==========================================
+        const bgMusic = document.getElementById('bg-music');
+        const soundIcon = document.getElementById('sound-icon');
+        let isMusicPlaying = false; // Harus dideklarasi duluan
+        
+        const daftarLagu = ['audio_halamanutama.mp3', 'audio_halaman_utama2.mp3']; 
+        let urutanLagu = 0;
+        
+        if (bgMusic) {
+            bgMusic.src = daftarLagu[urutanLagu];
+        }
+
+        // Variabel Navigasi
         let currentSlide = 1;
         const totalSlides = document.querySelectorAll('.slide').length;
-        document.getElementById('total-page').innerText = totalSlides;
+        const totalPageEl = document.getElementById('total-page');
+        if (totalPageEl) totalPageEl.innerText = totalSlides;
 
+        // ==========================================
+        // 2. FUNGSI UPDATE TAMPILAN & LOGIKA LAGU MATI-NYALA
+        // ==========================================
         function updateUI() {
             // Sembunyikan semua slide
             document.querySelectorAll('.slide').forEach(slide => {
@@ -1461,51 +1490,83 @@
             // Tampilkan slide saat ini
             document.getElementById(`slide-${currentSlide}`).classList.add('active');
             
-            // Update teks halaman (Kalo masih ada yang pake ID ini)
             const currentPageEl = document.getElementById('current-page');
             if(currentPageEl) currentPageEl.innerText = currentSlide;
 
-            // Update Progress Bar
             const progressBar = document.getElementById('progress-bar');
             if(progressBar) {
                 const progress = ((currentSlide - 1) / (totalSlides - 1)) * 100;
                 progressBar.style.width = `${progress}%`;
             }
 
-            // LOGIKA AUDIO OTOMATIS
+            // BGM CUMA NYALA DI SLIDE 1 (MENU UTAMA)
+            if (bgMusic) {
+                if (currentSlide === 1) {
+                    if (isMusicPlaying) {
+                        bgMusic.play().catch(e => console.log("Menunggu interaksi"));
+                    }
+                } else {
+                    bgMusic.pause();
+                }
+            }
+
+            // AUDIO MATERI MUFROD (Slide 8)
             const laguMufrod = document.getElementById('audio-mufrod');
             if (laguMufrod) {
                 if (currentSlide === 8) {
-                    // Kalo slide 8, play lagunya
-                    laguMufrod.play().catch(error => console.log("Audio diblokir browser, butuh interaksi klik dulu."));
+                    laguMufrod.play().catch(error => console.log("Audio diblokir browser"));
                 } else {
-                    // Kalo pindah ke slide lain, pause dan ulang lagunya dari detik ke-0
                     laguMufrod.pause();
                     laguMufrod.currentTime = 0; 
                 }
             }
-        }
-        function nextSlide() {
-            if (currentSlide < totalSlides) {
-                currentSlide++;
-                updateUI();
-            }
-        }
 
-        function prevSlide() {
-            if (currentSlide > 1) {
-                currentSlide--;
-                updateUI();
+            // =====================================================
+            // AUDIO MATERI JAMAK TAKSIR (Slide 9) - MASUK SINI BANG
+            // =====================================================
+            const laguTaksir = document.getElementById('audio-taksir');
+            if (laguTaksir) {
+                if (currentSlide === 9) {
+                    laguTaksir.play().catch(error => console.log("Audio diblokir browser"));
+                } else {
+                    laguTaksir.pause();
+                    laguTaksir.currentTime = 0; 
+                }
             }
-        }
 
-        // Biar bisa ganti slide pake tombol panah di keyboard laptop!
-        //document.addEventListener('keydown', (e) => {
-           // if (e.key === 'ArrowRight') nextSlide();
-            //if (e.key === 'ArrowLeft') prevSlide();
-        //});
-        
-        updateUI(); // Inisialisasi awal
+            // =====================================================
+            // TAMBAHIN KODE INI: AUDIO MATERI JAMAK MUANNATS SALIM (Slide 10)
+            // =====================================================
+            const laguMuannats = document.getElementById('audio-muannats');
+            if (laguMuannats) {
+                if (currentSlide === 10) {
+                    laguMuannats.play().catch(error => console.log("Audio diblokir browser"));
+                } else {
+                    laguMuannats.pause();
+                    laguMuannats.currentTime = 0; 
+                }
+            }
+
+            // =====================================================
+            // TAMBAHIN KODE INI: AUDIO MATERI ISIM GHOIRU MUNSYORIF (Slide 11)
+            // =====================================================
+            const laguGhoiru = document.getElementById('audio-ghoiru');
+            if (laguGhoiru) {
+                if (currentSlide === 11) {
+                    laguGhoiru.play().catch(error => console.log("Audio diblokir browser"));
+                } else {
+                    laguGhoiru.pause();
+                    laguGhoiru.currentTime = 0; 
+                }
+            }
+            
+        } // <--- Nah, penutup fungsinya harus di sini bang!
+
+        // ==========================================
+        // 3. FUNGSI NAVIGASI SLIDE
+        // ==========================================
+        function nextSlide() { if (currentSlide < totalSlides) { currentSlide++; updateUI(); } }
+        function prevSlide() { if (currentSlide > 1) { currentSlide--; updateUI(); } }
         function goToSlide(slideNumber) {
             if (slideNumber >= 1 && slideNumber <= totalSlides) {
                 currentSlide = slideNumber;
@@ -1513,153 +1574,121 @@
             }
         }
 
-        // LOGIKA KUIS
+        // ==========================================
+        // 4. FUNGSI KUIS & SKOR
+        // ==========================================
         let totalSkor = 0;
         let jumlahBenar = 0;
         let jumlahSalah = 0;
-        let soalTerjawab = {}; // Biar user gak bisa nge-klik berkali-kali di satu soal
+        let soalTerjawab = {}; 
 
         function cekJawaban(tombolPilihan, isBenar) {
-            // Cek apakah di slide ini user udah pernah jawab?
             if (soalTerjawab[currentSlide]) return; 
-            
-            soalTerjawab[currentSlide] = true; // Tandai soal ini udah dijawab
+            soalTerjawab[currentSlide] = true; 
 
-            // Styling tombol setelah diklik
             const semuaOpsi = tombolPilihan.parentElement.querySelectorAll('.kuis-opsi');
             semuaOpsi.forEach(btn => {
                 btn.classList.remove('hover:bg-yellow-400', 'hover:scale-105', 'bg-yellow-500');
-                btn.classList.add('bg-slate-500', 'opacity-50', 'cursor-not-allowed'); // Matiin tombol lain
+                btn.classList.add('bg-slate-500', 'opacity-50', 'cursor-not-allowed'); 
             });
 
             if (isBenar) {
-                totalSkor += 5; // Nambah poin
-                jumlahBenar += 1; // Nambah jumlah jawaban benar
+                totalSkor += 5; jumlahBenar += 1;
                 tombolPilihan.classList.remove('bg-slate-500', 'opacity-50');
-                tombolPilihan.classList.add('bg-green-500', 'border-green-400', 'opacity-100'); // Hijau = Benar
+                tombolPilihan.classList.add('bg-green-500', 'border-green-400', 'opacity-100'); 
                 alert("ممتاز! Jawaban Benar (+5 Poin)");
             } else {
-                jumlahSalah += 1; // Nambah jumlah jawaban salah
+                jumlahSalah += 1; 
                 tombolPilihan.classList.remove('bg-slate-500', 'opacity-50');
-                tombolPilihan.classList.add('bg-red-500', 'border-red-400', 'opacity-100'); // Merah = Salah
+                tombolPilihan.classList.add('bg-red-500', 'border-red-400', 'opacity-100'); 
                 alert("kurang tepat, poin kamu 0");
             }
 
-            // Update tampilan UI sementara di pojok atas tiap soal
             document.querySelectorAll('.update-skor').forEach(el => el.innerText = totalSkor);
+            
+            const elementSkorDisplay = document.getElementById('skor-display');
+            if (elementSkorDisplay) elementSkorDisplay.innerText = totalSkor;
 
-            // Update tampilan UI di Halaman Skor Akhir (Slide 22)
-            document.getElementById('hasil-benar').innerText = jumlahBenar;
-            document.getElementById('hasil-salah').innerText = jumlahSalah;
-            document.getElementById('hasil-skor').innerText = totalSkor;
+            const elBenar = document.getElementById('hasil-benar');
+            if(elBenar) elBenar.innerText = jumlahBenar;
+            
+            const elSalah = document.getElementById('hasil-salah');
+            if(elSalah) elSalah.innerText = jumlahSalah;
+            
+            const elSkor = document.getElementById('hasil-skor');
+            if(elSkor) elSkor.innerText = totalSkor;
 
-            // Munculin tombol "Selanjutnya / Lihat Skor"
             const slideSekarang = document.getElementById(`slide-${currentSlide}`);
             const tombolNext = slideSekarang.querySelector('.btn-next-soal');
-            if (tombolNext) {
-                tombolNext.classList.remove('hidden');
-            }
+            if (tombolNext) tombolNext.classList.remove('hidden');
         }
 
         // ==========================================
-        // LOGIKA PLAYLIST BACKSOUND (2 LAGU)
+        // 5. FUNGSI KONTROL PLAYLIST LAGU
         // ==========================================
-        const bgMusic = document.getElementById('bg-music');
-        const soundIcon = document.getElementById('sound-icon');
-        let isMusicPlaying = false;
-
-        // 1. Masukin nama file 2 lagu lu ke sini bang (pastiin namanya sama persis)
-        const daftarLagu = ['audio_halamanutama.mp3', 'audio_halaman_utama2.mp3']; 
-        let urutanLagu = 0;
-
-        // Set lagu awal pas web dibuka
-        bgMusic.src = daftarLagu[urutanLagu];
-
-        // 2. Logika otomatis ganti lagu pas lagu sebelumnya habis
-        bgMusic.addEventListener('ended', function() {
-            urutanLagu++; // Lanjut ke lagu berikutnya
-            
-            // Kalo udah lewat lagu terakhir, balik lagi ke lagu pertama (Looping)
-            if (urutanLagu >= daftarLagu.length) {
-                urutanLagu = 0; 
-            }
-            
-            bgMusic.src = daftarLagu[urutanLagu];
-            bgMusic.play();
-        });
-
-        // 3. Fungsi maksa lagu nyala pas web pertama dibuka
-        window.onload = function() {
-            bgMusic.play().then(() => {
-                isMusicPlaying = true;
-                soundIcon.classList.remove('fa-volume-xmark');
-                soundIcon.classList.add('fa-volume-high');
-            }).catch((err) => {
-                console.log("Autoplay diblokir browser, nunggu user klik layar.");
-                isMusicPlaying = false;
-                soundIcon.classList.remove('fa-volume-high');
-                soundIcon.classList.add('fa-volume-xmark');
+        if (bgMusic) {
+            bgMusic.addEventListener('ended', function() {
+                urutanLagu++; 
+                if (urutanLagu >= daftarLagu.length) urutanLagu = 0; 
+                bgMusic.src = daftarLagu[urutanLagu];
+                bgMusic.play();
             });
+        }
+
+        window.onload = function() {
+            if (bgMusic) {
+                bgMusic.play().then(() => {
+                    isMusicPlaying = true;
+                    if (soundIcon) {
+                        soundIcon.classList.remove('fa-volume-xmark');
+                        soundIcon.classList.add('fa-volume-high');
+                    }
+                }).catch((err) => {
+                    console.log("Autoplay diblokir browser, nunggu user klik layar.");
+                    isMusicPlaying = false;
+                    if (soundIcon) {
+                        soundIcon.classList.remove('fa-volume-high');
+                        soundIcon.classList.add('fa-volume-xmark');
+                    }
+                });
+            }
         };
 
-        // 4. Fungsi tombol nyala/matiin musik (Speaker)
         function toggleMusic(event) {
             if (event) event.stopPropagation(); 
-
             if (isMusicPlaying) {
                 bgMusic.pause();
-                soundIcon.classList.remove('fa-volume-high');
-                soundIcon.classList.add('fa-volume-xmark');
+                if (soundIcon) {
+                    soundIcon.classList.remove('fa-volume-high');
+                    soundIcon.classList.add('fa-volume-xmark');
+                }
                 isMusicPlaying = false;
             } else {
                 bgMusic.play();
-                soundIcon.classList.remove('fa-volume-xmark');
-                soundIcon.classList.add('fa-volume-high');
+                if (soundIcon) {
+                    soundIcon.classList.remove('fa-volume-xmark');
+                    soundIcon.classList.add('fa-volume-high');
+                }
                 isMusicPlaying = true;
             }
         }
 
-        // Trik cadangan: Kalau browser ngeblokir autoplay, pas klik layar pertama kali langsung nyala
         document.addEventListener('click', function playOnFirstClick() {
-            if (!isMusicPlaying) {
+            // Cek kalau belum nyala, lagunya ada, dan user lagi di menu utama (slide 1)
+            if (!isMusicPlaying && bgMusic && currentSlide === 1) {
                 bgMusic.play().then(() => {
                     isMusicPlaying = true;
-                    soundIcon.classList.remove('fa-volume-xmark');
-                    soundIcon.classList.add('fa-volume-high');
+                    if (soundIcon) {
+                        soundIcon.classList.remove('fa-volume-xmark');
+                        soundIcon.classList.add('fa-volume-high');
+                    }
                 }).catch(err => console.log("Menunggu interaksi..."));
             }
             document.removeEventListener('click', playOnFirstClick);
         });
 
-        // Fungsi buat nyalain/matiin musik pas tombol speaker diklik
-        function toggleMusic(event) {
-            if (event) event.stopPropagation(); 
-
-            if (isMusicPlaying) {
-                bgMusic.pause();
-                soundIcon.classList.remove('fa-volume-high');
-                soundIcon.classList.add('fa-volume-xmark');
-                isMusicPlaying = false;
-            } else {
-                bgMusic.play();
-                soundIcon.classList.remove('fa-volume-xmark');
-                soundIcon.classList.add('fa-volume-high');
-                isMusicPlaying = true;
-            }
-        }
-
-        // Trik cadangan: Kalo autoplay diblokir browser, pas user klik layar pertama kali lagunya nyala
-        document.addEventListener('click', function playOnFirstClick() {
-            if (!isMusicPlaying) {
-                bgMusic.play().then(() => {
-                    isMusicPlaying = true;
-                    soundIcon.classList.remove('fa-volume-xmark');
-                    soundIcon.classList.add('fa-volume-high');
-                }).catch(err => console.log("Menunggu interaksi..."));
-            }
-            document.removeEventListener('click', playOnFirstClick);
-        });
-        
+        // INISIALISASI AWAL WEB (Mulai nampilin slide)
+        updateUI(); 
     </script>
 </body>
 </html>
