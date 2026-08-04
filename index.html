@@ -8,20 +8,70 @@
     <link rel="icon" type="image/png" href="logo_web.png">
     <!-- Framework Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Google: Poppins untuk teks biasa, Amiri untuk teks Arab -->
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script>
+        // Palet ulang warna Tailwind: biru & teal & slate jadi Emas-Navy elegan,
+        // supaya seluruh kelas warna yang sudah dipakai di 23 slide ikut berubah nuansanya.
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        blue:  { 50:'#fdf8ec', 100:'#f7e8bf', 400:'#d4af37', 500:'#c9a227', 600:'#a8841f' },
+                        teal:  { 300:'#f3dfa0', 400:'#e0b64a', 500:'#c9a227' },
+                        cyan:  { 400:'#d4af37' },
+                        slate: { 200:'#f3e9d2', 300:'#e3d3a8', 400:'#8a7a4e', 500:'#5b4a2e', 600:'#16233f', 700:'#12203f', 800:'#0b1730' }
+                    },
+                    fontFamily: { display: ['Marcellus', 'serif'] }
+                }
+            }
+        }
+    </script>
+    <!-- Font Google: Poppins untuk teks biasa, Amiri untuk teks Arab, Marcellus untuk sentuhan elegan -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Marcellus&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     
     <style>
         html { scroll-behavior: smooth; }
+        :root {
+            --gold: #d4af37;
+            --gold-light: #f3dfa0;
+            --gold-deep: #8b6914;
+            --navy-deep: #060b1a;
+            --navy: #0b1730;
+            --navy-mid: #12203f;
+            --ivory: #f6ecd6;
+        }
         body {
             font-family: 'Poppins', sans-serif;
-            /* Background Langit Biru Cerah */
-            background: linear-gradient(180deg, #4cb8f3 0%, #89d4fe 50%, #c4eaff 100%);
-            color: #1e3a8a;
+            /* Background: langit malam navy dengan corak geometris emas ala manuskrip Arab */
+            background:
+                radial-gradient(circle at 20% 15%, rgba(212,175,55,0.10) 0%, transparent 45%),
+                radial-gradient(circle at 85% 80%, rgba(212,175,55,0.08) 0%, transparent 50%),
+                repeating-linear-gradient(45deg, rgba(212,175,55,0.035) 0px, rgba(212,175,55,0.035) 1px, transparent 1px, transparent 26px),
+                repeating-linear-gradient(-45deg, rgba(212,175,55,0.035) 0px, rgba(212,175,55,0.035) 1px, transparent 1px, transparent 26px),
+                linear-gradient(180deg, var(--navy-deep) 0%, var(--navy) 55%, #081226 100%);
+            color: var(--ivory);
             min-height: 100vh;
             overflow-x: hidden;
+            position: relative;
         }
         .arabic { font-family: 'Amiri', serif; }
+        .font-display { font-family: 'Marcellus', serif; }
+
+        /* Bintang emas kecil yang berkelip-kelip di seluruh halaman - dekorasi "hiasan" */
+        .stars-deco { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+        .stars-deco span {
+            position: absolute; width: 4px; height: 4px; background: var(--gold-light);
+            border-radius: 50%; box-shadow: 0 0 6px 2px rgba(243,223,160,0.7);
+            animation: twinkle 3.2s ease-in-out infinite;
+        }
+        @keyframes twinkle { 0%,100% { opacity: 0.15; transform: scale(0.7); } 50% { opacity: 1; transform: scale(1.2); } }
+
+        /* Ornamen sudut ala bingkai manuskrip klasik */
+        .corner-ornament { position: fixed; width: 90px; height: 90px; z-index: 40; pointer-events: none; opacity: 0.85; }
+        .corner-ornament svg { width: 100%; height: 100%; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); }
+        .corner-tl { top: 0; left: 0; }
+        .corner-tr { top: 0; right: 0; transform: scaleX(-1); }
+        .corner-bl { bottom: 0; left: 0; transform: scaleY(-1); }
+        .corner-br { bottom: 0; right: 0; transform: scale(-1,-1); }
 
         /* Animasi Transisi Slide */
         .slide {
@@ -36,15 +86,15 @@
             transform: scale(1);
         }
 
-        /* TOMBOL CIRCLE 3D (Buat tombol back, sound, dll) */
+        /* TOMBOL CIRCLE 3D (Buat tombol back, sound, dll) - kini emas metalik berlapis */
         .btn-circle-3d {
             width: 60px;
             height: 60px;
             border-radius: 50%;
-            background: #22d3ee; /* Warna cyan */
-            border: 4px solid #fff;
-            box-shadow: 0 8px 0 #0891b2, 0 15px 20px rgba(0,0,0,0.2);
-            color: white;
+            background: linear-gradient(145deg, #f3dfa0 0%, #d4af37 45%, #a8841f 100%);
+            border: 3px solid #fdf6e0;
+            box-shadow: 0 8px 0 var(--gold-deep), 0 15px 22px rgba(0,0,0,0.45), inset 0 2px 3px rgba(255,255,255,0.6);
+            color: #3a2c05;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -53,52 +103,81 @@
             transition: all 0.1s;
             z-index: 50;
         }
+        .btn-circle-3d:hover { filter: brightness(1.08); }
         .btn-circle-3d:active {
             transform: translateY(8px);
-            box-shadow: 0 0 0 #0891b2, 0 5px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 0 0 var(--gold-deep), 0 5px 10px rgba(0,0,0,0.3);
         }
 
-        /* CARD MENU 3D PUTIH */
+        /* CARD MENU 3D - kertas gading berlapis emas */
         .card-menu-3d {
-            background: #ffffff;
+            background: linear-gradient(160deg, #fffaf0 0%, #f6ecd6 100%);
             border-radius: 30px;
-            border-bottom: 12px solid #e2e8f0;
-            box-shadow: 0 15px 25px rgba(0,0,0,0.15);
+            border: 2px solid rgba(212,175,55,0.5);
+            border-bottom: 12px solid var(--gold);
+            box-shadow: 0 15px 25px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.8);
             display: flex;
             flex-col;
             align-items: center;
             padding: 20px;
             cursor: pointer;
-            transition: all 0.15s;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
         }
+        .card-menu-3d::after {
+            content: ''; position: absolute; inset: 0; border-radius: 30px;
+            background: linear-gradient(120deg, transparent 40%, rgba(212,175,55,0.25) 50%, transparent 60%);
+            background-size: 250% 250%; background-position: 120% 0; pointer-events: none;
+            transition: background-position 0.6s ease;
+        }
+        .card-menu-3d:hover::after { background-position: -20% 100%; }
         .card-menu-3d:hover {
-            transform: translateY(-5px);
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.5), 0 0 0 3px rgba(212,175,55,0.6), inset 0 1px 0 rgba(255,255,255,0.8);
         }
         .card-menu-3d:active {
-            transform: translateY(10px);
-            border-bottom: 2px solid #e2e8f0;
+            transform: translateY(8px);
+            border-bottom: 3px solid var(--gold);
+        }
+        .card-menu-3d .icon-float { animation: float-icon 3.4s ease-in-out infinite; }
+        @keyframes float-icon { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+
+        /* Watermark kaligrafi raksasa di balik judul cover - elemen "hiasan" ciri khas halaman */
+        .cover-watermark {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+            font-family: 'Amiri', serif; font-size: 26rem; font-weight: 700;
+            color: transparent; -webkit-text-stroke: 1px rgba(212,175,55,0.18);
+            opacity: 0.5; pointer-events: none; z-index: 0; user-select: none;
+            white-space: nowrap;
         }
 
-        /* KOTAK MATERI UTAMA (Ganti Glassmorphism jadi 3D Biru Tua biar teks putih lu tetep kebaca) */
+        /* KOTAK MATERI UTAMA - navy tua berbingkai emas ukir, berlapis (efek 3D dalam) */
         .glass-panel {
-            background: #1e3a5f;
-            border: 6px solid #60b3e6;
+            background: linear-gradient(155deg, #16233f 0%, #0b1730 100%);
+            border: 5px solid var(--gold);
+            outline: 1px solid rgba(212,175,55,0.35);
+            outline-offset: 5px;
             border-radius: 35px;
-            box-shadow: 0 15px 0 #112745, 0 25px 30px rgba(0,0,0,0.3);
+            box-shadow:
+                0 15px 0 #060b1a,
+                0 26px 34px rgba(0,0,0,0.5),
+                inset 0 2px 0 rgba(255,255,255,0.08),
+                inset 0 -30px 40px rgba(0,0,0,0.25);
             transition: transform 0.25s ease;
             position: relative;
         }
 
-        /* Efek Teks Judul 3D */
+        /* Efek Teks Judul 3D - emas berukir bercahaya */
         .text-3d-title {
-            color: #ffffff;
-            text-shadow: 
-                -3px -3px 0 #1e3a8a,  
-                 3px -3px 0 #1e3a8a,
-                -3px  3px 0 #1e3a8a,
-                 3px  3px 0 #1e3a8a,
-                 0 8px 0 #0f172a,
-                 0 15px 20px rgba(0,0,0,0.4);
+            background: linear-gradient(180deg, #fff6da 0%, #f3dfa0 35%, #d4af37 60%, #a8841f 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow:
+                0 2px 0 rgba(139,105,20,0.6),
+                0 10px 18px rgba(0,0,0,0.55);
+            filter: drop-shadow(0 0 18px rgba(212,175,55,0.35));
         }
 
         @media (max-width: 768px) {
@@ -106,12 +185,14 @@
                 width: 100% !important;
                 border-radius: 20px !important;
                 padding: 1rem !important;
-                box-shadow: 0 8px 0 #112745 !important;
+                box-shadow: 0 8px 0 #060b1a !important;
+                outline-offset: 3px !important;
             }
             .slide .relative svg { display: none !important; }
             .slide .relative { display: flex !important; flex-direction: column !important; gap: 12px !important; height: auto !important; margin-top: 20px !important; }
             .slide .relative > div.absolute { position: relative !important; left: auto !important; top: auto !important; width: 100% !important; height: auto !important; padding: 15px !important; }
             .btn-circle-3d { width: 45px; height: 45px; font-size: 1.2rem; }
+            .corner-ornament { width: 45px; height: 45px; opacity: 0.5; }
         }
         /* ============================================================ */
     </style>
@@ -124,52 +205,61 @@
         <button class="btn-circle-3d" onclick="goToSlide(1)"><i class="fa-solid fa-arrow-left"></i></button>
     </div>
     <div class="fixed top-6 right-6 flex flex-col gap-4 z-50">
-        <button class="btn-circle-3d"><i class="fa-solid fa-question"></i></button>
+        <button class="btn-circle-3d" onclick="goToSlide(15)" title="Petunjuk Aplikasi"><i class="fa-solid fa-question"></i></button>
         <button class="btn-circle-3d" onclick="toggleMusic(event)">
     <i id="sound-icon" class="fa-solid fa-volume-xmark"></i>
 </button> 
     </div>
 
-    <!-- Dekorasi Bawah (Bentuk Awan/Bukit Salju Putih) -->
-    <div class="fixed bottom-0 left-0 w-full h-48 bg-white z-0" style="border-radius: 100% 100% 0 0 / 50px 50px 0 0; box-shadow: 0 -20px 50px rgba(255,255,255,0.5);"></div>
-    <div class="fixed bottom-0 left-[-10%] w-[120%] h-32 bg-[#e0f2fe] z-0 opacity-60" style="border-radius: 100% 100% 0 0 / 100px 100px 0 0;"></div>
+    <!-- Dekorasi: bintang emas berkelip tersebar di seluruh layar -->
+    <div class="stars-deco">
+        <span style="top:8%; left:12%; animation-delay:0s;"></span>
+        <span style="top:18%; left:78%; animation-delay:0.6s;"></span>
+        <span style="top:30%; left:5%; animation-delay:1.1s;"></span>
+        <span style="top:42%; left:92%; animation-delay:1.6s;"></span>
+        <span style="top:55%; left:15%; animation-delay:0.3s;"></span>
+        <span style="top:65%; left:85%; animation-delay:2.1s;"></span>
+        <span style="top:78%; left:8%; animation-delay:1.4s;"></span>
+        <span style="top:88%; left:70%; animation-delay:0.9s;"></span>
+        <span style="top:12%; left:50%; animation-delay:1.9s;"></span>
+        <span style="top:70%; left:45%; animation-delay:0.4s;"></span>
+    </div>
+
+    <!-- Dekorasi: ornamen sudut ukiran emas ala bingkai manuskrip klasik -->
+    <div class="corner-ornament corner-tl"><svg viewBox="0 0 100 100"><path d="M2 2 L2 40 M2 2 L40 2" stroke="#d4af37" stroke-width="2.5" fill="none"/><path d="M2 2 Q35 2 35 35" stroke="#d4af37" stroke-width="1.5" fill="none" opacity="0.6"/><circle cx="35" cy="35" r="5" fill="none" stroke="#f3dfa0" stroke-width="1.5"/><path d="M15 2 Q15 15 2 15" stroke="#f3dfa0" stroke-width="1.2" fill="none"/></svg></div>
+    <div class="corner-ornament corner-tr"><svg viewBox="0 0 100 100"><path d="M2 2 L2 40 M2 2 L40 2" stroke="#d4af37" stroke-width="2.5" fill="none"/><path d="M2 2 Q35 2 35 35" stroke="#d4af37" stroke-width="1.5" fill="none" opacity="0.6"/><circle cx="35" cy="35" r="5" fill="none" stroke="#f3dfa0" stroke-width="1.5"/><path d="M15 2 Q15 15 2 15" stroke="#f3dfa0" stroke-width="1.2" fill="none"/></svg></div>
+    <div class="corner-ornament corner-bl"><svg viewBox="0 0 100 100"><path d="M2 2 L2 40 M2 2 L40 2" stroke="#d4af37" stroke-width="2.5" fill="none"/><path d="M2 2 Q35 2 35 35" stroke="#d4af37" stroke-width="1.5" fill="none" opacity="0.6"/><circle cx="35" cy="35" r="5" fill="none" stroke="#f3dfa0" stroke-width="1.5"/><path d="M15 2 Q15 15 2 15" stroke="#f3dfa0" stroke-width="1.2" fill="none"/></svg></div>
+    <div class="corner-ornament corner-br"><svg viewBox="0 0 100 100"><path d="M2 2 L2 40 M2 2 L40 2" stroke="#d4af37" stroke-width="2.5" fill="none"/><path d="M2 2 Q35 2 35 35" stroke="#d4af37" stroke-width="1.5" fill="none" opacity="0.6"/><circle cx="35" cy="35" r="5" fill="none" stroke="#f3dfa0" stroke-width="1.5"/><path d="M15 2 Q15 15 2 15" stroke="#f3dfa0" stroke-width="1.2" fill="none"/></svg></div>
 
     <!-- CONTAINER UTAMA MATERI -->
     <div class="glass-panel w-full max-w-5xl min-h-[75vh] h-auto rounded-3xl z-10 flex flex-col p-8 relative mt-12 mb-12">
-        
-        <!-- Progress Bar (Desain 3D) -->
-        <div class="w-full bg-[#112745] h-4 rounded-full mb-6 border-2 border-[#1e3a5f] shadow-inner">
-            <div id="progress-bar" class="bg-cyan-400 h-full rounded-full transition-all duration-300 w-0 shadow-[inset_0_-3px_0_rgba(0,0,0,0.2)]"></div>
-        </div>
 
-    <!-- CONTAINER UTAMA -->
-    <div class="glass-panel w-full max-w-5xl min-h-[75vh] h-auto rounded-3xl z-10 flex flex-col p-8 relative">
-        
-        <!-- Progress Bar -->
-        <div class="w-full bg-slate-700 h-2 rounded-full mb-6">
-            <div id="progress-bar" class="bg-teal-400 h-2 rounded-full transition-all duration-300 w-0"></div>
+        <!-- Progress Bar (Desain 3D) -->
+        <div class="w-full bg-[#112745] h-4 rounded-full mb-6 border-2 border-[#1e3a5f] shadow-inner overflow-hidden">
+            <div id="progress-bar" class="bg-gradient-to-r from-[#f3dfa0] to-[#d4af37] h-full rounded-full transition-all duration-300 w-0 shadow-[inset_0_-3px_0_rgba(0,0,0,0.2)]"></div>
         </div>
 
         <!-- SLIDE 1: Cover -->
         <div class="slide active flex-col items-center justify-center h-full text-center" id="slide-1">
+            <div class="cover-watermark">ن</div>
             
             <!-- Judul Ala Qolbuna -->
-            <h1 class="arabic text-7xl md:text-8xl font-black mb-4 text-3d-title tracking-wider mt-4">
+            <h1 class="arabic text-7xl md:text-8xl font-black mb-4 text-3d-title tracking-wider mt-4 relative z-10">
                 خَرِيطَةُ النَّحْو
             </h1>
             
             <!-- Subjudul Pill -->
-            <div class="bg-[#0f172a] border-4 border-slate-700 text-white px-8 py-3 rounded-full text-lg md:text-xl font-bold mb-12 shadow-[0_8px_0_#020617] tracking-wide inline-block">
+            <div class="bg-[#0f172a] border-4 border-[#d4af37] text-[#f3dfa0] px-8 py-3 rounded-full text-lg md:text-xl font-bold mb-12 shadow-[0_8px_0_#020617,0_0_18px_rgba(212,175,55,0.35)] tracking-wide inline-block relative z-10">
                 Peta Konsep Pembelajaran Nahwu
             </div>
 
             <!-- 5 Kotak Menu (Sejajar ke samping) -->
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 w-full max-w-6xl mx-auto px-2">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 w-full max-w-6xl mx-auto px-2 relative z-10">
                 
                 <!-- Menu 1: Materi -->
                 <div onclick="goToSlide(2)" class="card-menu-3d flex flex-col items-center justify-between h-56">
                     <div class="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center shadow-inner mb-4">
-                        <i class="fa-solid fa-book-open text-5xl text-blue-500 drop-shadow-md"></i>
+                        <i class="fa-solid fa-book-open text-5xl text-blue-500 drop-shadow-md icon-float" style="animation-delay:0s;"></i>
                     </div>
                     <span class="font-bold text-slate-800 text-lg leading-tight text-center">Materi<br>Nahwu</span>
                 </div>
@@ -177,7 +267,7 @@
                 <!-- Menu 2: Tujuan -->
                 <div onclick="goToSlide(16)" class="card-menu-3d flex flex-col items-center justify-between h-56">
                     <div class="w-24 h-24 bg-purple-100 rounded-full flex items-center justify-center shadow-inner mb-4">
-                        <i class="fa-solid fa-bullseye text-5xl text-purple-500 drop-shadow-md"></i>
+                        <i class="fa-solid fa-bullseye text-5xl text-purple-500 drop-shadow-md icon-float" style="animation-delay:0.3s;"></i>
                     </div>
                     <span class="font-bold text-slate-800 text-lg leading-tight text-center">Tujuan<br>Pembelajaran</span>
                 </div>
@@ -185,7 +275,7 @@
                 <!-- Menu 3: Petunjuk -->
                 <div onclick="goToSlide(15)" class="card-menu-3d flex flex-col items-center justify-between h-56">
                     <div class="w-24 h-24 bg-amber-100 rounded-full flex items-center justify-center shadow-inner mb-4">
-                        <i class="fa-solid fa-circle-info text-5xl text-amber-500 drop-shadow-md"></i>
+                        <i class="fa-solid fa-circle-info text-5xl text-amber-500 drop-shadow-md icon-float" style="animation-delay:0.6s;"></i>
                     </div>
                     <span class="font-bold text-slate-800 text-lg leading-tight text-center">Petunjuk<br>Aplikasi</span>
                 </div>
@@ -193,7 +283,7 @@
                 <!-- Menu 4: Evaluasi -->
                 <div onclick="goToSlide(17)" class="card-menu-3d flex flex-col items-center justify-between h-56">
                     <div class="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center shadow-inner mb-4">
-                        <i class="fa-solid fa-clipboard-question text-5xl text-green-500 drop-shadow-md"></i>
+                        <i class="fa-solid fa-clipboard-question text-5xl text-green-500 drop-shadow-md icon-float" style="animation-delay:0.9s;"></i>
                     </div>
                     <span class="font-bold text-slate-800 text-lg leading-tight text-center">Soal<br>Evaluasi</span>
                 </div>
@@ -201,7 +291,7 @@
                 <!-- Menu 5: Pengembang (POSISI SEJAJAR DI PALING KANAN) -->
                 <div onclick="goToSlide(23)" class="card-menu-3d flex flex-col items-center justify-between h-56">
                     <div class="w-24 h-24 bg-rose-100 rounded-full flex items-center justify-center shadow-inner mb-4">
-                        <i class="fa-solid fa-users text-5xl text-rose-500 drop-shadow-md"></i>
+                        <i class="fa-solid fa-users text-5xl text-rose-500 drop-shadow-md icon-float" style="animation-delay:1.2s;"></i>
                     </div>
                     <span class="font-bold text-slate-800 text-lg leading-tight text-center">Profil<br>Pengembang</span>
                 </div>
@@ -266,24 +356,24 @@
                     <defs>
                         <!-- Desain ujung panah -->
                         <marker id="arrowhead" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
-                            <polyline points="2,2 8,5 2,8" fill="none" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <polyline points="2,2 8,5 2,8" fill="none" stroke="#c9a227" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </marker>
                     </defs>
                     
                     <!-- Garis Diagonal dari Kalam (X:80%, Y:46%) ke 4 Kotak Tengah (X:71%) -->
-                    <line x1="80%" y1="46%" x2="71%" y2="15%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead)" />
-                    <line x1="80%" y1="46%" x2="71%" y2="35%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead)" />
-                    <line x1="80%" y1="46%" x2="71%" y2="55%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead)" />
-                    <line x1="80%" y1="46%" x2="71%" y2="75%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead)" />
+                    <line x1="80%" y1="46%" x2="71%" y2="15%" stroke="#c9a227" stroke-width="1.5" marker-end="url(#arrowhead)" />
+                    <line x1="80%" y1="46%" x2="71%" y2="35%" stroke="#c9a227" stroke-width="1.5" marker-end="url(#arrowhead)" />
+                    <line x1="80%" y1="46%" x2="71%" y2="55%" stroke="#c9a227" stroke-width="1.5" marker-end="url(#arrowhead)" />
+                    <line x1="80%" y1="46%" x2="71%" y2="75%" stroke="#c9a227" stroke-width="1.5" marker-end="url(#arrowhead)" />
 
                     <!-- Garis Lurus dari 3 Kotak Tengah (X:55%) ke Teks Kiri (X:48%) -->
-                    <line x1="55%" y1="15%" x2="48%" y2="15%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead)" />
-                    <line x1="55%" y1="35%" x2="48%" y2="35%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead)" />
-                    <line x1="55%" y1="55%" x2="48%" y2="55%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead)" />
+                    <line x1="55%" y1="15%" x2="48%" y2="15%" stroke="#c9a227" stroke-width="1.5" marker-end="url(#arrowhead)" />
+                    <line x1="55%" y1="35%" x2="48%" y2="35%" stroke="#c9a227" stroke-width="1.5" marker-end="url(#arrowhead)" />
+                    <line x1="55%" y1="55%" x2="48%" y2="55%" stroke="#c9a227" stroke-width="1.5" marker-end="url(#arrowhead)" />
 
                     <!-- Garis Bercabang dari Kotak Paling Bawah (Bil Wadh'i) -->
-                    <line x1="55%" y1="75%" x2="43%" y2="69%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead)" />
-                    <line x1="55%" y1="75%" x2="43%" y2="81%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead)" />
+                    <line x1="55%" y1="75%" x2="43%" y2="69%" stroke="#c9a227" stroke-width="1.5" marker-end="url(#arrowhead)" />
+                    <line x1="55%" y1="75%" x2="43%" y2="81%" stroke="#c9a227" stroke-width="1.5" marker-end="url(#arrowhead)" />
                 </svg>
 
                 <!-- LAYER 2: Kotak Teks -->
@@ -348,22 +438,22 @@
                     <defs>
                         <!-- Desain ujung panah -->
                         <marker id="arrowhead2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
-                            <polyline points="2,2 8,5 2,8" fill="none" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <polyline points="2,2 8,5 2,8" fill="none" stroke="#c9a227" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </marker>
                     </defs>
                     
                     <!-- Garis Vertikal (I'rob -> Ta'rif -> Definisi Panjang) -->
-                    <line x1="82.5%" y1="35%" x2="82.5%" y2="45%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead2)" />
-                    <line x1="82.5%" y1="55%" x2="82.5%" y2="65%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead2)" />
+                    <line x1="82.5%" y1="35%" x2="82.5%" y2="45%" stroke="#c9a227" stroke-width="1.5" marker-end="url(#arrowhead2)" />
+                    <line x1="82.5%" y1="55%" x2="82.5%" y2="65%" stroke="#c9a227" stroke-width="1.5" marker-end="url(#arrowhead2)" />
 
                     <!-- Garis Horizontal (I'rob -> Aqsāmuhu) -->
-                    <line x1="75%" y1="30%" x2="63%" y2="30%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead2)" />
+                    <line x1="75%" y1="30%" x2="63%" y2="30%" stroke="#c9a227" stroke-width="1.5" marker-end="url(#arrowhead2)" />
 
                     <!-- Garis Menyebar (Aqsāmuhu -> 4 Pembagian) -->
-                    <line x1="45%" y1="30%" x2="30%" y2="14%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead2)" />
-                    <line x1="45%" y1="30%" x2="30%" y2="29%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead2)" />
-                    <line x1="45%" y1="30%" x2="30%" y2="44%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead2)" />
-                    <line x1="45%" y1="30%" x2="30%" y2="59%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead2)" />
+                    <line x1="45%" y1="30%" x2="30%" y2="14%" stroke="#c9a227" stroke-width="1.5" marker-end="url(#arrowhead2)" />
+                    <line x1="45%" y1="30%" x2="30%" y2="29%" stroke="#c9a227" stroke-width="1.5" marker-end="url(#arrowhead2)" />
+                    <line x1="45%" y1="30%" x2="30%" y2="44%" stroke="#c9a227" stroke-width="1.5" marker-end="url(#arrowhead2)" />
+                    <line x1="45%" y1="30%" x2="30%" y2="59%" stroke="#c9a227" stroke-width="1.5" marker-end="url(#arrowhead2)" />
                 </svg>
 
                 <!-- LAYER 2: Kotak Teks -->
@@ -430,9 +520,9 @@
 
             <div class="relative w-full max-w-5xl h-[65vh] mx-auto" dir="ltr">
                 <svg class="absolute inset-0 w-full h-full pointer-events-none z-0">
-                    <defs><marker id="arr5" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><polyline points="2,2 8,5 2,8" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round"/></marker></defs>
-                    <line x1="75%" y1="50%" x2="50%" y2="25%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr5)" />
-                    <line x1="75%" y1="50%" x2="50%" y2="75%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr5)" />
+                    <defs><marker id="arr5" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><polyline points="2,2 8,5 2,8" fill="none" stroke="#c9a227" stroke-width="1.5" stroke-linecap="round"/></marker></defs>
+                    <line x1="75%" y1="50%" x2="50%" y2="25%" stroke="#c9a227" stroke-width="1.5" marker-end="url(#arr5)" />
+                    <line x1="75%" y1="50%" x2="50%" y2="75%" stroke="#c9a227" stroke-width="1.5" marker-end="url(#arr5)" />
                 </svg>
 
                 <div class="absolute flex items-center justify-center glass-panel rounded-sm border border-slate-400 z-10" style="left: 75%; top: 45%; width: 20%; height: 10%;">
@@ -458,13 +548,13 @@
 
             <div class="relative w-full max-w-5xl h-[65vh] mx-auto" dir="ltr">
                 <svg class="absolute inset-0 w-full h-full pointer-events-none z-0">
-                    <defs><marker id="arr6" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><polyline points="2,2 8,5 2,8" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round"/></marker></defs>
-                    <line x1="75%" y1="50%" x2="68%" y2="50%" stroke="#94a3b8" stroke-width="1.5" />
-                    <line x1="68%" y1="15%" x2="68%" y2="85%" stroke="#94a3b8" stroke-width="1.5" />
-                    <line x1="68%" y1="15%" x2="55%" y2="15%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr6)" />
-                    <line x1="68%" y1="38%" x2="55%" y2="38%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr6)" />
-                    <line x1="68%" y1="62%" x2="55%" y2="62%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr6)" />
-                    <line x1="68%" y1="85%" x2="55%" y2="85%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr6)" />
+                    <defs><marker id="arr6" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><polyline points="2,2 8,5 2,8" fill="none" stroke="#c9a227" stroke-width="1.5" stroke-linecap="round"/></marker></defs>
+                    <line x1="75%" y1="50%" x2="68%" y2="50%" stroke="#c9a227" stroke-width="1.5" />
+                    <line x1="68%" y1="15%" x2="68%" y2="85%" stroke="#c9a227" stroke-width="1.5" />
+                    <line x1="68%" y1="15%" x2="55%" y2="15%" stroke="#c9a227" stroke-width="1.5" marker-end="url(#arr6)" />
+                    <line x1="68%" y1="38%" x2="55%" y2="38%" stroke="#c9a227" stroke-width="1.5" marker-end="url(#arr6)" />
+                    <line x1="68%" y1="62%" x2="55%" y2="62%" stroke="#c9a227" stroke-width="1.5" marker-end="url(#arr6)" />
+                    <line x1="68%" y1="85%" x2="55%" y2="85%" stroke="#c9a227" stroke-width="1.5" marker-end="url(#arr6)" />
                 </svg>
 
                 <div class="absolute flex items-center justify-center glass-panel rounded-sm border border-slate-400 z-10" style="left: 75%; top: 45%; width: 22%; height: 10%;">
@@ -496,12 +586,12 @@
 
             <div class="relative w-full max-w-5xl h-[65vh] mx-auto" dir="ltr">
                 <svg class="absolute inset-0 w-full h-full pointer-events-none z-0">
-                    <defs><marker id="arr7" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><polyline points="2,2 8,5 2,8" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round"/></marker></defs>
-                    <line x1="75%" y1="50%" x2="68%" y2="50%" stroke="#94a3b8" stroke-width="1.5" />
-                    <line x1="68%" y1="20%" x2="68%" y2="80%" stroke="#94a3b8" stroke-width="1.5" />
-                    <line x1="68%" y1="20%" x2="55%" y2="20%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr7)" />
-                    <line x1="68%" y1="50%" x2="55%" y2="50%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr7)" />
-                    <line x1="68%" y1="80%" x2="55%" y2="80%" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr7)" />
+                    <defs><marker id="arr7" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><polyline points="2,2 8,5 2,8" fill="none" stroke="#c9a227" stroke-width="1.5" stroke-linecap="round"/></marker></defs>
+                    <line x1="75%" y1="50%" x2="68%" y2="50%" stroke="#c9a227" stroke-width="1.5" />
+                    <line x1="68%" y1="20%" x2="68%" y2="80%" stroke="#c9a227" stroke-width="1.5" />
+                    <line x1="68%" y1="20%" x2="55%" y2="20%" stroke="#c9a227" stroke-width="1.5" marker-end="url(#arr7)" />
+                    <line x1="68%" y1="50%" x2="55%" y2="50%" stroke="#c9a227" stroke-width="1.5" marker-end="url(#arr7)" />
+                    <line x1="68%" y1="80%" x2="55%" y2="80%" stroke="#c9a227" stroke-width="1.5" marker-end="url(#arr7)" />
                 </svg>
 
                 <div class="absolute flex items-center justify-center glass-panel rounded-sm border border-slate-400 z-10" style="left: 75%; top: 45%; width: 22%; height: 10%;">
@@ -1085,11 +1175,6 @@
 
         <!-- SLIDE 17: Menu Evaluasi (Daftar Pelajaran) -->
         <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-17">
-            
-            <!-- Tombol Ruju' (Kembali ke Menu Utama) -->
-            <button onclick="goToSlide(1)" class="absolute bottom-8 right-8 px-10 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg shadow-blue-500/30 transition hover:scale-105 border border-blue-400/50 z-50">
-                <span class="arabic text-3xl font-bold">رجوع</span>
-            </button>
 
             <!-- Judul Atas (Ad-Duruusul Muqorroh) -->
             <div class="w-full max-w-2xl bg-yellow-500 hover:bg-yellow-400 transition py-4 px-8 rounded-xl shadow-lg border border-yellow-400 mb-10 text-center mx-auto cursor-default">
@@ -1099,50 +1184,52 @@
             <!-- Grid 6 Tombol Pelajaran (Warna Kuning) -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 w-full max-w-5xl mx-auto" dir="rtl">
                 
-                <!-- Pelajaran 1 -->
-                <!-- Nanti onclick-nya bisa lu isi "goToSlide(XX)" kalo slide kuisnya udah lu bikin -->
-                <button onclick="goToSlide(18)" class="bg-blue-500 hover:bg-blue-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-center hover:scale-105 z-10">
+               <!-- Pelajaran 1 -->
+                <button onclick="mulaiKuis(18)" class="bg-blue-500 hover:bg-blue-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-center hover:scale-105 z-10">
                     <span class="arabic text-2xl md:text-3xl font-bold text-white leading-relaxed">
-        الدَّرْسُ الأَوَّلُ — تَعْرِيْفُ الْكَلَامِ
-                </span>
+                        الدَّرْسُ الأَوَّلُ — تَعْرِيْفُ الْكَلَامِ
+                    </span>
                 </button>
 
-                <!-- Pelajaran 4 -->
-                <button class="bg-blue-500 hover:bg-blue-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-center hover:scale-105">
+               <!-- Pelajaran 4 (Sekarang diarahkan ke Slide 32) -->
+                <button onclick="mulaiKuis(32)" class="bg-blue-500 hover:bg-blue-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-center hover:scale-105">
                     <span class="arabic text-2xl md:text-3xl font-bold text-white leading-relaxed">
                         الدَّرْسُ الرَّابِعُ — إِعْرَابُ الْمُفْرَدِ وَجَمْعُ التَّكْسِيْرِ
                     </span>
                 </button>
 
-                <!-- Pelajaran 2 -->
-                <button class="bg-blue-500 hover:bg-blue-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-center hover:scale-105">
+                <!-- Pelajaran 2 (Sekarang diarahkan ke Slide 24) -->
+                <button onclick="mulaiKuis(24)" class="bg-blue-500 hover:bg-blue-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-center hover:scale-105">
                     <span class="arabic text-2xl md:text-3xl font-bold text-white leading-relaxed">
                         الدَّرْسُ الثَّانِي — تَعْرِيْفُ الإِعْرَابِ وَأَقْسَامُهُ
                     </span>
                 </button>
 
-                <!-- Pelajaran 5 -->
-                <button class="bg-blue-500 hover:bg-blue-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-center hover:scale-105">
+                <!-- Pelajaran 5 (Sekarang diarahkan ke Slide 36) -->
+                <button onclick="mulaiKuis(36)" class="bg-blue-500 hover:bg-blue-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-center hover:scale-105">
                     <span class="arabic text-2xl md:text-3xl font-bold text-white leading-relaxed">
                         الدَّرْسُ الْخَامِسُ — جَمْعُ الْمُؤَنَّثِ السَّالِمِ وَالإِسْمُ غَيْرُ المُنْصَرِفِ
                     </span>
                 </button>
 
-                <!-- Pelajaran 3 -->
-                <button class="bg-blue-500 hover:bg-blue-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-center hover:scale-105">
+                <!-- Pelajaran 3 (Sekarang diarahkan ke Slide 28) -->
+                <button onclick="mulaiKuis(28)" class="bg-blue-500 hover:bg-blue-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-center hover:scale-105">
                     <span class="arabic text-2xl md:text-3xl font-bold text-white leading-relaxed">
                         الدَّرْسُ الثَّالِثُ — عَلَامَاتُ الإِعْرَابِ
                     </span>
                 </button>
 
-                <!-- Pelajaran 6 -->
-                <button class="bg-blue-500 hover:bg-blue-400 transition py-5 px-6 rounded-xl shadow-lg border border-blue-400 text-center hover:scale-105">
+                <!-- Pelajaran 6 (Sekarang diarahkan ke Slide 39) -->
+                <button onclick="mulaiKuis(39)" class="bg-blue-500 hover:bg-blue-400 transition py-5 px-6 rounded-xl shadow-lg border border-blue-400 text-center hover:scale-105">
                     <span class="arabic text-2xl md:text-3xl font-bold text-white leading-relaxed">
                         الدَّرْسُ السَّادِسُ — الأَسْمَاءُ الْخَمْسَةُ وَالمُثَنَّى وَجَمْعُ الْمُذَكَّرِ السَّالِمِ
                     </span>
                 </button>
 
             </div>
+            <button onclick="goToSlide(1)" class="mt-12 mb-4 px-12 py-3 bg-slate-800 hover:bg-slate-700 rounded-full text-white shadow-lg transition hover:scale-105 border-2 border-yellow-500 z-50">
+                <span class="arabic text-3xl font-bold">رجوع</span>
+            </button>
         </div>
 
         <!-- SLIDE 18: Kuis Pelajaran 1 -->
@@ -1391,8 +1478,19 @@
                 PROFIL PENGEMBANG
             </h2>
             
-            <!-- Kontainer Kartu Profil (Pake flex-wrap biar otomatis turun baris kalo kepenuhan) -->
-            <div class="flex flex-wrap justify-center gap-6 w-full max-w-6xl mx-auto mt-4 px-4">
+            <!-- BARIS ATAS: DOSEN (Sendirian di tengah) -->
+            <div class="flex justify-center w-full mb-10 px-4">
+                <div class="bg-white rounded-3xl p-6 border-b-8 border-slate-300 shadow-xl flex flex-col items-center w-64 text-center transform transition hover:-translate-y-2">
+                    <div class="w-32 h-32 rounded-full border-4 border-purple-400 overflow-hidden mb-4 bg-slate-200 shadow-inner">
+                        <img src="ustadz_yongki.jpeg" alt="Foto Dosen" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="font-bold text-xl text-slate-800 mb-1">Al Ustad Yoke Suryadarma,M.Pd.I </h3>
+                    <p class="text-purple-500 font-bold text-sm tracking-wide">Lecturer</p>
+                </div>
+            </div>
+
+            <!-- BARIS BAWAH: MAHASISWA (Berjejer) -->
+            <div class="flex flex-wrap justify-center gap-6 w-full max-w-6xl mx-auto px-4">
                 
                 <!-- 1. Programmer & Developer -->
                 <div class="bg-white rounded-3xl p-6 border-b-8 border-slate-300 shadow-xl flex flex-col items-center w-64 text-center transform transition hover:-translate-y-2">
@@ -1400,7 +1498,7 @@
                         <img src="gw.png" alt="Foto Programmer" class="w-full h-full object-cover">
                     </div>
                     <h3 class="font-bold text-xl text-slate-800 mb-1">Fathurrahman Naufal</h3>
-                    <p class="text-blue-500 font-bold text-sm tracking-wide">Programmer & Developer</p>
+                    <p class="text-blue-500 font-bold text-sm tracking-wide">Developer(Programmer)</p>
                 </div>
 
                 <!-- 2. Penyusun Materi 1 -->
@@ -1409,7 +1507,7 @@
                         <img src="rafi_shulton.jpeg" alt="Foto Penyusun" class="w-full h-full object-cover">
                     </div>
                     <h3 class="font-bold text-xl text-slate-800 mb-1">Rafi Shulton</h3>
-                    <p class="text-teal-500 font-bold text-sm tracking-wide">Penyusun Materi</p>
+                    <p class="text-teal-500 font-bold text-sm tracking-wide">Developer</p>
                 </div>
 
                 <!-- 3. Penyusun Materi 2 -->
@@ -1418,7 +1516,7 @@
                         <img src="ghofur.jpeg" alt="Foto Penyusun" class="w-full h-full object-cover">
                     </div>
                     <h3 class="font-bold text-xl text-slate-800 mb-1">Tsalam Asytar Ghofur</h3>
-                    <p class="text-amber-500 font-bold text-sm tracking-wide">Penyusun Materi</p>
+                    <p class="text-amber-500 font-bold text-sm tracking-wide">Developer</p>
                 </div>
 
                 <!-- 4. Penyusun Materi 3 -->
@@ -1427,16 +1525,7 @@
                         <img src="agus.jpeg" alt="Foto Penyusun" class="w-full h-full object-cover">
                     </div>
                     <h3 class="font-bold text-xl text-slate-800 mb-1">Agus Nur Hafidz</h3>
-                    <p class="text-emerald-500 font-bold text-sm tracking-wide">Penyusun Materi</p>
-                </div>
-
-                <!-- 5. Dosen / Lecture -->
-                <div class="bg-white rounded-3xl p-6 border-b-8 border-slate-300 shadow-xl flex flex-col items-center w-64 text-center transform transition hover:-translate-y-2">
-                    <div class="w-32 h-32 rounded-full border-4 border-purple-400 overflow-hidden mb-4 bg-slate-200 shadow-inner">
-                        <img src="foto-dosen.jpg" alt="Foto Dosen" class="w-full h-full object-cover">
-                    </div>
-                    <h3 class="font-bold text-xl text-slate-800 mb-1">ustadz PBA</h3>
-                    <p class="text-purple-500 font-bold text-sm tracking-wide">Dosen / Lecturer</p>
+                    <p class="text-emerald-500 font-bold text-sm tracking-wide">Developer</p>
                 </div>
 
             </div>
@@ -1447,6 +1536,936 @@
             </button>
         </div>
 
+        <!-- SLIDE 24: Kuis Pelajaran 2 - Soal 1 -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-24">
+            
+            <!-- Tombol Ruju' ke Menu Evaluasi -->
+            <button onclick="goToSlide(17)" class="absolute top-6 left-6 px-8 py-2 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg shadow-blue-500/30 transition hover:scale-105 border border-blue-400/50 z-50">
+                <span class="arabic text-2xl">رجوع</span>
+            </button>
+
+            <!-- Menampilkan Skor Sementara -->
+            <div class="absolute top-6 right-6 px-6 py-2 bg-slate-800 rounded-lg border border-teal-500 text-teal-400 font-bold z-50">
+                Skor: <span class="update-skor">0</span>
+            </div>
+
+            <!-- Pertanyaan -->
+            <div class="w-full max-w-3xl bg-yellow-500 py-6 px-8 rounded-xl shadow-lg border border-yellow-400 mb-12 text-center mx-auto mt-12">
+                <h2 class="arabic text-3xl md:text-4xl font-bold text-white">ما تعريف الإعراب؟</h2>
+            </div>
+            
+            <!-- Pilihan Ganda -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mx-auto" dir="rtl">
+                
+                <!-- Pilihan B (Kanan Atas) - JAWABAN BENAR -->
+                <button onclick="cekJawaban(this, true)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-xl md:text-2xl font-bold text-white leading-relaxed">B. تغيير أواخر الكلم لاختلاف العوامل الداخلة عليها لفظًا أو تقديرًا</span>
+                </button>
+
+                <!-- Pilihan A (Kiri Atas) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">A. تغيير أوائل الكلم</span>
+                </button>
+
+                <!-- Pilihan D (Kanan Bawah) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">D. تغيير معنى الجملة</span>
+                </button>
+
+                <!-- Pilihan C (Kiri Bawah) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">C. تغيير شكل الحروف</span>
+                </button>
+            </div>
+
+            <!-- Tombol At-Taali di Slide 24 (Arahin ke Slide 25) -->
+            <button onclick="goToSlide(25)" class="btn-next-soal hidden mt-12 mb-4 px-12 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
+                <span class="arabic text-3xl font-bold">التالي</span>
+            </button>
+
+        </div>
+
+        <!-- SLIDE 25: Kuis Pelajaran 2 - Soal 2 -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-25">
+            
+            <!-- Tombol Ruju' ke Menu Evaluasi -->
+            <button onclick="goToSlide(17)" class="absolute top-6 left-6 px-8 py-2 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg shadow-blue-500/30 transition hover:scale-105 border border-blue-400/50 z-50">
+                <span class="arabic text-2xl">رجوع</span>
+            </button>
+
+            <!-- Menampilkan Skor Sementara -->
+            <div class="absolute top-6 right-6 px-6 py-2 bg-slate-800 rounded-lg border border-teal-500 text-teal-400 font-bold z-50">
+                Skor: <span class="update-skor">0</span>
+            </div>
+
+            <!-- Pertanyaan -->
+            <div class="w-full max-w-3xl bg-yellow-500 py-6 px-8 rounded-xl shadow-lg border border-yellow-400 mb-12 text-center mx-auto mt-12">
+                <h2 class="arabic text-3xl md:text-4xl font-bold text-white">كم أقسام الإعراب؟؟</h2>
+            </div>
+            
+            <!-- Pilihan Ganda -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mx-auto" dir="rtl">
+                
+                <!-- Pilihan B (Kanan Atas) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">B. ثلاثة أقسام</span>
+                </button>
+
+                <!-- Pilihan A (Kiri Atas) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">A. قسمان</span>
+                </button>
+
+                <!-- Pilihan D (Kanan Bawah) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">D. خمسة أقسام</span>
+                </button>
+
+                <!-- Pilihan C (Kiri Bawah) - BENAR -->
+                <button onclick="cekJawaban(this, true)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">C. أربعة أقسام</span>
+                </button>
+            </div>
+
+            <!-- Tombol At-Taali di Slide 25 (Arahin ke Slide 26) -->
+            <button onclick="goToSlide(26)" class="btn-next-soal hidden mt-12 mb-4 px-12 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
+                <span class="arabic text-3xl font-bold">التالي</span>
+            </button>
+
+        </div>
+
+        <!-- SLIDE 26: Kuis Pelajaran 2 - Soal 3 -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-26">
+            
+            <!-- Tombol Ruju' ke Menu Evaluasi -->
+            <button onclick="goToSlide(17)" class="absolute top-6 left-6 px-8 py-2 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg shadow-blue-500/30 transition hover:scale-105 border border-blue-400/50 z-50">
+                <span class="arabic text-2xl">رجوع</span>
+            </button>
+
+            <!-- Menampilkan Skor Sementara -->
+            <div class="absolute top-6 right-6 px-6 py-2 bg-slate-800 rounded-lg border border-teal-500 text-teal-400 font-bold z-50">
+                Skor: <span class="update-skor">0</span>
+            </div>
+
+            <!-- Pertanyaan -->
+            <div class="w-full max-w-3xl bg-yellow-500 py-6 px-8 rounded-xl shadow-lg border border-yellow-400 mb-12 text-center mx-auto mt-12">
+                <h2 class="arabic text-3xl md:text-4xl font-bold text-white">ما أقسام الإعراب؟</h2>
+            </div>
+            
+            <!-- Pilihan Ganda -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mx-auto" dir="rtl">
+                
+                <!-- Pilihan B (Kanan Atas) - BENAR -->
+                <button onclick="cekJawaban(this, true)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">B. الرفع، والنصب، والجر، والجزم</span>
+                </button>
+
+                <!-- Pilihan A (Kiri Atas) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">A. الاسم، والفعل، والحرف</span>
+                </button>
+
+                <!-- Pilihan D (Kanan Bawah) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">D. المبتدأ، والخبر، والفاعل</span>
+                </button>
+
+                <!-- Pilihan C (Kiri Bawah) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">C. المفرد، والمثنى، والجمع</span>
+                </button>
+            </div>
+
+            <!-- Tombol At-Taali di Slide 26 (Arahin ke Slide 27) -->
+            <button onclick="goToSlide(27)" class="btn-next-soal hidden mt-12 mb-4 px-12 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
+                <span class="arabic text-3xl font-bold">التالي</span>
+            </button>
+
+        </div>
+
+        <!-- SLIDE 27: Kuis Pelajaran 2 - Soal 4 -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-27">
+            
+            <!-- Tombol Ruju' ke Menu Evaluasi -->
+            <button onclick="goToSlide(17)" class="absolute top-6 left-6 px-8 py-2 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg shadow-blue-500/30 transition hover:scale-105 border border-blue-400/50 z-50">
+                <span class="arabic text-2xl">رجوع</span>
+            </button>
+
+            <!-- Menampilkan Skor Sementara -->
+            <div class="absolute top-6 right-6 px-6 py-2 bg-slate-800 rounded-lg border border-teal-500 text-teal-400 font-bold z-50">
+                Skor: <span class="update-skor">0</span>
+            </div>
+
+            <!-- Pertanyaan -->
+            <div class="w-full max-w-3xl bg-yellow-500 py-6 px-8 rounded-xl shadow-lg border border-yellow-400 mb-12 text-center mx-auto mt-12">
+                <h2 class="arabic text-3xl md:text-4xl font-bold text-white leading-relaxed">
+                    ما إعراب كلمة «زيدًا» في الجملة الآتية؟<br>رَأَيْتُ زَيْدًا
+                </h2>
+            </div>
+            
+            <!-- Pilihan Ganda -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mx-auto" dir="rtl">
+                
+                <!-- Pilihan B (Kanan Atas) - BENAR -->
+                <button onclick="cekJawaban(this, true)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">B. النصب</span>
+                </button>
+
+                <!-- Pilihan A (Kiri Atas) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">A. الرفع</span>
+                </button>
+
+                <!-- Pilihan D (Kanan Bawah) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">D. الجزم</span>
+                </button>
+
+                <!-- Pilihan C (Kiri Bawah) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">C. الجر</span>
+                </button>
+            </div>
+
+            <!-- Tombol At-Taali (Berhubung ini soal ke-4, gw arahin langsung ke Slide 22 buat lihat Skor Akhir) -->
+            <button onclick="goToSlide(22)" class="btn-next-soal hidden mt-12 mb-4 px-12 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
+                <span class="arabic text-3xl font-bold">التالي</span>
+            </button>
+        </div>
+
+        <!-- SLIDE 28: Kuis Pelajaran 3 - Soal 1 -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-28">
+            
+            <!-- Tombol Ruju' ke Menu Evaluasi -->
+            <button onclick="goToSlide(17)" class="absolute top-6 left-6 px-8 py-2 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg shadow-blue-500/30 transition hover:scale-105 border border-blue-400/50 z-50">
+                <span class="arabic text-2xl">رجوع</span>
+            </button>
+
+            <!-- Menampilkan Skor Sementara -->
+            <div class="absolute top-6 right-6 px-6 py-2 bg-slate-800 rounded-lg border border-teal-500 text-teal-400 font-bold z-50">
+                Skor: <span class="update-skor">0</span>
+            </div>
+
+            <!-- Pertanyaan -->
+            <div class="w-full max-w-3xl bg-yellow-500 py-6 px-8 rounded-xl shadow-lg border border-yellow-400 mb-12 text-center mx-auto mt-12">
+                <h2 class="arabic text-3xl md:text-4xl font-bold text-white">إلى كم تنقسم علامات الإعراب؟</h2>
+            </div>
+            
+            <!-- Pilihan Ganda -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mx-auto" dir="rtl">
+                
+                <!-- Pilihan B (Kanan Atas) - BENAR -->
+                <button onclick="cekJawaban(this, true)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">B. قسمان</span>
+                </button>
+
+                <!-- Pilihan A (Kiri Atas) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">A. قسم واحد</span>
+                </button>
+
+                <!-- Pilihan C (Kanan Bawah) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">C. ثلاثة أقسام</span>
+                </button>
+
+                <!-- Pilihan D (Kiri Bawah) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">D. أربعة أقسام</span>
+                </button>
+            </div>
+
+            <!-- Tombol At-Taali di Slide 28 (Arahin ke Slide 29) -->
+            <button onclick="goToSlide(29)" class="btn-next-soal hidden mt-12 mb-4 px-12 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
+                <span class="arabic text-3xl font-bold">التالي</span>
+            </button>
+
+        </div>
+
+        <!-- SLIDE 29: Kuis Pelajaran 3 - Soal 2 -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-29">
+            
+            <!-- Tombol Ruju' ke Menu Evaluasi -->
+            <button onclick="goToSlide(17)" class="absolute top-6 left-6 px-8 py-2 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg shadow-blue-500/30 transition hover:scale-105 border border-blue-400/50 z-50">
+                <span class="arabic text-2xl">رجوع</span>
+            </button>
+
+            <!-- Menampilkan Skor Sementara -->
+            <div class="absolute top-6 right-6 px-6 py-2 bg-slate-800 rounded-lg border border-teal-500 text-teal-400 font-bold z-50">
+                Skor: <span class="update-skor">0</span>
+            </div>
+
+            <!-- Pertanyaan -->
+            <div class="w-full max-w-3xl bg-yellow-500 py-6 px-8 rounded-xl shadow-lg border border-yellow-400 mb-12 text-center mx-auto mt-12">
+                <h2 class="arabic text-3xl md:text-4xl font-bold text-white">ما علامات الإعراب بالحركات؟</h2>
+            </div>
+            
+            <!-- Pilihan Ganda -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mx-auto" dir="rtl">
+                
+                <!-- Pilihan B (Kanan Atas) - BENAR -->
+                <button onclick="cekJawaban(this, true)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">B. الضمة، والفتحة، والكسرة، والسكون</span>
+                </button>
+
+                <!-- Pilihan A (Kiri Atas) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">A. الواو، والألف، والياء، والنون</span>
+                </button>
+
+                <!-- Pilihan D (Kanan Bawah) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">D. الألف، والواو، والفتحة، والكسرة</span>
+                </button>
+
+                <!-- Pilihan C (Kiri Bawah) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">C. الرفع، والنصب، والجر، والجزم</span>
+                </button>
+            </div>
+
+            <!-- Tombol At-Taali di Slide 29 (Arahin ke Slide 30) -->
+            <button onclick="goToSlide(30)" class="btn-next-soal hidden mt-12 mb-4 px-12 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
+                <span class="arabic text-3xl font-bold">التالي</span>
+            </button>
+
+        </div>
+
+        <!-- SLIDE 30: Kuis Pelajaran 3 - Soal 3 -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-30">
+            
+            <!-- Tombol Ruju' ke Menu Evaluasi -->
+            <button onclick="goToSlide(17)" class="absolute top-6 left-6 px-8 py-2 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg shadow-blue-500/30 transition hover:scale-105 border border-blue-400/50 z-50">
+                <span class="arabic text-2xl">رجوع</span>
+            </button>
+
+            <!-- Menampilkan Skor Sementara -->
+            <div class="absolute top-6 right-6 px-6 py-2 bg-slate-800 rounded-lg border border-teal-500 text-teal-400 font-bold z-50">
+                Skor: <span class="update-skor">0</span>
+            </div>
+
+            <!-- Pertanyaan -->
+            <div class="w-full max-w-3xl bg-yellow-500 py-6 px-8 rounded-xl shadow-lg border border-yellow-400 mb-12 text-center mx-auto mt-12">
+                <h2 class="arabic text-3xl md:text-4xl font-bold text-white">ما علامات الإعراب بالحروف؟</h2>
+            </div>
+            
+            <!-- Pilihan Ganda -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mx-auto" dir="rtl">
+                
+                <!-- Pilihan B (Kanan Atas) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">B. الرفع، والنصب، والجر، والجزم</span>
+                </button>
+
+                <!-- Pilihan A (Kiri Atas) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">A. الضمة، والفتحة، والكسرة، والسكون</span>
+                </button>
+
+                <!-- Pilihan C (Kanan Bawah) - BENAR -->
+                <button onclick="cekJawaban(this, true)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">C. الواو، والألف، والياء، والنون</span>
+                </button>
+
+                <!-- Pilihan D (Kiri Bawah) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">D. الفتحة، والواو، والألف، والسكون</span>
+                </button>
+            </div>
+
+            <!-- Tombol At-Taali di Slide 30 (Arahin ke Slide 31) -->
+            <button onclick="goToSlide(31)" class="btn-next-soal hidden mt-12 mb-4 px-12 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
+                <span class="arabic text-3xl font-bold">التالي</span>
+            </button>
+
+        </div>
+
+        <!-- SLIDE 31: Kuis Pelajaran 3 - Soal 4 -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-31">
+            
+            <!-- Tombol Ruju' ke Menu Evaluasi -->
+            <button onclick="goToSlide(17)" class="absolute top-6 left-6 px-8 py-2 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg shadow-blue-500/30 transition hover:scale-105 border border-blue-400/50 z-50">
+                <span class="arabic text-2xl">رجوع</span>
+            </button>
+
+            <!-- Menampilkan Skor Sementara -->
+            <div class="absolute top-6 right-6 px-6 py-2 bg-slate-800 rounded-lg border border-teal-500 text-teal-400 font-bold z-50">
+                Skor: <span class="update-skor">0</span>
+            </div>
+
+            <!-- Pertanyaan -->
+            <div class="w-full max-w-3xl bg-yellow-500 py-6 px-8 rounded-xl shadow-lg border border-yellow-400 mb-12 text-center mx-auto mt-12">
+                <h2 class="arabic text-3xl md:text-4xl font-bold text-white leading-relaxed">
+                    ما علامة رفع كلمة <strong>المسلمونَ</strong> في الجملة الآتية؟<br>جَاءَ المسلمونَ
+                </h2>
+            </div>
+            
+            <!-- Pilihan Ganda -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mx-auto" dir="rtl">
+                
+                <!-- Pilihan B (Kanan Atas) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">B. الألف</span>
+                </button>
+
+                <!-- Pilihan A (Kiri Atas) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">A. الضمة</span>
+                </button>
+
+                <!-- Pilihan D (Kanan Bawah) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">D. النون</span>
+                </button>
+
+                <!-- Pilihan C (Kiri Bawah) - BENAR -->
+                <button onclick="cekJawaban(this, true)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">C. الواو</span>
+                </button>
+            </div>
+
+            <!-- Tombol At-Taali (Diarahkan ke Slide 22 / Lihat Skor karena ini soal terakhir) -->
+            <button onclick="goToSlide(22)" class="btn-next-soal hidden mt-12 mb-4 px-12 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
+                <span class="arabic text-3xl font-bold">التالي</span>
+            </button>
+        </div>
+
+        <!-- SLIDE 32: Kuis Pelajaran 4 - Soal 1 -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-32">
+            
+            <!-- Tombol Ruju' ke Menu Evaluasi -->
+            <button onclick="goToSlide(17)" class="absolute top-6 left-6 px-8 py-2 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg shadow-blue-500/30 transition hover:scale-105 border border-blue-400/50 z-50">
+                <span class="arabic text-2xl">رجوع</span>
+            </button>
+
+            <!-- Menampilkan Skor Sementara -->
+            <div class="absolute top-6 right-6 px-6 py-2 bg-slate-800 rounded-lg border border-teal-500 text-teal-400 font-bold z-50">
+                Skor: <span class="update-skor">0</span>
+            </div>
+
+            <!-- Pertanyaan -->
+            <div class="w-full max-w-3xl bg-yellow-500 py-6 px-8 rounded-xl shadow-lg border border-yellow-400 mb-12 text-center mx-auto mt-12">
+                <h2 class="arabic text-3xl md:text-4xl font-bold text-white">ما علامة رفع الاسم المفرد؟</h2>
+            </div>
+            
+            <!-- Pilihan Ganda -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mx-auto" dir="rtl">
+                
+                <!-- Pilihan B (Kanan Atas) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">B. الفتحة</span>
+                </button>
+
+                <!-- Pilihan A (Kiri Atas) - BENAR -->
+                <button onclick="cekJawaban(this, true)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">A. الضمة</span>
+                </button>
+
+                <!-- Pilihan D (Kanan Bawah) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">D. الواو</span>
+                </button>
+
+                <!-- Pilihan C (Kiri Bawah) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">C. الكسرة</span>
+                </button>
+            </div>
+
+            <!-- Tombol At-Taali di Slide 32 (Arahin ke Slide 33) -->
+            <button onclick="goToSlide(33)" class="btn-next-soal hidden mt-12 mb-4 px-12 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
+                <span class="arabic text-3xl font-bold">التالي</span>
+            </button>
+
+        </div>
+
+        <!-- SLIDE 33: Kuis Pelajaran 4 - Soal 2 -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-33">
+            
+            <!-- Tombol Ruju' ke Menu Evaluasi -->
+            <button onclick="goToSlide(17)" class="absolute top-6 left-6 px-8 py-2 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg shadow-blue-500/30 transition hover:scale-105 border border-blue-400/50 z-50">
+                <span class="arabic text-2xl">رجوع</span>
+            </button>
+
+            <!-- Menampilkan Skor Sementara -->
+            <div class="absolute top-6 right-6 px-6 py-2 bg-slate-800 rounded-lg border border-teal-500 text-teal-400 font-bold z-50">
+                Skor: <span class="update-skor">0</span>
+            </div>
+
+            <!-- Pertanyaan -->
+            <div class="w-full max-w-3xl bg-yellow-500 py-6 px-8 rounded-xl shadow-lg border border-yellow-400 mb-12 text-center mx-auto mt-12">
+                <h2 class="arabic text-3xl md:text-4xl font-bold text-white">أَيُّ الجمل الآتية صحيحة؟</h2>
+            </div>
+            
+            <!-- Pilihan Ganda -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mx-auto" dir="rtl">
+                
+                <!-- Pilihan B (Kanan Atas) - BENAR -->
+                <button onclick="cekJawaban(this, true)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">B. جاءَ الطالبُ</span>
+                </button>
+
+                <!-- Pilihan A (Kiri Atas) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">A. جاءَ الطالبَ</span>
+                </button>
+
+                <!-- Pilihan D (Kanan Bawah) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">D. جاءَ الطالبْ</span>
+                </button>
+
+                <!-- Pilihan C (Kiri Bawah) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">C. جاءَ الطالبِ</span>
+                </button>
+            </div>
+
+            <!-- Tombol At-Taali di Slide 33 (Arahin ke Slide 34) -->
+            <button onclick="goToSlide(34)" class="btn-next-soal hidden mt-12 mb-4 px-12 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
+                <span class="arabic text-3xl font-bold">التالي</span>
+            </button>
+
+        </div>
+
+        <!-- SLIDE 34: Kuis Pelajaran 4 - Soal 3 -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-34">
+            
+            <!-- Tombol Ruju' ke Menu Evaluasi -->
+            <button onclick="goToSlide(17)" class="absolute top-6 left-6 px-8 py-2 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg shadow-blue-500/30 transition hover:scale-105 border border-blue-400/50 z-50">
+                <span class="arabic text-2xl">رجوع</span>
+            </button>
+
+            <!-- Menampilkan Skor Sementara -->
+            <div class="absolute top-6 right-6 px-6 py-2 bg-slate-800 rounded-lg border border-teal-500 text-teal-400 font-bold z-50">
+                Skor: <span class="update-skor">0</span>
+            </div>
+
+            <!-- Pertanyaan -->
+            <div class="w-full max-w-3xl bg-yellow-500 py-6 px-8 rounded-xl shadow-lg border border-yellow-400 mb-12 text-center mx-auto mt-12">
+                <h2 class="arabic text-3xl md:text-4xl font-bold text-white">ما علامة نصب جمع التكسير؟</h2>
+            </div>
+            
+            <!-- Pilihan Ganda -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mx-auto" dir="rtl">
+                
+                <!-- Pilihan B (Kanan Atas) - BENAR -->
+                <button onclick="cekJawaban(this, true)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">B. الفتحة</span>
+                </button>
+
+                <!-- Pilihan A (Kiri Atas) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">A. الضمة</span>
+                </button>
+
+                <!-- Pilihan D (Kanan Bawah) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">D. الواو</span>
+                </button>
+
+                <!-- Pilihan C (Kiri Bawah) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">C. الكسرة</span>
+                </button>
+            </div>
+
+            <!-- Tombol At-Taali di Slide 34 (Arahin ke Slide 35) -->
+            <button onclick="goToSlide(35)" class="btn-next-soal hidden mt-12 mb-4 px-12 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
+                <span class="arabic text-3xl font-bold">التالي</span>
+            </button>
+
+        </div>
+
+        <!-- SLIDE 35: Kuis Pelajaran 4 - Soal 4 -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-35">
+            
+            <!-- Tombol Ruju' ke Menu Evaluasi -->
+            <button onclick="goToSlide(17)" class="absolute top-6 left-6 px-8 py-2 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg shadow-blue-500/30 transition hover:scale-105 border border-blue-400/50 z-50">
+                <span class="arabic text-2xl">رجوع</span>
+            </button>
+
+            <!-- Menampilkan Skor Sementara -->
+            <div class="absolute top-6 right-6 px-6 py-2 bg-slate-800 rounded-lg border border-teal-500 text-teal-400 font-bold z-50">
+                Skor: <span class="update-skor">0</span>
+            </div>
+
+            <!-- Pertanyaan -->
+            <div class="w-full max-w-3xl bg-yellow-500 py-6 px-8 rounded-xl shadow-lg border border-yellow-400 mb-12 text-center mx-auto mt-12">
+                <h2 class="arabic text-3xl md:text-4xl font-bold text-white">أَيُّ الجمل الآتية صحيحة؟</h2>
+            </div>
+            
+            <!-- Pilihan Ganda -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mx-auto" dir="rtl">
+                
+                <!-- Pilihan B (Kanan Atas) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">B. رَأَيْتُ الطلابِ</span>
+                </button>
+
+                <!-- Pilihan A (Kiri Atas) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">A. رَأَيْتُ الطلابُ</span>
+                </button>
+
+                <!-- Pilihan D (Kanan Bawah) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">D. رَأَيْتُ الطلابْ</span>
+                </button>
+
+                <!-- Pilihan C (Kiri Bawah) - BENAR -->
+                <button onclick="cekJawaban(this, true)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">C. رَأَيْتُ الطلابَ</span>
+                </button>
+            </div>
+
+            <!-- Tombol At-Taali (Diarahkan ke Slide 22 / Lihat Skor karena ini soal terakhir) -->
+            <button onclick="goToSlide(22)" class="btn-next-soal hidden mt-12 mb-4 px-12 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
+                <span class="arabic text-3xl font-bold">التالي</span>
+            </button>
+        </div>
+
+        <!-- SLIDE 36: Kuis Pelajaran 5 - Soal 1 -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-36">
+            
+            <!-- Tombol Ruju' ke Menu Evaluasi -->
+            <button onclick="goToSlide(17)" class="absolute top-6 left-6 px-8 py-2 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg shadow-blue-500/30 transition hover:scale-105 border border-blue-400/50 z-50">
+                <span class="arabic text-2xl">رجوع</span>
+            </button>
+
+            <!-- Menampilkan Skor Sementara -->
+            <div class="absolute top-6 right-6 px-6 py-2 bg-slate-800 rounded-lg border border-teal-500 text-teal-400 font-bold z-50">
+                Skor: <span class="update-skor">0</span>
+            </div>
+
+            <!-- Pertanyaan -->
+            <div class="w-full max-w-3xl bg-yellow-500 py-6 px-8 rounded-xl shadow-lg border border-yellow-400 mb-12 text-center mx-auto mt-12">
+                <h2 class="arabic text-3xl md:text-4xl font-bold text-white">أَيُّ الجمل الآتية صحيحة؟</h2>
+            </div>
+            
+            <!-- Pilihan Ganda -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mx-auto" dir="rtl">
+                
+                <!-- Pilihan B (Kanan Atas) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">B. رَأَيْتُ المسلماتُ</span>
+                </button>
+
+                <!-- Pilihan A (Kiri Atas) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">A. رَأَيْتُ المسلماتَ</span>
+                </button>
+
+                <!-- Pilihan D (Kanan Bawah) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">D. رَأَيْتُ المسلماتْ</span>
+                </button>
+
+                <!-- Pilihan C (Kiri Bawah) - BENAR -->
+                <button onclick="cekJawaban(this, true)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">C. رَأَيْتُ المسلماتِ</span>
+                </button>
+            </div>
+
+            <!-- Tombol At-Taali di Slide 36 (Arahin ke Slide 37) -->
+            <button onclick="goToSlide(37)" class="btn-next-soal hidden mt-12 mb-4 px-12 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
+                <span class="arabic text-3xl font-bold">التالي</span>
+            </button>
+
+        </div>
+
+        <!-- SLIDE 37: Kuis Pelajaran 5 - Soal 2 -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-37">
+            
+            <!-- Tombol Ruju' ke Menu Evaluasi -->
+            <button onclick="goToSlide(17)" class="absolute top-6 left-6 px-8 py-2 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg shadow-blue-500/30 transition hover:scale-105 border border-blue-400/50 z-50">
+                <span class="arabic text-2xl">رجوع</span>
+            </button>
+
+            <!-- Menampilkan Skor Sementara -->
+            <div class="absolute top-6 right-6 px-6 py-2 bg-slate-800 rounded-lg border border-teal-500 text-teal-400 font-bold z-50">
+                Skor: <span class="update-skor">0</span>
+            </div>
+
+            <!-- Pertanyaan -->
+            <div class="w-full max-w-3xl bg-yellow-500 py-6 px-8 rounded-xl shadow-lg border border-yellow-400 mb-12 text-center mx-auto mt-12">
+                <h2 class="arabic text-3xl md:text-4xl font-bold text-white">ما علامة جر الاسم غير المنصرف؟</h2>
+            </div>
+            
+            <!-- Pilihan Ganda -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mx-auto" dir="rtl">
+                
+                <!-- Pilihan B (Kanan Atas) - BENAR -->
+                <button onclick="cekJawaban(this, true)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">B. الفتحة</span>
+                </button>
+
+                <!-- Pilihan A (Kiri Atas) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">A. الكسرة</span>
+                </button>
+
+                <!-- Pilihan D (Kanan Bawah) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">D. الواو</span>
+                </button>
+
+                <!-- Pilihan C (Kiri Bawah) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">C. الضمة</span>
+                </button>
+            </div>
+
+            <!-- Tombol At-Taali di Slide 37 (Arahin ke Slide 38) -->
+            <button onclick="goToSlide(38)" class="btn-next-soal hidden mt-12 mb-4 px-12 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
+                <span class="arabic text-3xl font-bold">التالي</span>
+            </button>
+
+        </div>
+
+        <!-- SLIDE 38: Kuis Pelajaran 5 - Soal 3 (Terakhir) -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-38">
+            
+            <!-- Tombol Ruju' ke Menu Evaluasi -->
+            <button onclick="goToSlide(17)" class="absolute top-6 left-6 px-8 py-2 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg shadow-blue-500/30 transition hover:scale-105 border border-blue-400/50 z-50">
+                <span class="arabic text-2xl">رجوع</span>
+            </button>
+
+            <!-- Menampilkan Skor Sementara -->
+            <div class="absolute top-6 right-6 px-6 py-2 bg-slate-800 rounded-lg border border-teal-500 text-teal-400 font-bold z-50">
+                Skor: <span class="update-skor">0</span>
+            </div>
+
+            <!-- Pertanyaan -->
+            <div class="w-full max-w-3xl bg-yellow-500 py-6 px-8 rounded-xl shadow-lg border border-yellow-400 mb-12 text-center mx-auto mt-12">
+                <h2 class="arabic text-3xl md:text-4xl font-bold text-white">ما علامة جر الاسم غير المنصرف؟</h2>
+            </div>
+            
+            <!-- Pilihan Ganda -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mx-auto" dir="rtl">
+                
+                <!-- Pilihan B (Kanan Atas) - BENAR -->
+                <button onclick="cekJawaban(this, true)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">B. الفتحة</span>
+                </button>
+
+                <!-- Pilihan A (Kiri Atas) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">A. الكسرة</span>
+                </button>
+
+                <!-- Pilihan D (Kanan Bawah) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">D. الواو</span>
+                </button>
+
+                <!-- Pilihan C (Kiri Bawah) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">C. الضمة</span>
+                </button>
+            </div>
+
+            <!-- Tombol At-Taali (Di arahkan ke Slide 22 / Lihat Skor karena ini soal terakhir Dars 5) -->
+            <button onclick="goToSlide(22)" class="btn-next-soal hidden mt-12 mb-4 px-12 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
+                <span class="arabic text-3xl font-bold">التالي</span>
+            </button>
+        </div>
+
+        <!-- SLIDE 39: Kuis Pelajaran 6 - Soal 1 -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-39">
+            
+            <!-- Tombol Ruju' ke Menu Evaluasi -->
+            <button onclick="goToSlide(17)" class="absolute top-6 left-6 px-8 py-2 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg shadow-blue-500/30 transition hover:scale-105 border border-blue-400/50 z-50">
+                <span class="arabic text-2xl">رجوع</span>
+            </button>
+
+            <!-- Menampilkan Skor Sementara -->
+            <div class="absolute top-6 right-6 px-6 py-2 bg-slate-800 rounded-lg border border-teal-500 text-teal-400 font-bold z-50">
+                Skor: <span class="update-skor">0</span>
+            </div>
+
+            <!-- Pertanyaan -->
+            <div class="w-full max-w-3xl bg-yellow-500 py-6 px-8 rounded-xl shadow-lg border border-yellow-400 mb-12 text-center mx-auto mt-12">
+                <h2 class="arabic text-3xl md:text-4xl font-bold text-white">أَيُّ الجمل الآتية صحيحة؟</h2>
+            </div>
+            
+            <!-- Pilihan Ganda -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mx-auto" dir="rtl">
+                
+                <!-- Pilihan B (Kanan Atas) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">B. جاءَ أباكَ</span>
+                </button>
+
+                <!-- Pilihan A (Kiri Atas) - BENAR -->
+                <button onclick="cekJawaban(this, true)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">A. جاءَ أبوكَ</span>
+                </button>
+
+                <!-- Pilihan D (Kanan Bawah) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">D. جاءَ أبُكَ</span>
+                </button>
+
+                <!-- Pilihan C (Kiri Bawah) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">C. جاءَ أبيكَ</span>
+                </button>
+            </div>
+
+            <!-- Tombol At-Taali di Slide 39 (Arahin ke Slide 40) -->
+            <button onclick="goToSlide(40)" class="btn-next-soal hidden mt-12 mb-4 px-12 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
+                <span class="arabic text-3xl font-bold">التالي</span>
+            </button>
+
+        </div>
+
+        <!-- SLIDE 40: Kuis Pelajaran 6 - Soal 2 -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-40">
+            
+            <!-- Tombol Ruju' ke Menu Evaluasi -->
+            <button onclick="goToSlide(17)" class="absolute top-6 left-6 px-8 py-2 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg shadow-blue-500/30 transition hover:scale-105 border border-blue-400/50 z-50">
+                <span class="arabic text-2xl">رجوع</span>
+            </button>
+
+            <!-- Menampilkan Skor Sementara -->
+            <div class="absolute top-6 right-6 px-6 py-2 bg-slate-800 rounded-lg border border-teal-500 text-teal-400 font-bold z-50">
+                Skor: <span class="update-skor">0</span>
+            </div>
+
+            <!-- Pertanyaan -->
+            <div class="w-full max-w-3xl bg-yellow-500 py-6 px-8 rounded-xl shadow-lg border border-yellow-400 mb-12 text-center mx-auto mt-12">
+                <h2 class="arabic text-3xl md:text-4xl font-bold text-white">ما علامة رفع المثنى؟</h2>
+            </div>
+            
+            <!-- Pilihan Ganda -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mx-auto" dir="rtl">
+                
+                <!-- Pilihan B (Kanan Atas) - BENAR -->
+                <button onclick="cekJawaban(this, true)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">B. الألف</span>
+                </button>
+
+                <!-- Pilihan A (Kiri Atas) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">A. الضمة</span>
+                </button>
+
+                <!-- Pilihan D (Kanan Bawah) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">D. الياء</span>
+                </button>
+
+                <!-- Pilihan C (Kiri Bawah) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">C. الواو</span>
+                </button>
+            </div>
+
+            <!-- Tombol At-Taali di Slide 40 (Arahkan ke Slide 41) -->
+            <button onclick="goToSlide(41)" class="btn-next-soal hidden mt-12 mb-4 px-12 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
+                <span class="arabic text-3xl font-bold">التالي</span>
+            </button>
+
+        </div>
+
+        <!-- SLIDE 41: Kuis Pelajaran 6 - Soal 3 -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-41">
+            
+            <!-- Tombol Ruju' ke Menu Evaluasi -->
+            <button onclick="goToSlide(17)" class="absolute top-6 left-6 px-8 py-2 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg shadow-blue-500/30 transition hover:scale-105 border border-blue-400/50 z-50">
+                <span class="arabic text-2xl">رجوع</span>
+            </button>
+
+            <!-- Menampilkan Skor Sementara -->
+            <div class="absolute top-6 right-6 px-6 py-2 bg-slate-800 rounded-lg border border-teal-500 text-teal-400 font-bold z-50">
+                Skor: <span class="update-skor">0</span>
+            </div>
+
+            <!-- Pertanyaan -->
+            <div class="w-full max-w-3xl bg-yellow-500 py-6 px-8 rounded-xl shadow-lg border border-yellow-400 mb-12 text-center mx-auto mt-12">
+                <h2 class="arabic text-3xl md:text-4xl font-bold text-white">أَيُّ جُمْلَةٍ صَحِيحَةٌ؟</h2>
+            </div>
+            
+            <!-- Pilihan Ganda -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mx-auto" dir="rtl">
+                
+                <!-- Pilihan B (Kanan Atas) - BENAR -->
+                <button onclick="cekJawaban(this, true)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">B. رَأَيْتُ المُسْلِمِينَ</span>
+                </button>
+
+                <!-- Pilihan A (Kiri Atas) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">A. رَأَيْتُ المُسْلِمُونَ</span>
+                </button>
+
+                <!-- Pilihan D (Kanan Bawah) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">D. رَأَيْتُ المُسْلِمَانِ</span>
+                </button>
+
+                <!-- Pilihan C (Kiri Bawah) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">C. رَأَيْتُ المُسْلِمَاتِ</span>
+                </button>
+            </div>
+
+            <!-- Tombol At-Taali di Slide 41 (Arahkan ke Slide 42) -->
+            <button onclick="goToSlide(42)" class="btn-next-soal hidden mt-12 mb-4 px-12 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
+                <span class="arabic text-3xl font-bold">التالي</span>
+            </button>
+
+        </div>
+
+        <!-- SLIDE 42: Kuis Pelajaran 6 - Soal 4 (Terakhir) -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-42">
+            
+            <!-- Tombol Ruju' ke Menu Evaluasi -->
+            <button onclick="goToSlide(17)" class="absolute top-6 left-6 px-8 py-2 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg shadow-blue-500/30 transition hover:scale-105 border border-blue-400/50 z-50">
+                <span class="arabic text-2xl">رجوع</span>
+            </button>
+
+            <!-- Menampilkan Skor Sementara -->
+            <div class="absolute top-6 right-6 px-6 py-2 bg-slate-800 rounded-lg border border-teal-500 text-teal-400 font-bold z-50">
+                Skor: <span class="update-skor">0</span>
+            </div>
+
+            <!-- Pertanyaan -->
+            <div class="w-full max-w-3xl bg-yellow-500 py-6 px-8 rounded-xl shadow-lg border border-yellow-400 mb-12 text-center mx-auto mt-12">
+                <h2 class="arabic text-3xl md:text-4xl font-bold text-white">مَا عَلَامَةُ نَصْبِ جَمْعِ الْمُذَكَّرِ السَّالِمِ؟</h2>
+            </div>
+            
+            <!-- Pilihan Ganda -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mx-auto" dir="rtl">
+                
+                <!-- Pilihan B (Kanan Atas) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">B. الْفَتْحَةُ</span>
+                </button>
+
+                <!-- Pilihan A (Kiri Atas) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">A. ضَمَّةٌ</span>
+                </button>
+
+                <!-- Pilihan D (Kanan Bawah) - BENAR -->
+                <button onclick="cekJawaban(this, true)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">D. الْيَاءُ</span>
+                </button>
+
+                <!-- Pilihan C (Kiri Bawah) - SALAH -->
+                <button onclick="cekJawaban(this, false)" class="kuis-opsi bg-yellow-500 hover:bg-yellow-400 transition py-5 px-6 rounded-xl shadow-lg border border-yellow-400 text-right hover:scale-105 relative">
+                    <span class="arabic text-2xl font-bold text-white">C. الْأَلِفُ</span>
+                </button>
+            </div>
+
+            <!-- Tombol At-Taali (Di arahkan ke Slide 22 / Lihat Skor karena ini soal terakhir Dars 6) -->
+            <button onclick="goToSlide(22)" class="btn-next-soal hidden mt-12 mb-4 px-12 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
+                <span class="arabic text-3xl font-bold">التالي</span>
+            </button>
+        </div>
+        
         <!-- TOMBOL NAVIGASI -->
         <!-- TOMBOL NAVIGASI (Disembunyikan) -->
         <div class="hidden">
@@ -1454,6 +2473,7 @@
             <span id="total-page">1</span>
         </div>
 
+    </div> <!-- /Penutup CONTAINER UTAMA MATERI -->
 
     <!-- LOGIKA JAVASCRIPT UNTUK NAVIGASI -->
     <!-- LOGIKA JAVASCRIPT UNTUK NAVIGASI & AUDIO -->
@@ -1582,6 +2602,38 @@
         let jumlahSalah = 0;
         let soalTerjawab = {}; 
 
+        // Fungsi buat ngereset semua skor pas mulai kuis baru
+        function mulaiKuis(slideAwal) {
+            // Reset skor dan data soal
+            totalSkor = 0;
+            jumlahBenar = 0;
+            jumlahSalah = 0;
+            soalTerjawab = {}; 
+            
+            // Balikin tampilan angka ke 0
+            document.querySelectorAll('.update-skor').forEach(el => el.innerText = totalSkor);
+            const elementSkorDisplay = document.getElementById('skor-display');
+            if (elementSkorDisplay) elementSkorDisplay.innerText = totalSkor;
+            
+            // Balikin warna tombol yang udah kepencet jadi kuning lagi
+            document.querySelectorAll('.kuis-opsi').forEach(btn => {
+                btn.classList.remove('bg-green-500', 'border-green-400', 'bg-red-500', 'border-red-400', 'bg-slate-500', 'opacity-50', 'cursor-not-allowed', 'opacity-100');
+                btn.classList.add('bg-yellow-500', 'hover:bg-yellow-400', 'border-yellow-400', 'hover:scale-105');
+            });
+
+            // Sembunyiin tombol 'Selanjutnya' dari kuis sebelumnya
+            document.querySelectorAll('.btn-next-soal').forEach(btn => {
+                btn.classList.add('hidden');
+            });
+
+            // Ganti slide (Jangan lupa pastiin totalSlides diperbarui)
+            const totalSlidesSaatIni = document.querySelectorAll('.slide').length;
+            if (slideAwal <= totalSlidesSaatIni) {
+                currentSlide = slideAwal;
+                updateUI();
+            }
+        }
+
         function cekJawaban(tombolPilihan, isBenar) {
             if (soalTerjawab[currentSlide]) return; 
             soalTerjawab[currentSlide] = true; 
@@ -1621,6 +2673,34 @@
             const slideSekarang = document.getElementById(`slide-${currentSlide}`);
             const tombolNext = slideSekarang.querySelector('.btn-next-soal');
             if (tombolNext) tombolNext.classList.remove('hidden');
+        }
+
+        // Fungsi buat ngereset semua skor pas mulai kuis baru
+        function mulaiKuis(slideAwal) {
+            // Reset skor dan data soal
+            totalSkor = 0;
+            jumlahBenar = 0;
+            jumlahSalah = 0;
+            soalTerjawab = {}; 
+            
+            // Balikin tampilan angka ke 0
+            document.querySelectorAll('.update-skor').forEach(el => el.innerText = totalSkor);
+            const elementSkorDisplay = document.getElementById('skor-display');
+            if (elementSkorDisplay) elementSkorDisplay.innerText = totalSkor;
+            
+            // Balikin warna tombol yang udah kepencet jadi kuning lagi
+            document.querySelectorAll('.kuis-opsi').forEach(btn => {
+                btn.classList.remove('bg-green-500', 'border-green-400', 'bg-red-500', 'border-red-400', 'bg-slate-500', 'opacity-50', 'cursor-not-allowed', 'opacity-100');
+                btn.classList.add('bg-yellow-500', 'hover:bg-yellow-400', 'border-yellow-400', 'hover:scale-105');
+            });
+
+            // Sembunyiin tombol 'Selanjutnya' dari kuis sebelumnya
+            document.querySelectorAll('.btn-next-soal').forEach(btn => {
+                btn.classList.add('hidden');
+            });
+
+            // Jalan menuju slide soal pertama
+            goToSlide(slideAwal);
         }
 
         // ==========================================
