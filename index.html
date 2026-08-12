@@ -29,6 +29,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Marcellus&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     
     <style>
+
+
         html { scroll-behavior: smooth; }
         :root {
             --gold: #d4af37;
@@ -55,6 +57,34 @@
         }
         .arabic { font-family: 'Amiri', serif; }
         .font-display { font-family: 'Marcellus', serif; }
+
+        /* Dekorasi Bendera di Pojok Kiri dan Kanan Bawah */
+        /* Dekorasi Bendera agar responsif ikut kotak utama */
+        .flag-left {
+            position: absolute;
+            bottom: -20px; /* Sedikit keluar dari batas bawah kotak utama */
+            left: -40px;  /* Menempel di pojok kiri bawah kotak utama */
+            width: 280px;  /* Ukuran disesuaikan agar pas */
+            z-index: 20;
+            pointer-events: none;
+            opacity: 0.95;
+        }
+
+        .flag-right {
+            position: absolute;
+            bottom: -20px;
+            right: -40px; /* Menempel di pojok kanan bawah kotak utama */
+            width: 280px;
+            z-index: 20;
+            pointer-events: none;
+            transform: scaleX(-1); /* Membalik gambar agar menghadap ke dalam */
+            opacity: 0.95;
+        }
+
+        /* Pastikan kontainer utama punya posisi relative agar benderanya patuh */
+        .glass-panel {
+            position: relative;
+        }
 
         /* Bintang emas kecil yang berkelip-kelip di seluruh halaman - dekorasi "hiasan" */
         .stars-deco { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
@@ -199,6 +229,12 @@
 </head>
 <body class="min-h-screen w-screen overflow-auto flex flex-col justify-center items-center relative p-4">
 
+    <!-- Bendera Hiasan Pojok Kiri Bawah -->
+    <img src="bendera_gontor.png" alt="Bendera Kiri" class="flag-left">
+
+    <!-- Bendera Hiasan Pojok Kanan Bawah (Dibalik otomatis pakai CSS) -->
+    <img src="bendera_gontor.png" alt="Bendera Kanan" class="flag-right">
+
     <!-- Tombol Navigasi Global (Sound, Help, Exit kayak di gambar) -->
      <audio id="bg-music" ></audio>
     <div class="fixed top-6 left-6 flex flex-col gap-4 z-50">
@@ -234,6 +270,7 @@
     <!-- CONTAINER UTAMA MATERI -->
     <div class="glass-panel w-full max-w-5xl min-h-[75vh] h-auto rounded-3xl z-10 flex flex-col p-8 relative mt-12 mb-12">
 
+        
         <!-- Progress Bar (Desain 3D) -->
         <div class="w-full bg-[#112745] h-4 rounded-full mb-6 border-2 border-[#1e3a5f] shadow-inner overflow-hidden">
             <div id="progress-bar" class="bg-gradient-to-r from-[#f3dfa0] to-[#d4af37] h-full rounded-full transition-all duration-300 w-0 shadow-[inset_0_-3px_0_rgba(0,0,0,0.2)]"></div>
@@ -304,32 +341,32 @@
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mx-auto" dir="rtl">
                 <!-- Kolom Kanan -->
-                <button onclick="goToSlide(3)" class="glass-panel p-6 rounded-2xl hover:bg-white/10 transition hover:scale-105 border border-blue-500/30 text-right">
+                <button onclick="goToSlide(43)" class="glass-panel p-6 rounded-2xl hover:bg-white/10 transition hover:scale-105 border border-blue-500/30 text-right">
                     <div class="arabic text-2xl text-white">تعريف الكلام</div>
                 </button>
                 
                 <!-- Kolom Kiri -->
-                <button onclick="goToSlide(4)" class="glass-panel p-6 rounded-2xl hover:bg-white/10 transition hover:scale-105 border border-blue-500/30 text-right">
+                <button onclick="goToSlide(44)" class="glass-panel p-6 rounded-2xl hover:bg-white/10 transition hover:scale-105 border border-blue-500/30 text-right">
                     <div class="arabic text-2xl text-white">تعريف الإعراب وأنواعه</div>
                 </button>
 
                 <!-- Kolom Kanan -->
-                <button onclick="goToSlide(5)" class="glass-panel p-6 rounded-2xl hover:bg-white/10 transition hover:scale-105 border border-blue-500/30 text-right">
+                <button onclick="goToSlide(45)" class="glass-panel p-6 rounded-2xl hover:bg-white/10 transition hover:scale-105 border border-blue-500/30 text-right">
                     <div class="arabic text-2xl text-white">تقسيم الإعراب</div>
                 </button>
 
                 <!-- Kolom Kiri -->
-                <button onclick="goToSlide(8)" class="glass-panel p-6 rounded-2xl hover:bg-white/10 transition hover:scale-105 border border-blue-500/30 text-right">
+                <button onclick="goToSlide(46)" class="glass-panel p-6 rounded-2xl hover:bg-white/10 transition hover:scale-105 border border-blue-500/30 text-right">
                     <div class="arabic text-2xl text-white leading-relaxed">إعراب الإسم المفرد وجمع التكسير</div>
                 </button>
 
                 <!-- Kolom Kanan -->
-                <button onclick="goToSlide(10)" class="glass-panel p-6 rounded-2xl hover:bg-white/10 transition hover:scale-105 border border-blue-500/30 text-right">
+                <button onclick="goToSlide(47)" class="glass-panel p-6 rounded-2xl hover:bg-white/10 transition hover:scale-105 border border-blue-500/30 text-right">
                     <div class="arabic text-2xl text-white leading-relaxed">إعراب جمع المؤنث السالم والإسم غير المنصرف</div>
                 </button>
 
                 <!-- Kolom Kiri -->
-                <button onclick="goToSlide(12)" class="glass-panel p-6 rounded-2xl hover:bg-white/10 transition hover:scale-105 border border-blue-500/30 text-right">
+                <button onclick="goToSlide(48)" class="glass-panel p-6 rounded-2xl hover:bg-white/10 transition hover:scale-105 border border-blue-500/30 text-right">
                     <div class="arabic text-2xl text-white leading-relaxed">إعراب الأسماء الخمسة، المثنى، وجمع المذكر السالم</div>
                 </button>
             </div>
@@ -337,6 +374,358 @@
             <!-- Tombol Kembali ke Menu Utama -->
             <button onclick="goToSlide(1)" class="mt-10 px-6 py-2 bg-slate-700/50 hover:bg-slate-700 rounded-lg text-slate-300 transition">
                 Kembali ke Menu Utama
+            </button>
+        </div>
+
+        <!-- SLIDE 43: Ahdafu Ta'alum - Pelajaran 1 (Ta'rif al-Kalam) -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-43">
+            
+            <!-- Tombol Kembali ke Menu Materi (Slide 2) -->
+            <button onclick="goToSlide(2)" class="absolute top-6 left-6 px-8 py-2 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400/50 z-50">
+                <span class="arabic text-2xl">رجوع</span>
+            </button>
+
+            <!-- Judul Ahdafu Ta'alum -->
+            <div class="w-full max-w-3xl bg-yellow-500 py-4 px-8 rounded-xl shadow-lg border border-yellow-400 mb-8 text-center mx-auto mt-8">
+                <h2 class="arabic text-3xl md:text-4xl font-bold text-white">أهْدَافُ التَّعَلُّم</h2>
+            </div>
+
+            <!-- Kontainer Kotak Teks Tujuan Pembelajaran -->
+            <div class="w-full max-w-4xl bg-slate-800/80 p-8 rounded-2xl border border-teal-500/50 shadow-inner text-right space-y-6" dir="rtl">
+                
+                <!-- Poin 1 -->
+                <div class="flex items-start gap-4">
+                    <span class="text-teal-400 font-bold text-2xl">•</span>
+                    <p class="arabic text-2xl md:text-3xl text-slate-100 leading-relaxed">
+                        أَنْ يُعَرِّفَ المُتَعَلِّمُ الكَلَامَ تَعْرِيفًا صَحِيحًا.
+                    </p>
+                </div>
+
+                <!-- Poin 2 -->
+                <div class="flex items-start gap-4">
+                    <span class="text-teal-400 font-bold text-2xl">•</span>
+                    <p class="arabic text-2xl md:text-3xl text-slate-100 leading-relaxed">
+                        أَنْ يَذْكُرَ المُتَعَلِّمُ أَقْسَامَ الكَلَامِ الثَّلَاثَةِ: الِاسْمَ وَالفِعْلَ وَالحَرْفَ.
+                    </p>
+                </div>
+
+                <!-- Poin 3 -->
+                <div class="flex items-start gap-4">
+                    <span class="text-teal-400 font-bold text-2xl">•</span>
+                    <p class="arabic text-2xl md:text-3xl text-slate-100 leading-relaxed">
+                        أَنْ يُمَيِّزَ المُتَعَلِّمُ بَيْنَ الِاسْمِ وَالفِعْلِ وَالحَرْفِ فِي الجُمْلَةِ.
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Tombol Lanjut ke Materi Inti (Slide 3 / Mind Map Ta'rif al-Kalam) -->
+            <button onclick="goToSlide(3)" class="mt-8 px-12 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
+                <span class="arabic text-3xl font-bold">التالي</span>
+            </button>
+        </div>
+
+        <!-- SLIDE 44: Ahdafu Ta'alum - Pelajaran 2 (Ta'rif al-I'rab wa Anwa'uhu) -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-44">
+            
+            <!-- Tombol Kembali ke Menu Materi (Slide 2) -->
+            <button onclick="goToSlide(2)" class="absolute top-6 left-6 px-8 py-2 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400/50 z-50">
+                <span class="arabic text-2xl">رجوع</span>
+            </button>
+
+            <!-- Judul Ahdafu Ta'alum -->
+            <div class="w-full max-w-3xl bg-yellow-500 py-4 px-8 rounded-xl shadow-lg border border-yellow-400 mb-8 text-center mx-auto mt-8">
+                <h2 class="arabic text-3xl md:text-4xl font-bold text-white">أهْدَافُ التَّعَلُّم</h2>
+            </div>
+
+            <!-- Kontainer Kotak Teks Tujuan Pembelajaran -->
+            <div class="w-full max-w-4xl bg-slate-800/80 p-8 rounded-2xl border border-teal-500/50 shadow-inner text-right space-y-6" dir="rtl">
+                
+                <!-- Poin 1 -->
+                <div class="flex items-start gap-4">
+                    <span class="text-teal-400 font-bold text-2xl">•</span>
+                    <p class="arabic text-2xl md:text-3xl text-slate-100 leading-relaxed">
+                        أَنْ يُعَرِّفَ المُتَعَلِّمُ الإِعْرَابَ تَعْرِيفًا صَحِيحًا.
+                    </p>
+                </div>
+
+                <!-- Poin 2 -->
+                <div class="flex items-start gap-4">
+                    <span class="text-teal-400 font-bold text-2xl">•</span>
+                    <p class="arabic text-2xl md:text-3xl text-slate-100 leading-relaxed">
+                        أَنْ يَذْكُرَ المُتَعَلِّمُ أَقْسَامَ الإِعْرَابِ الأَرْبَعَةَ: الرَّفْعَ وَالنَّصْبَ وَالجَرَّ وَالجَزْمَ.
+                    </p>
+                </div>
+
+                <!-- Poin 3 -->
+                <div class="flex items-start gap-4">
+                    <span class="text-teal-400 font-bold text-2xl">•</span>
+                    <p class="arabic text-2xl md:text-3xl text-slate-100 leading-relaxed">
+                        أَنْ يُمَيِّزَ المُتَعَلِّمُ بَيْنَ عَلَامَاتِ الإِعْرَابِ الأَسَاسِيَّةِ.
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Tombol Lanjut ke Materi Inti (Slide 4 / Mind Map Ta'rif al-I'rab) -->
+            <button onclick="goToSlide(4)" class="mt-8 px-12 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
+                <span class="arabic text-3xl font-bold">التالي</span>
+            </button>
+        </div>
+
+        <!-- SLIDE 45: Ahdafu Ta'alum - Pelajaran 3 (Taqsimul I'rab) -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-45">
+            
+            <!-- Tombol Kembali ke Menu Materi (Slide 2) -->
+            <button onclick="goToSlide(2)" class="absolute top-6 left-6 px-8 py-2 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400/50 z-50">
+                <span class="arabic text-2xl">رجوع</span>
+            </button>
+
+            <!-- Judul Ahdafu Ta'alum -->
+            <div class="w-full max-w-3xl bg-yellow-500 py-4 px-8 rounded-xl shadow-lg border border-yellow-400 mb-8 text-center mx-auto mt-8">
+                <h2 class="arabic text-3xl md:text-4xl font-bold text-white">أهْدَافُ التَّعَلُّم</h2>
+            </div>
+
+            <!-- Kontainer Kotak Teks Tujuan Pembelajaran -->
+            <div class="w-full max-w-4xl bg-slate-800/80 p-8 rounded-2xl border border-teal-500/50 shadow-inner text-right space-y-6" dir="rtl">
+                
+                <!-- Poin 1 -->
+                <div class="flex items-start gap-4">
+                    <span class="text-teal-400 font-bold text-2xl">•</span>
+                    <p class="arabic text-2xl md:text-3xl text-slate-100 leading-relaxed">
+                        أَنْ يُمَيِّزَ المُتَعَلِّمُ بَيْنَ الإِعْرَابِ بِالحَرَكَاتِ وَالإِعْرَابِ بِالحُرُوفِ.
+                    </p>
+                </div>
+
+                <!-- Poin 2 -->
+                <div class="flex items-start gap-4">
+                    <span class="text-teal-400 font-bold text-2xl">•</span>
+                    <p class="arabic text-2xl md:text-3xl text-slate-100 leading-relaxed">
+                        أَنْ يَذْكُرَ المُتَعَلِّمُ عَلَامَاتِ الإِعْرَابِ الأَصْلِيَّةَ وَالفَرْعِيَّةَ.
+                    </p>
+                </div>
+
+                <!-- Poin 3 -->
+                <div class="flex items-start gap-4">
+                    <span class="text-teal-400 font-bold text-2xl">•</span>
+                    <p class="arabic text-2xl md:text-3xl text-slate-100 leading-relaxed">
+                        أَنْ يُحَدِّدَ المُتَعَلِّمُ عَلَامَةَ الإِعْرَابِ المُنَاسِبَةَ فِي الكَلِمَةِ.
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Tombol Lanjut ke Materi Inti (Slide 5 / Mind Map Taqsimul I'rab) -->
+            <button onclick="goToSlide(5)" class="mt-8 px-12 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
+                <span class="arabic text-3xl font-bold">التالي</span>
+            </button>
+        </div>
+
+        <!-- SLIDE 46: Ahdafu Ta'alum - Pelajaran 4 (I'rab Isim Mufrod & Jam'u Taksir) -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-46">
+            
+            <!-- Tombol Kembali ke Menu Materi (Slide 2) -->
+            <button onclick="goToSlide(2)" class="absolute top-6 left-6 px-8 py-2 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400/50 z-50">
+                <span class="arabic text-2xl">رجوع</span>
+            </button>
+
+            <!-- Judul Ahdafu Ta'alum -->
+            <div class="w-full max-w-3xl bg-yellow-500 py-4 px-8 rounded-xl shadow-lg border border-yellow-400 mb-8 text-center mx-auto mt-8">
+                <h2 class="arabic text-3xl md:text-4xl font-bold text-white">أهْدَافُ التَّعَلُّم</h2>
+            </div>
+
+            <!-- Kontainer Kotak Teks Tujuan Pembelajaran -->
+            <div class="w-full max-w-4xl bg-slate-800/80 p-8 rounded-2xl border border-teal-500/50 shadow-inner text-right space-y-6" dir="rtl">
+                
+                <!-- Poin 1 -->
+                <div class="flex items-start gap-4">
+                    <span class="text-teal-400 font-bold text-2xl">•</span>
+                    <p class="arabic text-2xl md:text-3xl text-slate-100 leading-relaxed">
+                        أَنْ يُعَرِّفَ المُتَعَلِّمُ الِاسْمَ المُفْرَدَ وَجَمْعَ التَّكْسِيرِ.
+                    </p>
+                </div>
+
+                <!-- Poin 2 -->
+                <div class="flex items-start gap-4">
+                    <span class="text-teal-400 font-bold text-2xl">•</span>
+                    <p class="arabic text-2xl md:text-3xl text-slate-100 leading-relaxed">
+                        أَنْ يُمَيِّزَ المُتَعَلِّمُ عَلَامَاتِ إِعْرَابِ الِاسْمِ المُفْرَدِ وَجَمْعِ التَّكْسِيرِ.
+                    </p>
+                </div>
+
+                <!-- Poin 3 -->
+                <div class="flex items-start gap-4">
+                    <span class="text-teal-400 font-bold text-2xl">•</span>
+                    <p class="arabic text-2xl md:text-3xl text-slate-100 leading-relaxed">
+                        أَنْ يُطَبِّقَ المُتَعَلِّمُ عَلَامَاتِ الإِعْرَابِ فِي الأَمْثِلَةِ وَالجُمَلِ.
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Tombol Lanjut ke Materi Inti (Slide 8 / Mind Map Isim Mufrod) -->
+            <button onclick="goToSlide(8)" class="mt-8 px-12 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
+                <span class="arabic text-3xl font-bold">التالي</span>
+            </button>
+        </div>
+
+        <!-- SLIDE 47: Ahdafu Ta'alum - Pelajaran 5 (Jam'u Muannats Salim & Ghoiru Munsyorif) -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-47">
+            
+            <!-- Tombol Kembali ke Menu Materi (Slide 2) -->
+            <button onclick="goToSlide(2)" class="absolute top-6 left-6 px-8 py-2 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400/50 z-50">
+                <span class="arabic text-2xl">رجوع</span>
+            </button>
+
+            <!-- Judul Ahdafu Ta'alum -->
+            <div class="w-full max-w-3xl bg-yellow-500 py-4 px-8 rounded-xl shadow-lg border border-yellow-400 mb-8 text-center mx-auto mt-8">
+                <h2 class="arabic text-3xl md:text-4xl font-bold text-white">أهْدَافُ التَّعَلُّم</h2>
+            </div>
+
+            <!-- Kontainer Kotak Teks Tujuan Pembelajaran -->
+            <div class="w-full max-w-4xl bg-slate-800/80 p-8 rounded-2xl border border-teal-500/50 shadow-inner text-right space-y-6" dir="rtl">
+                
+                <!-- Poin 1 -->
+                <div class="flex items-start gap-4">
+                    <span class="text-teal-400 font-bold text-2xl">•</span>
+                    <p class="arabic text-2xl md:text-3xl text-slate-100 leading-relaxed">
+                        أَنْ يُعَرِّفَ المُتَعَلِّمُ جَمْعَ المُؤَنَّثِ السَّالِمِ وَالِاسْمَ غَيْرَ المُنْصَرِفِ.
+                    </p>
+                </div>
+
+                <!-- Poin 2 -->
+                <div class="flex items-start gap-4">
+                    <span class="text-teal-400 font-bold text-2xl">•</span>
+                    <p class="arabic text-2xl md:text-3xl text-slate-100 leading-relaxed">
+                        أَنْ يُمَيِّزَ المُتَعَلِّمُ عَلَامَاتِ إِعْرَابِ جَمْعِ المُؤَنَّثِ السَّالِمِ وَالِاسْمِ غَيْرِ المُنْصَرِفِ.
+                    </p>
+                </div>
+
+                <!-- Poin 3 -->
+                <div class="flex items-start gap-4">
+                    <span class="text-teal-400 font-bold text-2xl">•</span>
+                    <p class="arabic text-2xl md:text-3xl text-slate-100 leading-relaxed">
+                        أَنْ يُطَبِّقَ المُتَعَلِّمُ عَلَامَاتِ الإِعْرَابِ فِي الجُمَلِ تَطْبِيقًا صَحِيحًا.
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Tombol Lanjut ke Materi Inti (Slide 10 / Mind Map Jam'u Muannats) -->
+            <button onclick="goToSlide(10)" class="mt-8 px-12 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
+                <span class="arabic text-3xl font-bold">التالي</span>
+            </button>
+        </div>
+
+        <!-- SLIDE 48: Ahdafu Ta'alum - Pelajaran 6 (Asmaul Khomsah, Mutsanna, Mudzakkar Salim) -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-48">
+            
+            <!-- Tombol Kembali ke Menu Materi (Slide 2) -->
+            <button onclick="goToSlide(2)" class="absolute top-6 left-6 px-8 py-2 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400/50 z-50">
+                <span class="arabic text-2xl">رجوع</span>
+            </button>
+
+            <!-- Judul Ahdafu Ta'alum -->
+            <div class="w-full max-w-3xl bg-yellow-500 py-4 px-8 rounded-xl shadow-lg border border-yellow-400 mb-8 text-center mx-auto mt-8">
+                <h2 class="arabic text-3xl md:text-4xl font-bold text-white">أهْدَافُ التَّعَلُّم</h2>
+            </div>
+
+            <!-- Kontainer Kotak Teks Tujuan Pembelajaran -->
+            <div class="w-full max-w-4xl bg-slate-800/80 p-8 rounded-2xl border border-teal-500/50 shadow-inner text-right space-y-6" dir="rtl">
+                
+                <!-- Poin 1 -->
+                <div class="flex items-start gap-4">
+                    <span class="text-teal-400 font-bold text-2xl">•</span>
+                    <p class="arabic text-2xl md:text-3xl text-slate-100 leading-relaxed">
+                        أَنْ يُعَرِّفَ المُتَعَلِّمُ الأَسْمَاءَ الخَمْسَةَ وَالمُثَنَّى وَجَمْعَ المُذَكَّرِ السَّالِمِ.
+                    </p>
+                </div>
+
+                <!-- Poin 2 -->
+                <div class="flex items-start gap-4">
+                    <span class="text-teal-400 font-bold text-2xl">•</span>
+                    <p class="arabic text-2xl md:text-3xl text-slate-100 leading-relaxed">
+                        أَنْ يَذْكُرَ المُتَعَلِّمُ عَلَامَاتِ إِعْرَابِهَا بِالحُرُوفِ.
+                    </p>
+                </div>
+
+                <!-- Poin 3 -->
+                <div class="flex items-start gap-4">
+                    <span class="text-teal-400 font-bold text-2xl">•</span>
+                    <p class="arabic text-2xl md:text-3xl text-slate-100 leading-relaxed">
+                        أَنْ يُمَيِّزَ المُتَعَلِّمُ بَيْنَ الرَّفْعِ وَالنَّصْبِ وَالجَرِّ فِي الأَمْثِلَةِ.
+                    </p>
+                </div>
+
+                <!-- Poin 4 -->
+                <div class="flex items-start gap-4">
+                    <span class="text-teal-400 font-bold text-2xl">•</span>
+                    <p class="arabic text-2xl md:text-3xl text-slate-100 leading-relaxed">
+                        أَنْ يُطَبِّقَ المُتَعَلِّمُ عَلَامَاتِ الإِعْرَابِ بِالحُرُوفِ فِي الجُمَلِ تَطْبِيقًا صَحِيحًا.
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Tombol Lanjut ke Materi Inti (Slide 12 / Mind Map Asmaul Khomsah) -->
+            <button onclick="goToSlide(12)" class="mt-8 px-12 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
+                <span class="arabic text-3xl font-bold">التالي</span>
+            </button>
+        </div>
+
+        <!-- SLIDE 48: Ahdafu Ta'alum - Pelajaran 6 (Asmaul Khomsah, Mutsanna, Mudzakkar Salim) -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-48">
+            
+            <!-- Tombol Kembali ke Menu Materi (Slide 2) -->
+            <button onclick="goToSlide(2)" class="absolute top-6 left-6 px-8 py-2 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400/50 z-50">
+                <span class="arabic text-2xl">رجوع</span>
+            </button>
+
+            <!-- Judul Ahdafu Ta'alum -->
+            <div class="w-full max-w-3xl bg-yellow-500 py-4 px-8 rounded-xl shadow-lg border border-yellow-400 mb-8 text-center mx-auto mt-8">
+                <h2 class="arabic text-3xl md:text-4xl font-bold text-white">أهْدَافُ التَّعَلُّم</h2>
+            </div>
+
+            <!-- Kontainer Kotak Teks Tujuan Pembelajaran -->
+            <div class="w-full max-w-4xl bg-slate-800/80 p-8 rounded-2xl border border-teal-500/50 shadow-inner text-right space-y-6" dir="rtl">
+                
+                <!-- Poin 1 -->
+                <div class="flex items-start gap-4">
+                    <span class="text-teal-400 font-bold text-2xl">•</span>
+                    <p class="arabic text-2xl md:text-3xl text-slate-100 leading-relaxed">
+                        أَنْ يُعَرِّفَ المُتَعَلِّمُ الأَسْمَاءَ الخَمْسَةَ وَالمُثَنَّى وَجَمْعَ المُذَكَّرِ السَّالِمِ.
+                    </p>
+                </div>
+
+                <!-- Poin 2 -->
+                <div class="flex items-start gap-4">
+                    <span class="text-teal-400 font-bold text-2xl">•</span>
+                    <p class="arabic text-2xl md:text-3xl text-slate-100 leading-relaxed">
+                        أَنْ يَذْكُرَ المُتَعَلِّمُ عَلَامَاتِ إِعْرَابِهَا بِالحُرُوفِ.
+                    </p>
+                </div>
+
+                <!-- Poin 3 -->
+                <div class="flex items-start gap-4">
+                    <span class="text-teal-400 font-bold text-2xl">•</span>
+                    <p class="arabic text-2xl md:text-3xl text-slate-100 leading-relaxed">
+                        أَنْ يُمَيِّزَ المُتَعَلِّمُ بَيْنَ الرَّفْعِ وَالنَّصْبِ وَالجَرِّ فِي الأَمْثِلَةِ.
+                    </p>
+                </div>
+
+                <!-- Poin 4 -->
+                <div class="flex items-start gap-4">
+                    <span class="text-teal-400 font-bold text-2xl">•</span>
+                    <p class="arabic text-2xl md:text-3xl text-slate-100 leading-relaxed">
+                        أَنْ يُطَبِّقَ المُتَعَلِّمُ عَلَامَاتِ الإِعْرَابِ بِالحُرُوفِ فِي الجُمَلِ تَطْبِيقًا صَحِيحًا.
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Tombol Lanjut ke Materi Inti (Slide 12 / Mind Map Asmaul Khomsah) -->
+            <button onclick="goToSlide(12)" class="mt-8 px-12 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
+                <span class="arabic text-3xl font-bold">التالي</span>
             </button>
         </div>
 
@@ -612,9 +1001,14 @@
 
         <!-- SLIDE 8: Isim Mufrod -->
         <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-8">
+            <!-- TOMBOL SPEAKER BULAT EMAS DI KIRI ATAS -->
+            <button onclick="toggleAudioMateri('audio-mufrod', this)" class="absolute left-6 top-16 w-16 h-16 bg-blue-500 hover:bg-blue-400 rounded-full flex items-center justify-center shadow-xl border-4 border-slate-700/20 transition hover:scale-105 z-50">
+                <i class="fa-solid fa-volume-high text-2xl text-slate-200 opacity-80"></i>
+            </button>
+
             <h2 class="arabic text-5xl font-bold text-white mb-4 text-slate-800 border-b-2 border-slate-300 pb-4">الذي يعرب بالحركات</h2>
             
-            <!-- Ganti 'lagu-mufrod.mp3' sama nama file lagu lu yang asli -->
+            <!-- Ganti 'audio_ismu_irob.mp3' sama nama file lagu lu yang asli -->
             <audio id="audio-mufrod" src="audio_ismu_irob.mp3"></audio>
 
             <!-- Tombol At-Taali -->
@@ -681,8 +1075,22 @@
 
         <!-- SLIDE 9: Jama' Taksir -->
         <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-9">
+            
+            <!-- TOMBOL SPEAKER BULAT EMAS DI KIRI ATAS -->
+            <button onclick="toggleAudioMateri('audio-taksir', this)" class="absolute left-6 top-16 w-16 h-16 bg-blue-500 hover:bg-blue-400 rounded-full flex items-center justify-center shadow-xl border-4 border-slate-700/20 transition hover:scale-105 z-50">
+                <i class="fa-solid fa-volume-high text-2xl text-slate-200 opacity-80"></i>
+            </button>
+
             <h2 class="arabic text-5xl font-bold mb-4 text-slate-800 border-b-2 border-slate-300 pb-4">الذي يعرب بالحركات</h2>
             
+            <!-- INI KODE AUDIO-NYA -->
+            <audio id="audio-taksir" src="Jam_taksir.mp3"></audio>
+            
+            <!-- Tombol Ruju' -->
+            <button onclick="goToSlide(2)" class="absolute bottom-8 right-8 px-10 py-4 bg-blue-600 hover:bg-blue-500 rounded-[50px] text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
+                <span class="arabic text-3xl">رجوع</span>
+            </button>
+
             <!-- INI KODE AUDIO-NYA BANG -->
             <!-- Pastiin nama file 'audio_taksir.mp3' disamain sama nama file lagu lu -->
             <audio id="audio-taksir" src="Jam_taksir.mp3"></audio>
@@ -747,19 +1155,20 @@
 
         <!-- SLIDE 10: Jama' Muannats Salim -->
         <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-10">
+            
+            <!-- TOMBOL SPEAKER BULAT EMAS DI KIRI ATAS -->
+            <button onclick="toggleAudioMateri('audio-muannats', this)" class="absolute left-6 top-16 w-16 h-16 bg-blue-500 hover:bg-blue-400 rounded-full flex items-center justify-center shadow-xl border-4 border-slate-700/20 transition hover:scale-105 z-50">
+                <i class="fa-solid fa-volume-high text-2xl text-slate-200 opacity-80"></i>
+            </button>
+
             <h2 class="arabic text-5xl font-bold mb-4 text-slate-800 border-b-2 border-slate-300 pb-4">الذي يعرب بالحركات</h2>
             
-            <!-- Ganti 'audio_muannats.mp3' dengan nama file lagu aslinya -->
+            <!-- TAG AUDIO -->
             <audio id="audio-muannats" src="jam'u_muaannas_salim.mp3"></audio>
 
             <!-- Tombol At-Taali -->
             <button onclick="goToSlide(11)" class="absolute bottom-8 right-8 px-10 py-4 bg-blue-600 hover:bg-blue-500 rounded-[50px] text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
                 <span class="arabic text-3xl">التالي</span>
-            </button>
-
-            <!-- Icon Speaker (Di Kiri) -->
-            <button class="absolute left-10 top-1/2 -translate-y-1/2 w-24 h-24 bg-blue-500 hover:bg-blue-400 rounded-full flex items-center justify-center shadow-xl border-4 border-slate-700/20 transition hover:scale-105 z-50">
-                <i class="fa-solid fa-volume-high text-4xl text-slate-200 opacity-80"></i>
             </button>
 
             <div class="relative w-full max-w-5xl h-[60vh] mx-auto mt-4" dir="ltr">
@@ -818,9 +1227,15 @@
 
         <!-- SLIDE 11: Isim Ghoiru Munsyorif -->
         <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-11">
+            
+            <!-- TOMBOL SPEAKER BULAT EMAS DI KIRI ATAS -->
+            <button onclick="toggleAudioMateri('audio-ghoiru', this)" class="absolute left-6 top-16 w-16 h-16 bg-blue-500 hover:bg-blue-400 rounded-full flex items-center justify-center shadow-xl border-4 border-slate-700/20 transition hover:scale-105 z-50">
+                <i class="fa-solid fa-volume-high text-2xl text-slate-200 opacity-80"></i>
+            </button>
+
             <h2 class="arabic text-5xl font-bold mb-4 text-slate-800 border-b-2 border-slate-300 pb-4">الذي يعرب بالحركات</h2>
             
-            <!-- Ganti 'audio_ghoiru.mp3' dengan nama file lagu aslinya -->
+            <!-- TAG AUDIO -->
             <audio id="audio-ghoiru" src="ghoiru_munshorif.mp3"></audio>
 
             <!-- Tombol Ruju' -->
@@ -884,6 +1299,12 @@
 
         <!-- SLIDE 12: Asmaul Khomsah -->
         <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-12">
+            <audio id="audio-khomsah" src="asmaul_khomsah.mp3"></audio>
+            <!-- Tombol Speaker Slide 12 -->
+<button onclick="toggleAudioMateri('audio-khomsah', this)" class="absolute left-6 top-16 w-16 h-16 bg-blue-500 hover:bg-blue-400 rounded-full flex items-center justify-center shadow-xl border-4 border-slate-700/20 transition hover:scale-105 z-50">
+    <i class="fa-solid fa-volume-high text-2xl text-slate-200 opacity-80"></i>
+</button>
+
             <h2 class="arabic text-5xl font-bold mb-4 text-slate-800 border-b-2 border-slate-300 pb-4">الذي يعرب بالحروف</h2>
             
             <!-- Tombol At-Taali -->
@@ -946,6 +1367,11 @@
 
         <!-- SLIDE 13: Isim Mutsanna -->
         <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-13">
+            <audio id="audio-mutsanna" src="ismun_musanna.mp3"></audio>
+            <button onclick="toggleAudioMateri('audio-mutsanna', this)" class="absolute left-6 top-16 w-16 h-16 bg-blue-500 hover:bg-blue-400 rounded-full flex items-center justify-center shadow-xl border-4 border-slate-700/20 transition hover:scale-105 z-50">
+    <i class="fa-solid fa-volume-high text-2xl text-slate-200 opacity-80"></i>
+</button>
+
             <h2 class="arabic text-5xl font-bold mb-4 text-slate-800 border-b-2 border-slate-300 pb-4">الذي يعرب بالحروف</h2>
             
             <button onclick="goToSlide(14)" class="absolute bottom-8 right-8 px-10 py-4 bg-blue-600 hover:bg-blue-500 rounded-[50px] text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
@@ -1006,16 +1432,16 @@
 
         <!-- SLIDE 14: Jama' Mudzakkar Salim -->
         <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-14">
+            <audio id="audio-mudzakkar" src="muzakar_salim.mp3"></audio>
+            <button onclick="toggleAudioMateri('audio-mudzakkar', this)" class="absolute left-6 top-16 w-16 h-16 bg-blue-500 hover:bg-blue-400 rounded-full flex items-center justify-center shadow-xl border-4 border-slate-700/20 transition hover:scale-105 z-50">
+    <i class="fa-solid fa-volume-high text-2xl text-slate-200 opacity-80"></i>
+</button>
+
             <h2 class="arabic text-5xl font-bold mb-4 text-slate-800 border-b-2 border-slate-300 pb-4">الذي يعرب بالحروف</h2>
             
             <!-- Tombol Ruju' -->
             <button onclick="goToSlide(2)" class="absolute bottom-8 right-8 px-10 py-4 bg-blue-600 hover:bg-blue-500 rounded-[50px] text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
                 <span class="arabic text-3xl">رجوع</span>
-            </button>
-
-            <!-- Icon Speaker -->
-            <button class="absolute left-10 top-1/2 -translate-y-1/2 w-24 h-24 bg-blue-500 hover:bg-blue-400 rounded-full flex items-center justify-center shadow-xl border-4 border-slate-700/20 transition hover:scale-105 z-50">
-                <i class="fa-solid fa-volume-high text-4xl text-slate-200 opacity-80"></i>
             </button>
 
             <div class="relative w-full max-w-5xl h-[60vh] mx-auto mt-4" dir="ltr">
@@ -2766,6 +3192,105 @@
             }
             document.removeEventListener('click', playOnFirstClick);
         });
+
+        function updateUI() {
+            document.querySelectorAll('.slide').forEach(slide => {
+                slide.classList.remove('active');
+            });
+            
+            const targetSlide = document.getElementById(`slide-${currentSlide}`);
+            if (targetSlide) targetSlide.classList.add('active');
+            
+            const currentPageEl = document.getElementById('current-page');
+            if(currentPageEl) currentPageEl.innerText = currentSlide;
+
+            const progressBar = document.getElementById('progress-bar');
+            if(progressBar) {
+                const progress = ((currentSlide - 1) / (totalSlides - 1)) * 100;
+                progressBar.style.width = `${progress}%`;
+            }
+
+            if (bgMusic) {
+                if (currentSlide === 1) {
+                    if (isMusicPlaying) {
+                        bgMusic.play().catch(e => console.log("Menunggu interaksi"));
+                    }
+                } else {
+                    bgMusic.pause();
+                }
+            }
+
+            // OTOMATIS PLAY/PAUSE AUDIO MATERI DARI SLIDE 8 SAMPAI 14
+            const audioMateriList = {
+                8: 'audio-mufrod',
+                9: 'audio-taksir',
+                10: 'audio-muannats',
+                11: 'audio-ghoiru',
+                12: 'audio-khomsah',
+                13: 'audio-mutsanna',
+                14: 'audio-mudzakkar'
+            };
+
+            for (let slideNum in audioMateriList) {
+                const audioEl = document.getElementById(audioMateriList[slideNum]);
+                if (audioEl) {
+                    if (currentSlide === parseInt(slideNum)) {
+                        audioEl.play().catch(e => console.log("Audio diblokir browser"));
+                    } else {
+                        audioEl.pause();
+                        audioEl.currentTime = 0;
+                    }
+                }
+            }
+        }
+
+        let activeAudio = null;
+let activeBtn = null;
+
+function toggleAudioMateri(audioId, btnElement) {
+    const audioEl = document.getElementById(audioId);
+    const bgMusic = document.getElementById('bg-music');
+
+    if (!audioEl) return;
+
+    // Kalau audio ini yang sedang berputar -> PAUSE / STOP
+    if (!audioEl.paused) {
+        audioEl.pause();
+        audioEl.currentTime = 0;
+        if (bgMusic) bgMusic.volume = 1.0; // Balikin volume background
+        btnElement.classList.remove('ring-4', 'ring-yellow-400');
+        activeAudio = null;
+        activeBtn = null;
+        return;
+    }
+
+    // Kalau ada audio lain yang lagi bunyi, matikan dulu
+    if (activeAudio && activeAudio !== audioEl) {
+        activeAudio.pause();
+        activeAudio.currentTime = 0;
+        if (activeBtn) activeBtn.classList.remove('ring-4', 'ring-yellow-400');
+    }
+
+    // Putar audio materi ini
+    activeAudio = audioEl;
+    activeBtn = btnElement;
+
+    if (bgMusic && !bgMusic.paused) {
+        bgMusic.volume = 0.2; // Perkecil BGM biar suara materi jelas
+    }
+
+    audioEl.play().then(() => {
+        btnElement.classList.add('ring-4', 'ring-yellow-400'); // Efek nyala
+    }).catch(e => console.log("Audio diblokir browser"));
+
+    // Kalau audionya habis sendiri
+    audioEl.onended = () => {
+        if (bgMusic) bgMusic.volume = 1.0;
+        btnElement.classList.remove('ring-4', 'ring-yellow-400');
+        activeAudio = null;
+        activeBtn = null;
+    };
+}
 
         // INISIALISASI AWAL WEB (Mulai nampilin slide)
         updateUI(); 
