@@ -32,19 +32,16 @@
 
         /* Gaya Logo Kampus di Pojok Kanan Atas */
         .campus-logo {
-            position: fixed;
-            top: 24px;
-            right: 105px; /* Di sebelah kiri tombol Tanya (?) */
             width: 50px;  
             height: 50px; 
             object-fit: contain;
-            z-index: 50;
             filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4));
-            display: none; /* Sembunyikan default */
+            display: none; /* Default disembunyikan dari semua halaman */
+            margin-bottom: 5px; /* Jarak ke tombol tanya di bawahnya */
         }
 
         .campus-logo.show-on-home {
-            display: block; /* Munculkan hanya di halaman utama */
+            display: block !important; /* Paksa muncul khusus di halaman utama */
         }
 
         html { scroll-behavior: smooth; }
@@ -163,7 +160,7 @@
             border-bottom: 12px solid var(--gold);
             box-shadow: 0 15px 25px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.8);
             display: flex;
-            flex-col;
+            flex-direction: column;
             align-items: center;
             padding: 20px;
             cursor: pointer;
@@ -249,18 +246,17 @@
 
     <!-- Tombol Navigasi Global (Sound, Help, Exit kayak di gambar) -->
      <audio id="bg-music" ></audio>
-    <div class="fixed top-6 left-6 flex flex-col gap-4 z-50">
-        <button class="btn-circle-3d" onclick="goToSlide(1)"><i class="fa-solid fa-arrow-left"></i></button>
-    </div>
-    <div class="fixed top-6 right-6 flex flex-col gap-4 z-50">
+    <div class="fixed top-6 right-6 flex flex-col items-end gap-4 z-50">
+        
+        <!-- Logo Kampus (Nangkring manis di sebelah kiri tombol) -->
+        <img id="campus-logo-img" src="logounida_keren.png" alt="Logo Kampus" class="campus-logo">
+
         <button class="btn-circle-3d" onclick="goToSlide(15)" title="Petunjuk Aplikasi"><i class="fa-solid fa-question"></i></button>
         <button class="btn-circle-3d" onclick="toggleMusic(event)">
-    <i id="sound-icon" class="fa-solid fa-volume-xmark"></i>
-</button> 
+            <i id="sound-icon" class="fa-solid fa-volume-xmark"></i>
+        </button> 
     </div>
-
-    <!-- Logo Kampus (Hanya muncul di Halaman Utama) -->
-    <img id="campus-logo-img" src="logounida_keren.png" alt="Logo Kampus" class="campus-logo">
+    
 
     <!-- Dekorasi: bintang emas berkelip tersebar di seluruh layar -->
     <div class="stars-deco">
@@ -688,62 +684,6 @@
             </button>
         </div>
 
-        <!-- SLIDE 48: Ahdafu Ta'alum - Pelajaran 6 (Asmaul Khomsah, Mutsanna, Mudzakkar Salim) -->
-        <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-48">
-            
-            <!-- Tombol Kembali ke Menu Materi (Slide 2) -->
-            <button onclick="goToSlide(2)" class="absolute top-6 left-6 px-8 py-2 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400/50 z-50">
-                <span class="arabic text-2xl">رجوع</span>
-            </button>
-
-            <!-- Judul Ahdafu Ta'alum -->
-            <div class="w-full max-w-3xl bg-yellow-500 py-4 px-8 rounded-xl shadow-lg border border-yellow-400 mb-8 text-center mx-auto mt-8">
-                <h2 class="arabic text-3xl md:text-4xl font-bold text-white">أهْدَافُ التَّعَلُّم</h2>
-            </div>
-
-            <!-- Kontainer Kotak Teks Tujuan Pembelajaran -->
-            <div class="w-full max-w-4xl bg-slate-800/80 p-8 rounded-2xl border border-teal-500/50 shadow-inner text-right space-y-6" dir="rtl">
-                
-                <!-- Poin 1 -->
-                <div class="flex items-start gap-4">
-                    <span class="text-teal-400 font-bold text-2xl">•</span>
-                    <p class="arabic text-2xl md:text-3xl text-slate-100 leading-relaxed">
-                        أَنْ يُعَرِّفَ المُتَعَلِّمُ الأَسْمَاءَ الخَمْسَةَ وَالمُثَنَّى وَجَمْعَ المُذَكَّرِ السَّالِمِ.
-                    </p>
-                </div>
-
-                <!-- Poin 2 -->
-                <div class="flex items-start gap-4">
-                    <span class="text-teal-400 font-bold text-2xl">•</span>
-                    <p class="arabic text-2xl md:text-3xl text-slate-100 leading-relaxed">
-                        أَنْ يَذْكُرَ المُتَعَلِّمُ عَلَامَاتِ إِعْرَابِهَا بِالحُرُوفِ.
-                    </p>
-                </div>
-
-                <!-- Poin 3 -->
-                <div class="flex items-start gap-4">
-                    <span class="text-teal-400 font-bold text-2xl">•</span>
-                    <p class="arabic text-2xl md:text-3xl text-slate-100 leading-relaxed">
-                        أَنْ يُمَيِّزَ المُتَعَلِّمُ بَيْنَ الرَّفْعِ وَالنَّصْبِ وَالجَرِّ فِي الأَمْثِلَةِ.
-                    </p>
-                </div>
-
-                <!-- Poin 4 -->
-                <div class="flex items-start gap-4">
-                    <span class="text-teal-400 font-bold text-2xl">•</span>
-                    <p class="arabic text-2xl md:text-3xl text-slate-100 leading-relaxed">
-                        أَنْ يُطَبِّقَ المُتَعَلِّمُ عَلَامَاتِ الإِعْرَابِ بِالحُرُوفِ فِي الجُمَلِ تَطْبِيقًا صَحِيحًا.
-                    </p>
-                </div>
-
-            </div>
-
-            <!-- Tombol Lanjut ke Materi Inti (Slide 12 / Mind Map Asmaul Khomsah) -->
-            <button onclick="goToSlide(12)" class="mt-8 px-12 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
-                <span class="arabic text-3xl font-bold">التالي</span>
-            </button>
-        </div>
-
        <!-- SLIDE 3: Definisi Kalam (Presisi Layout) -->
         <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-3">
             
@@ -1106,13 +1046,6 @@
                 <span class="arabic text-3xl">رجوع</span>
             </button>
 
-            <!-- INI KODE AUDIO-NYA BANG -->
-            <!-- Pastiin nama file 'audio_taksir.mp3' disamain sama nama file lagu lu -->
-            <audio id="audio-taksir" src="Jam_taksir.mp3"></audio>
-            <!-- Tombol Ruju' -->
-            <button onclick="goToSlide(2)" class="absolute bottom-8 right-8 px-10 py-4 bg-blue-600 hover:bg-blue-500 rounded-[50px] text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
-                <span class="arabic text-3xl">رجوع</span>
-            </button>
 
             <div class="relative w-full max-w-5xl h-[60vh] mx-auto mt-4" dir="ltr">
                 <svg class="absolute inset-0 w-full h-full pointer-events-none z-0">
@@ -2960,11 +2893,11 @@
                 }
             }
             // ==========================================
-            
+
             // Tampilkan slide saat ini
             const targetSlide = document.getElementById(`slide-${currentSlide}`);
             if (targetSlide) targetSlide.classList.add('active');
-            
+
             const currentPageEl = document.getElementById('current-page');
             if(currentPageEl) currentPageEl.innerText = currentSlide;
 
@@ -2985,58 +2918,31 @@
                 }
             }
 
-            // AUDIO MATERI MUFROD (Slide 8)
-            const laguMufrod = document.getElementById('audio-mufrod');
-            if (laguMufrod) {
-                if (currentSlide === 8) {
-                    laguMufrod.play().catch(error => console.log("Audio diblokir browser"));
-                } else {
-                    laguMufrod.pause();
-                    laguMufrod.currentTime = 0; 
-                }
-            }
+            // =====================================================
+            // OTOMATIS PLAY/PAUSE SEMUA AUDIO MATERI DARI SLIDE 8 SAMPAI 14
+            // =====================================================
+            const audioMateriList = {
+                8: 'audio-mufrod',
+                9: 'audio-taksir',
+                10: 'audio-muannats',
+                11: 'audio-ghoiru',
+                12: 'audio-khomsah',
+                13: 'audio-mutsanna',
+                14: 'audio-mudzakkar'
+            };
 
-            // =====================================================
-            // AUDIO MATERI JAMAK TAKSIR (Slide 9) - MASUK SINI BANG
-            // =====================================================
-            const laguTaksir = document.getElementById('audio-taksir');
-            if (laguTaksir) {
-                if (currentSlide === 9) {
-                    laguTaksir.play().catch(error => console.log("Audio diblokir browser"));
-                } else {
-                    laguTaksir.pause();
-                    laguTaksir.currentTime = 0; 
+            for (let slideNum in audioMateriList) {
+                const audioEl = document.getElementById(audioMateriList[slideNum]);
+                if (audioEl) {
+                    if (currentSlide === parseInt(slideNum)) {
+                        audioEl.play().catch(e => console.log("Audio diblokir browser"));
+                    } else {
+                        audioEl.pause();
+                        audioEl.currentTime = 0;
+                    }
                 }
             }
-
-            // =====================================================
-            // TAMBAHIN KODE INI: AUDIO MATERI JAMAK MUANNATS SALIM (Slide 10)
-            // =====================================================
-            const laguMuannats = document.getElementById('audio-muannats');
-            if (laguMuannats) {
-                if (currentSlide === 10) {
-                    laguMuannats.play().catch(error => console.log("Audio diblokir browser"));
-                } else {
-                    laguMuannats.pause();
-                    laguMuannats.currentTime = 0; 
-                }
-            }
-
-            // =====================================================
-            // TAMBAHIN KODE INI: AUDIO MATERI ISIM GHOIRU MUNSYORIF (Slide 11)
-            // =====================================================
-            const laguGhoiru = document.getElementById('audio-ghoiru');
-            if (laguGhoiru) {
-                if (currentSlide === 11) {
-                    laguGhoiru.play().catch(error => console.log("Audio diblokir browser"));
-                } else {
-                    laguGhoiru.pause();
-                    laguGhoiru.currentTime = 0; 
-                }
-            }
-            
-            
-        } // <--- Nah, penutup fungsinya harus di sini bang!
+        }
 
         // ==========================================
         // 3. FUNGSI NAVIGASI SLIDE
@@ -3131,34 +3037,6 @@
             if (tombolNext) tombolNext.classList.remove('hidden');
         }
 
-        // Fungsi buat ngereset semua skor pas mulai kuis baru
-        function mulaiKuis(slideAwal) {
-            // Reset skor dan data soal
-            totalSkor = 0;
-            jumlahBenar = 0;
-            jumlahSalah = 0;
-            soalTerjawab = {}; 
-            
-            // Balikin tampilan angka ke 0
-            document.querySelectorAll('.update-skor').forEach(el => el.innerText = totalSkor);
-            const elementSkorDisplay = document.getElementById('skor-display');
-            if (elementSkorDisplay) elementSkorDisplay.innerText = totalSkor;
-            
-            // Balikin warna tombol yang udah kepencet jadi kuning lagi
-            document.querySelectorAll('.kuis-opsi').forEach(btn => {
-                btn.classList.remove('bg-green-500', 'border-green-400', 'bg-red-500', 'border-red-400', 'bg-slate-500', 'opacity-50', 'cursor-not-allowed', 'opacity-100');
-                btn.classList.add('bg-yellow-500', 'hover:bg-yellow-400', 'border-yellow-400', 'hover:scale-105');
-            });
-
-            // Sembunyiin tombol 'Selanjutnya' dari kuis sebelumnya
-            document.querySelectorAll('.btn-next-soal').forEach(btn => {
-                btn.classList.add('hidden');
-            });
-
-            // Jalan menuju slide soal pertama
-            goToSlide(slideAwal);
-        }
-
         // ==========================================
         // 5. FUNGSI KONTROL PLAYLIST LAGU
         // ==========================================
@@ -3222,57 +3100,6 @@
             }
             document.removeEventListener('click', playOnFirstClick);
         });
-
-        function updateUI() {
-            document.querySelectorAll('.slide').forEach(slide => {
-                slide.classList.remove('active');
-            });
-            
-            const targetSlide = document.getElementById(`slide-${currentSlide}`);
-            if (targetSlide) targetSlide.classList.add('active');
-            
-            const currentPageEl = document.getElementById('current-page');
-            if(currentPageEl) currentPageEl.innerText = currentSlide;
-
-            const progressBar = document.getElementById('progress-bar');
-            if(progressBar) {
-                const progress = ((currentSlide - 1) / (totalSlides - 1)) * 100;
-                progressBar.style.width = `${progress}%`;
-            }
-
-            if (bgMusic) {
-                if (currentSlide === 1) {
-                    if (isMusicPlaying) {
-                        bgMusic.play().catch(e => console.log("Menunggu interaksi"));
-                    }
-                } else {
-                    bgMusic.pause();
-                }
-            }
-
-            // OTOMATIS PLAY/PAUSE AUDIO MATERI DARI SLIDE 8 SAMPAI 14
-            const audioMateriList = {
-                8: 'audio-mufrod',
-                9: 'audio-taksir',
-                10: 'audio-muannats',
-                11: 'audio-ghoiru',
-                12: 'audio-khomsah',
-                13: 'audio-mutsanna',
-                14: 'audio-mudzakkar'
-            };
-
-            for (let slideNum in audioMateriList) {
-                const audioEl = document.getElementById(audioMateriList[slideNum]);
-                if (audioEl) {
-                    if (currentSlide === parseInt(slideNum)) {
-                        audioEl.play().catch(e => console.log("Audio diblokir browser"));
-                    } else {
-                        audioEl.pause();
-                        audioEl.currentTime = 0;
-                    }
-                }
-            }
-        }
 
         let activeAudio = null;
 let activeBtn = null;
