@@ -30,6 +30,22 @@
     
     <style>
 
+        /* Gaya Logo Kampus di Pojok Kanan Atas */
+        .campus-logo {
+            position: fixed;
+            top: 24px;
+            right: 105px; /* Di sebelah kiri tombol Tanya (?) */
+            width: 50px;  
+            height: 50px; 
+            object-fit: contain;
+            z-index: 50;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4));
+            display: none; /* Sembunyikan default */
+        }
+
+        .campus-logo.show-on-home {
+            display: block; /* Munculkan hanya di halaman utama */
+        }
 
         html { scroll-behavior: smooth; }
         :root {
@@ -224,16 +240,12 @@
             .btn-circle-3d { width: 45px; height: 45px; font-size: 1.2rem; }
             .corner-ornament { width: 45px; height: 45px; opacity: 0.5; }
         }
+        
         /* ============================================================ */
     </style>
 </head>
 <body class="min-h-screen w-screen overflow-auto flex flex-col justify-center items-center relative p-4">
 
-    <!-- Bendera Hiasan Pojok Kiri Bawah -->
-    <img src="bendera_gontor.png" alt="Bendera Kiri" class="flag-left">
-
-    <!-- Bendera Hiasan Pojok Kanan Bawah (Dibalik otomatis pakai CSS) -->
-    <img src="bendera_gontor.png" alt="Bendera Kanan" class="flag-right">
 
     <!-- Tombol Navigasi Global (Sound, Help, Exit kayak di gambar) -->
      <audio id="bg-music" ></audio>
@@ -246,6 +258,9 @@
     <i id="sound-icon" class="fa-solid fa-volume-xmark"></i>
 </button> 
     </div>
+
+    <!-- Logo Kampus (Hanya muncul di Halaman Utama) -->
+    <img id="campus-logo-img" src="logounida_keren.png" alt="Logo Kampus" class="campus-logo">
 
     <!-- Dekorasi: bintang emas berkelip tersebar di seluruh layar -->
     <div class="stars-deco">
@@ -2892,7 +2907,7 @@
             </button>
         </div>
         
-        <!-- TOMBOL NAVIGASI -->
+        
         <!-- TOMBOL NAVIGASI (Disembunyikan) -->
         <div class="hidden">
             <span id="current-page">1</span>
@@ -2932,9 +2947,23 @@
             document.querySelectorAll('.slide').forEach(slide => {
                 slide.classList.remove('active');
             });
+
+            // ==========================================
+            // KONTROL MUNCUL/HILANG LOGO KAMPUS (Hanya di Slide 1)
+            // ==========================================
+            const logoKampus = document.getElementById('campus-logo-img');
+            if (logoKampus) {
+                if (currentSlide === 1) {
+                    logoKampus.classList.add('show-on-home');
+                } else {
+                    logoKampus.classList.remove('show-on-home');
+                }
+            }
+            // ==========================================
             
             // Tampilkan slide saat ini
-            document.getElementById(`slide-${currentSlide}`).classList.add('active');
+            const targetSlide = document.getElementById(`slide-${currentSlide}`);
+            if (targetSlide) targetSlide.classList.add('active');
             
             const currentPageEl = document.getElementById('current-page');
             if(currentPageEl) currentPageEl.innerText = currentSlide;
@@ -3005,6 +3034,7 @@
                     laguGhoiru.currentTime = 0; 
                 }
             }
+            
             
         } // <--- Nah, penutup fungsinya harus di sini bang!
 
@@ -3291,6 +3321,7 @@ function toggleAudioMateri(audioId, btnElement) {
         activeBtn = null;
     };
 }
+    
 
         // INISIALISASI AWAL WEB (Mulai nampilin slide)
         updateUI(); 
