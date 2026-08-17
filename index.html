@@ -390,12 +390,12 @@
 
         <!-- SLIDE 43: Ahdafu Ta'alum - Pelajaran 1 (Ta'rif al-Kalam) -->
         <div class="slide flex-col items-center justify-start h-full w-full relative pt-8" id="slide-43">
-            
+
             <!-- Tombol Kembali ke Menu Materi (Slide 2) -->
             <button onclick="goToSlide(2)" class="absolute top-6 left-6 px-8 py-2 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400/50 z-50">
                 <span class="arabic text-2xl">رجوع</span>
             </button>
-
+            
             <!-- Judul Ahdafu Ta'alum -->
             <div class="w-full max-w-3xl bg-yellow-500 py-4 px-8 rounded-xl shadow-lg border border-yellow-400 mb-8 text-center mx-auto mt-8">
                 <h2 class="arabic text-3xl md:text-4xl font-bold text-white">أهْدَافُ التَّعَلُّم</h2>
@@ -430,9 +430,38 @@
 
             </div>
 
-            <!-- Tombol Lanjut ke Materi Inti (Slide 3 / Mind Map Ta'rif al-Kalam) -->
-            <button onclick="goToSlide(3)" class="mt-8 px-12 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
+            <!-- UBAH BAGIAN INI: Arahkan ke Slide 49 (Teks Materi Kitab) -->
+            <button onclick="goToSlide(49)" class="mt-8 px-12 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
                 <span class="arabic text-3xl font-bold">التالي</span>
+            </button>
+        </div>
+
+        <!-- SLIDE 49: Teks Materi Kitab - Pelajaran 1 (Dipercantik & Proporsional) -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-6 md:pt-10 px-4" id="slide-49">
+            
+            <!-- Tombol Kembali ke Ahdafu Ta'alum (Slide 43) - Disesuaikan posisinya biar rapi -->
+            <button onclick="goToSlide(43)" class="absolute top-4 left-6 md:top-6 md:left-8 px-6 py-2 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400/50 z-50">
+                <span class="arabic text-xl md:text-2xl">رجوع</span>
+            </button>
+
+            <!-- Judul Materi (Lebih proporsional) -->
+            <div class="w-full max-w-2xl bg-yellow-500 py-3 px-6 rounded-xl shadow-lg border border-yellow-400 mb-6 text-center mx-auto mt-2">
+                <h2 class="arabic text-2xl md:text-3xl font-bold text-white">مَادَّةُ الدَّرْسِ</h2>
+            </div>
+
+            <!-- Kontainer Kotak Teks Kitab (Padding ditambah biar gak mepet, line-height dilonggarkan) -->
+            <div class="w-full max-w-4xl bg-slate-800/95 p-6 md:p-10 rounded-2xl border-2 border-teal-500/50 shadow-2xl text-right space-y-6 max-h-[52vh] md:max-h-[58vh] overflow-y-auto" dir="rtl">
+                <p class="arabic text-xl md:text-2xl lg:text-3xl text-slate-100 leading-[2.2] md:leading-[2.5] text-justify">
+                    <strong class="text-yellow-400">الْكَلَامُ :</strong> هُو اللَّفْظُ الْمُرَكَّبُ الْمُفِيدُ بِالْوَضْعِ. وَأَقْسَامُهُ ثَلَاثَةٌ : اسم وَفِعْل وَحَرْف جَاءَ لِمَعْنَى.
+                </p>
+                <p class="arabic text-xl md:text-2xl lg:text-3xl text-slate-100 leading-[2.2] md:leading-[2.5] text-justify">
+                    <strong class="text-yellow-400">فَالْإِسْمُ يُعْرَفُ :</strong> بِالْخَفْضِ وَالتَّنْوِينِ، وَدُخُولِ الْأَلِفِ وَاللَّامِ، وَحُرُوفِ الْخَفْضِ وَهِيَ: مِنْ، وَإِلَى، وَعَنْ، وَعَلَى، وَفِي، وَرُبَّ، وَالْبَاءُ، وَالْكَافُ، وَالتَّاءُ، وَحُرُوفُ الْقَسَمِ، وَهِيَ: الْوَاوُ وَالْبَاءُ، وَالتَّاءُ.
+                </p>
+            </div>
+
+            <!-- Tombol Lanjut ke Mind Map Inti (Slide 3) - Jarak dan ukuran proporsional -->
+            <button onclick="goToSlide(3)" class="mt-6 px-10 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
+                <span class="arabic text-2xl md:text-3xl font-bold">التالي</span>
             </button>
         </div>
 
@@ -478,9 +507,38 @@
 
             </div>
 
-            <!-- Tombol Lanjut ke Materi Inti (Slide 4 / Mind Map Ta'rif al-I'rab) -->
-            <button onclick="goToSlide(4)" class="mt-8 px-12 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
+            <!-- Tombol Lanjut ke Halaman Teks Materi Pelajaran 2 (Slide 50) -->
+            <button onclick="goToSlide(50)" class="mt-8 px-12 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
                 <span class="arabic text-3xl font-bold">التالي</span>
+            </button>
+        </div>
+
+        <!-- SLIDE 50: Teks Materi Kitab - Pelajaran 2 (Ta'rif al-I'rab wa Anwa'uhu) -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-6 md:pt-10 px-4" id="slide-50">
+            
+            <!-- Tombol Kembali ke Ahdafu Ta'alum Pelajaran 2 (Slide 44) -->
+            <button onclick="goToSlide(44)" class="absolute top-4 left-6 md:top-6 md:left-8 px-6 py-2 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400/50 z-50">
+                <span class="arabic text-xl md:text-2xl">رجوع</span>
+            </button>
+
+            <!-- Judul Materi -->
+            <div class="w-full max-w-2xl bg-yellow-500 py-3 px-6 rounded-xl shadow-lg border border-yellow-400 mb-6 text-center mx-auto mt-2">
+                <h2 class="arabic text-2xl md:text-3xl font-bold text-white">مَادَّةُ الدَّرْسِ</h2>
+            </div>
+
+            <!-- Kontainer Kotak Teks Kitab (Didesain rapi, proporsional, dan nyaman dibaca) -->
+            <div class="w-full max-w-4xl bg-slate-800/95 p-6 md:p-10 rounded-2xl border-2 border-teal-500/50 shadow-2xl text-right space-y-6 max-h-[52vh] md:max-h-[58vh] overflow-y-auto" dir="rtl">
+                <p class="arabic text-xl md:text-2xl lg:text-3xl text-slate-100 leading-[2.2] md:leading-[2.5] text-justify">
+                    <strong class="text-yellow-400">الْإِعْرَابُ :</strong> هُوَ تَغْيِيرُ أَوَاحِرِ الْكَلِمِ لِاحْتِلَافِ الْعَوَامِلِ الدَّاخِلَةِ عَلَيْهَا لَفْظًا أَوْ تَقْدِيرًا.
+                </p>
+                <p class="arabic text-xl md:text-2xl lg:text-3xl text-slate-100 leading-[2.2] md:leading-[2.5] text-justify">
+                    <strong class="text-yellow-400">وَأَقْسَامُهُ أَرْبَعَةٌ :</strong> رَفْعٌ وَنَصْبٌ وَخَفْضٌ وَجَزْمٌ. فَلِلْأَسْمَاءِ مِنْ ذَلِكَ الرَّفْعُ وَالنَّصْبُ وَالْخَفْضُ، وَلَا جَزْمَ فِيهَا. وَلِلْأَفْعَالِ مِنْ ذَلِكَ الرَّفْعُ وَالنَّصْبُ وَالْجَزْمُ، وَلَا خَفْضَ فِيهَا.
+                </p>
+            </div>
+
+            <!-- Tombol Lanjut ke Mind Map Inti Pelajaran 2 (Slide 4) -->
+            <button onclick="goToSlide(4)" class="mt-6 px-10 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
+                <span class="arabic text-2xl md:text-3xl font-bold">التالي </span>
             </button>
         </div>
 
@@ -526,9 +584,44 @@
 
             </div>
 
-            <!-- Tombol Lanjut ke Materi Inti (Slide 5 / Mind Map Taqsimul I'rab) -->
-            <button onclick="goToSlide(5)" class="mt-8 px-12 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
+            <!-- Tombol Lanjut ke Halaman Teks Materi Pelajaran 3 (Slide 51) -->
+            <button onclick="goToSlide(51)" class="mt-8 px-12 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
                 <span class="arabic text-3xl font-bold">التالي</span>
+            </button>
+        </div>
+
+        <!-- SLIDE 51: Teks Materi Kitab - Pelajaran 3 (Taqsimul I'rab) -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-6 md:pt-10 px-4" id="slide-51">
+            
+            <!-- Tombol Kembali ke Ahdafu Ta'alum Pelajaran 3 (Slide 45) -->
+            <button onclick="goToSlide(44)" class="absolute top-4 left-6 md:top-6 md:left-8 px-6 py-2 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400/50 z-50">
+                <span class="arabic text-xl md:text-2xl">رجوع</span>
+            </button>
+
+            <!-- Judul Materi -->
+            <div class="w-full max-w-2xl bg-yellow-500 py-3 px-6 rounded-xl shadow-lg border border-yellow-400 mb-6 text-center mx-auto mt-2">
+                <h2 class="arabic text-2xl md:text-3xl font-bold text-white">مَادَّةُ الدَّرْسِ</h2>
+            </div>
+
+            <!-- Kontainer Kotak Teks Kitab (Didesain rapi, proporsional, dan nyaman dibaca) -->
+            <div class="w-full max-w-4xl bg-slate-800/95 p-6 md:p-10 rounded-2xl border-2 border-teal-500/50 shadow-2xl text-right space-y-6 max-h-[52vh] md:max-h-[58vh] overflow-y-auto" dir="rtl">
+                <p class="arabic text-xl md:text-2xl lg:text-3xl text-slate-100 leading-[2.2] md:leading-[2.5] text-justify">
+                    <strong class="text-yellow-400">الْمُعْرَبَاتُ قِسْمَانِ :</strong> قِسْمٌ يُعْرَبُ بِالْحَرَكَاتِ، وَقِسْمٌ يُعْرَبُ بِالْحُرُوفِ.
+                </p>
+                <p class="arabic text-xl md:text-2xl lg:text-3xl text-slate-100 leading-[2.2] md:leading-[2.5] text-justify">
+                    <strong class="text-yellow-400">فَالَّذِي يُعْرَبُ بِالْحَرَكَاتِ :</strong> أَرْبَعَةُ أَنْوَاعٍ: الِاسْمُ الْمُفْرَدُ، وَجَمْعُ التَّكْسِيرِ، وَجَمْعُ الْمُؤَنَّثِ السَّالِمِ، وَالْفِعْلُ الْمُضَارِعُ الَّذِي لَمْ يَتَّصِلْ بِآخِرِهِ شَيْءٌ. وَكُلُّهَا تَرْفَعُ بِالضَّمَّةِ، وَتَنْصِبُ بِالْفَتْحَةِ، وَتُخْفَضُ بِالْكَسْرَةِ، وَتُجْزَمُ بِالسُّكُونِ.
+                </p>
+                <p class="arabic text-xl md:text-2xl lg:text-3xl text-slate-100 leading-[2.2] md:leading-[2.5] text-justify">
+                    <strong class="text-yellow-400">وَيَخْرُجُ عَنْ ذَلِكَ ثَلَاثَةُ أَشْيَاءَ :</strong> جَمْعُ الْمُؤَنَّثِ السَّالِمِ يُنْصَبُ بِالْكَسْرَةِ، وَالِاسْمُ الَّذِي لَا يَنْصَرِفُ يَخْفَضُ بِالْفَتْحَةِ، وَالْفِعْلُ الْمُضَارِعُ الْمُعْتَلُّ الْآخِرِ يُجْزَمُ بِحَذْفِ آخِرِهِ.
+                </p>
+                <p class="arabic text-xl md:text-2xl lg:text-3xl text-slate-100 leading-[2.2] md:leading-[2.5] text-justify">
+                    <strong class="text-yellow-400">وَالَّذِي يُعْرَبُ بِالْحُرُوفِ :</strong> أَرْبَعَةُ أَنْوَاعٍ: التَّثْنِيَةُ، وَجَمْعُ الْمُذَكَّرِ السَّالِمِ، وَالْأَسْمَاءُ الْخَمْسَةُ، وَالْأَفْعَالُ الْخَمْسَةُ.
+                </p>
+            </div>
+
+            <!-- Tombol Lanjut ke Mind Map Inti Pelajaran 3 (Slide 5) -->
+            <button onclick="goToSlide(5)" class="mt-6 px-10 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
+                <span class="arabic text-2xl md:text-3xl font-bold">التالي (الخريطة الذهنية)</span>
             </button>
         </div>
 
@@ -574,9 +667,41 @@
 
             </div>
 
-            <!-- Tombol Lanjut ke Materi Inti (Slide 8 / Mind Map Isim Mufrod) -->
-            <button onclick="goToSlide(8)" class="mt-8 px-12 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
+            <!-- Tombol Lanjut ke Halaman Teks Materi Pelajaran 4 (Slide 52) -->
+            <button onclick="goToSlide(52)" class="mt-8 px-12 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
                 <span class="arabic text-3xl font-bold">التالي</span>
+            </button>
+        </div>
+
+        <!-- SLIDE 52: Teks Materi Kitab - Pelajaran 4 (I'rab Isim Mufrod & Jam'u Taksir) -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-6 md:pt-10 px-4" id="slide-52">
+            
+            <!-- Tombol Kembali ke Ahdafu Ta'alum Pelajaran 4 (Slide 46) -->
+            <button onclick="goToSlide(46)" class="absolute top-4 left-6 md:top-6 md:left-8 px-6 py-2 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400/50 z-50">
+                <span class="arabic text-xl md:text-2xl">رجوع</span>
+            </button>
+
+            <!-- Judul Materi -->
+            <div class="w-full max-w-2xl bg-yellow-500 py-3 px-6 rounded-xl shadow-lg border border-yellow-400 mb-6 text-center mx-auto mt-2">
+                <h2 class="arabic text-2xl md:text-3xl font-bold text-white">مَادَّةُ الدَّرْسِ</h2>
+            </div>
+
+            <!-- Kontainer Kotak Teks Kitab -->
+            <div class="w-full max-w-4xl bg-slate-800/95 p-6 md:p-10 rounded-2xl border-2 border-teal-500/50 shadow-2xl text-right space-y-6 max-h-[52vh] md:max-h-[58vh] overflow-y-auto" dir="rtl">
+                <p class="arabic text-xl md:text-2xl lg:text-3xl text-slate-100 leading-[2.2] md:leading-[2.5] text-justify">
+                    <strong class="text-yellow-400">فَالَّذِي يُعْرَبُ بِالْحَرَكَاتِ أَرْبَعَةُ أَنْوَاعٍ :</strong> الِاسْمُ الْمُفْرَدُ، وَجَمْعُ التَّكْسِيرِ، وَجَمْعُ الْمُؤَنَّثِ السَّالِمِ، وَالْفِعْلُ الْمُضَارِعُ الَّذِي لَمْ يَتَّصِلْ بِآخِرِهِ شَيْءٌ.
+                </p>
+                <p class="arabic text-xl md:text-2xl lg:text-3xl text-slate-100 leading-[2.2] md:leading-[2.5] text-justify">
+                    <strong class="text-yellow-400">وَكُلُّهَا تَرْفَعُ بِالضَّمَّةِ :</strong> وَتَنْصِبُ بِالْفَتْحَةِ، وَتُخْفَضُ بِالْكَسْرَةِ، وَتُجْزَمُ بِالسُّكُونِ.
+                </p>
+                <p class="arabic text-xl md:text-2xl lg:text-3xl text-slate-100 leading-[2.2] md:leading-[2.5] text-justify">
+                    <strong class="text-yellow-400">وَيَخْرُجُ عَنْ ذَلِكَ ثَلَاثَةُ أَشْيَاءَ :</strong> جَمْعُ الْمُؤَنَّثِ السَّالِمِ يُنْصَبُ بِالْكَسْرَةِ، وَالِاسْمُ الَّذِي لَا يَنْصَرِفُ يَخْفَضُ بِالْفَتْحَةِ، وَالْفِعْلُ الْمُضَارِعُ الْمُعْتَلُّ الْآخِرِ يُجْزَمُ بِحَذْفِ آخِرِهِ.
+                </p>
+            </div>
+
+            <!-- Tombol Lanjut ke Mind Map Isim Mufrod (Slide 8) -->
+            <button onclick="goToSlide(8)" class="mt-6 px-10 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
+                <span class="arabic text-2xl md:text-3xl font-bold">التالي (الخريطة الذهنية)</span>
             </button>
         </div>
 
@@ -622,9 +747,38 @@
 
             </div>
 
-            <!-- Tombol Lanjut ke Materi Inti (Slide 10 / Mind Map Jam'u Muannats) -->
-            <button onclick="goToSlide(10)" class="mt-8 px-12 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
+            <!-- Tombol Lanjut ke Halaman Teks Materi Pelajaran 5 (Slide 53) -->
+            <button onclick="goToSlide(53)" class="mt-8 px-12 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
                 <span class="arabic text-3xl font-bold">التالي</span>
+            </button>
+        </div>
+
+        <!-- SLIDE 53: Teks Materi Kitab - Pelajaran 5 (Jam'u Muannats Salim & Ghoiru Munsyorif) -->
+        <div class="slide flex-col items-center justify-start h-full w-full relative pt-6 md:pt-10 px-4" id="slide-53">
+            
+            <!-- Tombol Kembali ke Ahdafu Ta'alum Pelajaran 5 (Slide 47) -->
+            <button onclick="goToSlide(47)" class="absolute top-4 left-6 md:top-6 md:left-8 px-6 py-2 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400/50 z-50">
+                <span class="arabic text-xl md:text-2xl">رجوع</span>
+            </button>
+
+            <!-- Judul Materi -->
+            <div class="w-full max-w-2xl bg-yellow-500 py-3 px-6 rounded-xl shadow-lg border border-yellow-400 mb-6 text-center mx-auto mt-2">
+                <h2 class="arabic text-2xl md:text-3xl font-bold text-white">مَادَّةُ الدَّرْسِ</h2>
+            </div>
+
+            <!-- Kontainer Kotak Teks Kitab -->
+            <div class="w-full max-w-4xl bg-slate-800/95 p-6 md:p-10 rounded-2xl border-2 border-teal-500/50 shadow-2xl text-right space-y-6 max-h-[52vh] md:max-h-[58vh] overflow-y-auto" dir="rtl">
+                <p class="arabic text-xl md:text-2xl lg:text-3xl text-slate-100 leading-[2.2] md:leading-[2.5] text-justify">
+                    <strong class="text-yellow-400">وَيَخْرُجُ عَنْ ذَلِكَ ثَلَاثَةُ أَشْيَاءَ :</strong> جَمْعُ الْمُؤَنَّثِ السَّالِمِ يُنْصَبُ بِالْكَسْرَةِ، وَالِاسْمُ الَّذِي لَا يَنْصَرِفُ يَخْفَضُ بِالْفَتْحَةِ.
+                </p>
+                <p class="arabic text-xl md:text-2xl lg:text-3xl text-slate-100 leading-[2.2] md:leading-[2.5] text-justify">
+                    <strong class="text-yellow-400">أَمْثِلَةٌ توضيحية :</strong> جَاءَتِ الْمُسْلِمَاتُ (رفع بالضمة)، رَأَيْتُ الْمُسْلِمَاتِ (نصب بالكسرة)، سَلَّمْتُ عَلَى الْمُسْلِمَاتِ (جر بالكسرة). وكذالك إعراب الاسم غير المنصرف نحو: جَاءَ أَحْمَدُ، رَأَيْتُ أَحْمَدَ، مَرَرْتُ بِأَحْمَدَ (خفض بالفتحة).
+                </p>
+            </div>
+
+            <!-- Tombol Lanjut ke Mind Map Pelajaran 5 (Slide 10) -->
+            <button onclick="goToSlide(10)" class="mt-6 px-10 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-white shadow-lg transition hover:scale-105 border border-blue-400 z-50">
+                <span class="arabic text-2xl md:text-3xl font-bold">التالي (الخريطة الذهنية)</span>
             </button>
         </div>
 
